@@ -11,6 +11,10 @@ const Hero = () => {
     navigate("/login");
   };
 
+  const handleClick2=()=>{
+    navigate("/allservices");
+  }
+
   return (
     <div className="pt-10 heroclass w-full min-h-screen" style={{ backgroundImage: `url(${bglanding})`, backgroundSize: 'cover', backgroundPosition: 'center' }}
 >
@@ -44,7 +48,8 @@ const Hero = () => {
             >
               Get Started
             </button>
-            <button className="border border-[#FF9800] px-6 py-2 md:px-8 md:py-3 rounded-3xl text-lg md:text-2xl font-semibold hover:bg-[#FF9800] hover:text-white transition">
+            <button className="border border-[#FF9800] px-6 py-2 md:px-8 md:py-3 rounded-3xl text-lg md:text-2xl font-semibold hover:bg-[#FF9800] hover:text-white transition"
+                    onClick={handleClick2}>
               Explore Services
             </button>
           </div>
