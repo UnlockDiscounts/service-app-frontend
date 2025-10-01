@@ -11,6 +11,7 @@ const Hero = () => {
     navigate("/login");
   };
 
+  
   const handleClick2=()=>{
     navigate("/allservices");
   }
