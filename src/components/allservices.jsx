@@ -122,7 +122,7 @@ const AllServices = () => {
                   <Star className="text-[#FFDE7E]"/>
                 </div>
                 <div>
-                  <button className="p-2 rounded-xl border-2 font-bold border-[#FFD700] hover:bg-[#FF8900]">Buy Now</button>
+                  <button className="p-2 rounded-xl border-2 font-bold border-[#FFD700] hover:bg-[#FF8900]">Book Now</button>
                 </div>
               </div>
               </div>
@@ -142,7 +142,7 @@ const AllServices = () => {
                   <Star className="text-[#FFDE7E]"/>
                 </div>
                 <div>
-                  <button className="p-2 rounded-xl border-2 font-bold border-[#FFD700] hover:bg-[#FF8900]">Buy Now</button>
+                  <button className="p-2 rounded-xl border-2 font-bold border-[#FFD700] hover:bg-[#FF8900]">Book Now</button>
                 </div>
               </div>
               </div>
@@ -162,7 +162,7 @@ const AllServices = () => {
                   <Star className="text-[#FFDE7E]"/>
                 </div>
                 <div>
-                  <button className="p-2 rounded-xl border-2 font-bold border-[#FFD700] hover:bg-[#FF8900]">Buy Now</button>
+                  <button className="p-2 rounded-xl border-2 font-bold border-[#FFD700] hover:bg-[#FF8900]">Book Now</button>
                 </div>
               </div>
               </div>
@@ -182,7 +182,7 @@ const AllServices = () => {
                   <Star className="text-[#FFDE7E]"/>
                 </div>
                 <div>
-                  <button className="p-2 rounded-xl border-2 font-bold border-[#FFD700] hover:bg-[#FF8900]">Buy Now</button>
+                  <button className="p-2 rounded-xl border-2 font-bold border-[#FFD700] hover:bg-[#FF8900]">Book Now</button>
                 </div>
               </div>
               </div>

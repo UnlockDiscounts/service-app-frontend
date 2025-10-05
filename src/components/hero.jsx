@@ -43,14 +43,13 @@ const Hero = () => {
           </p>
 
           <div className="flex flex-col sm:flex-row gap-4 mt-8">
-            <button
-              className="bg-[#FF9800] px-6 py-2 md:px-8 md:py-3 rounded-3xl text-lg md:text-2xl font-semibold hover:bg-white hover:border hover:border-[#FF8900] transition"
+             <button
+              className="bg-[#FF9800] px-6 py-2 md:px-8 md:py-3 rounded-full text-lg md:text-2xl font-semibold hover:bg-white hover:border-2 hover:border-[#FF8900] transition"
               onClick={handleClick}
             >
               Get Started
             </button>
-            <button className="border border-[#FF9800] px-6 py-2 md:px-8 md:py-3 rounded-3xl text-lg md:text-2xl font-semibold hover:bg-[#FF9800] hover:text-white transition"
-                    onClick={handleClick2}>
+            <button className="border-2 border-[#FF9800] px-6 py-2 md:px-8 md:py-3 rounded-full text-lg md:text-2xl font-semibold hover:bg-[#FF9800] hover:text-white transition">
               Explore Services
             </button>
           </div>
