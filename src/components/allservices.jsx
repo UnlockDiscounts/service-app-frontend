@@ -1,269 +1,316 @@
-import { ArrowBigLeft, ArrowLeft, MapPin, Search, Star } from "lucide-react";
+import { useState, useEffect } from 'react';
+import { X, Star, ArrowLeft, Search } from 'lucide-react';
+import { useNavigate, Link } from "react-router-dom";
+import axios from 'axios';
 import image from "../assets/image.png";
-import Painter from "../assets/Painter.png";
-import Plumber from "../assets/Plumber.png";
-import Electrician from "../assets/Electrician.png";
-import Beautician from "../assets/Beautician.png";
-import Highlight from "../assets/Highlight 1.png";
-import Hightlight2 from "../assets/Highlight 2.png";
-import Hightlight3 from "../assets/Highlight 3.png";
-import star_shine from "../assets/star_shine.png";
-import woman from "../assets/woman.jpg";
-import gelLaser from "../assets/gelLaser.jpg";
-import stoneMassage from "../assets/stoneMassage.jpg";
-import pedicure from "../assets/pedicure.jpg";
-import trp1 from "../assets/TRP 1.png";
-import trp2 from "../assets/TRP 2.png";
-import trp3 from "../assets/TRP 3.png";
+import ii from '../assets/ii.jpg'
+import i1 from '../assets/i1.jpg'
+import Thynk1 from "../assets/Thynk1.jpg";
 
-import topprofessionals from "../assets/topprofessionals.png";
-import Vector from "../assets/Vector.png";
-import star from "../assets/star.png";
-import calendar from "../assets/calendar.png";
-import { useState } from "react";
-import Modal from "./beauticianListingModel";
 
-const AllServices = () => {
-  const [isOpen, setIsOpen] = useState(false);
+function AllServices() {
+  const [categories, setCategories] = useState([]);
+  const [filteredCategories, setFilteredCategories] = useState([]);
+  const [services, setServices] = useState([]);
+  const [selectedCategory, setSelectedCategory] = useState(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [loading, setLoading] = useState(true);
+  const [servicesLoading, setServicesLoading] = useState(false);
+  const [searchQuery, setSearchQuery] = useState('');
+  const navigate = useNavigate();
+
+  useEffect(() => {
+
+     const info = async () => {
+ 
+      const res = await axios.get("https://service-app-backend-1.onrender.com/api/provider/services-by-category");
+      
+      console.log(res?.data?.data);
+
+
+      setFilteredCategories(res?.data?.data);
+      setCategories(res?.data?.data);
+
+      setLoading(false);
+
+    }
+    info();
+
+    // fetchCategories();
+  }, []);
+
+  useEffect(() => {
+    if (searchQuery.trim() === '') {
+      setFilteredCategories(categories);
+    } else {
+      const filtered = categories.filter(category =>
+        category.category.toLowerCase().includes(searchQuery.toLowerCase())
+      );
+      setFilteredCategories(filtered);
+    }
+  }, [searchQuery, categories]);
+
+
+  const handleCardClick = (id) => {
+
+    
+    const storedUser = JSON.parse(localStorage.getItem("user"));
+
+    if (!storedUser){
+      alert("Please Login / Sign Up first to Book a service");
+      return;
+    }
+
+    navigate(`/individualListing/${id}`);
+ 
+};
+
+  const handleCategoryClick = async (category) => {
+    
+    const res = await axios.get(`https://service-app-backend-1.onrender.com/api/provider/category/${category}`);
+
+    console.log(res?.data?.data);
+
+    setSelectedCategory(category);
+    setIsModalOpen(true);
+    setServices(res?.data?.data);
+    setServicesLoading(false);
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+    setSelectedCategory(null);
+    setServices([]);
+  };
+
+    const handleBook = async (id) => {
+
+    
+    const token = localStorage.getItem("accessToken");
+    const storedUser = JSON.parse(localStorage.getItem("user"));
+
+    if (!storedUser){
+      alert("Please Login / Sign Up first to Book a service");
+      return;
+    }
+    
+    const res = await axios.get(`https://service-app-backend-1.onrender.com/api/booknow/provider/${id}`,  {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+
+    console.log(res?.data);
+   
+    window.open(res?.data?.whatsAppURL, '_blank', 'noopener,noreferrer');
+    
+
+  }
+
   return (
-    <>
-      <div className="container mx-auto my-2">
-        {/*search bars*/}
-        <div className="w-full p-4 grid  sm:grid-cols-1 md:grid-cols-2 items-center justify-center gap-1 place-content-center ">
-          <div className="border border-[#FF8900] rounded-xl  flex items-center gap-3">
-            <div className="flex items-center px-2 ml-4 ">
-              <MapPin className="text-[#FF8900]" />
+    <div className="min-h-screen bg-white">
+      {/* Search Bar */}
+      <div className="max-w-7xl mx-auto px-4 py-8">
+        {/* <div className="max-w-2xl mx-auto">
+          <div className="relative">
+            <div className="absolute inset-y-0 left-4 flex items-center pointer-events-none">
+              <Search className="w-6 h-6 text-amber-500" />
             </div>
-            <div className=" flex flex-grow">
-              <input
-                type="text"
-                name=""
-                id=""
-                className="w-full p-2 border-none rounded-xl"
-                placeholder="Search for your location"
-              />
-            </div>
-          </div>
-          <div className="border border-[#FF8900] rounded-xl  flex justify-start items-center gap-3">
-            <div className="flex items-center px-2  ml-4">
-              <Search className="text-[#FF8900]" />
-            </div>
-            <div className=" flex flex-grow">
-              <input
-                type="text"
-                name=""
-                id=""
-                className=" p-2 border-none rounded-xl w-full"
-                placeholder="Search for Services"
-              />
-            </div>
-          </div>
-        </div>
-        <div className="relative">
-          <img src={image} alt="heroimg" className="w-full h-auto" />
-
-          {/* Hero Heading */}
-          <div className="absolute inset-x-0 top-[35%] sm:top-[40%] text-center px-2 sm:px-4">
-            <h1 className="text-gray-200 font-bold text-xl sm:text-3xl md:text-4xl lg:text-5xl tracking-wide font-serif mb-2">
-              One Platform
-            </h1>
-            <h1 className="text-gray-200 font-bold text-xl sm:text-3xl md:text-4xl lg:text-5xl tracking-wide font-serif ">
-              All Services
-            </h1>
-          </div>
-
-          {/* Search Bar */}
-          {/* <div className="absolute inset-x-0 top-1/2 px-2 sm:px-4">
-            <div className="max-w-md sm:max-w-lg mx-auto flex items-center bg-gray-200 rounded-3xl px-2 sm:px-3 py-2 sm:py-3">
-              <Search className="w-5 h-5 sm:w-6 sm:h-6 text-gray-600" />
-              <input
-                type="text"
-                placeholder="Search for services"
-                className="flex-grow bg-gray-200 border-none focus:outline-none px-2 sm:px-3 text-sm sm:text-base"
-              />
-              <button className="bg-[#ff8901] px-3 sm:px-4 py-1 sm:py-2 rounded-2xl text-xs sm:text-sm md:text-base font-semibold text-black">
-                Search
-              </button>
-            </div>
-          </div> */}
-        </div>
-
-        {/* Popular Services */}
-        <div className="px-4 w-full flex flex-col gap-4 space-y-6 mt-6">
-          <h1 className="text-lg sm:text-xl font-bold">Popular Services</h1>
-          <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-4 gap-4 w-full">
-            <img src={Painter} alt="" className="w-full" />
-            <img src={Plumber} alt="" className="w-full" />
-            <img src={Electrician} alt="" className="w-full" />
-            <img
-              src={Beautician}
-              alt=""
-              className="w-full"
-              onClick={() => setIsOpen(true)}
+            <input
+              type="text"
+              placeholder="Search for Services"
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              className="w-full pl-14 pr-12 py-4 text-base border-2 border-amber-400 rounded-xl focus:outline-none focus:border-amber-500 transition-colors"
             />
+            <button className="absolute inset-y-0 right-4 flex items-center text-gray-400">
+              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+              </svg>
+            </button>
           </div>
-          <Modal open={isOpen} onClose={() => setIsOpen(false)}>
-            <div className="flex items-center gap-4 mb-4  justify-start">
-            <ArrowLeft className="flex items-center justify-between font-bold" onClick={()=>setIsOpen(false)}/>
-            <h2 className="text-2xl font-bold mb-4"> Services</h2>
-            </div>
-            <div className="relative rounded-xl shadow-2xl overflow-hidden flex flex-col gap-4 mb-4">
-              <div>
-              <img src={woman} alt="" />
-              </div>
-              <div className=" p-2 absolute bottom-0 w-full bg-white">
-              <div className="">
-                <h2 className="text-xl font-bold">Looks Salon</h2>
-                <p className="text-md text-gray-400">Facial, Grooming, Massage</p>
-              </div>  
-              <div className="flex justify-between ">
-                <div className="flex items-center gap-2">
-                  <h2 className="text-[#FFDE7E] text-2xl font-bold">4.3</h2>
-                  <Star className="text-[#FFDE7E]"/>
-                </div>
-                <div>
-                  <button className="p-2 rounded-xl border-2 font-bold border-[#FFD700] hover:bg-[#FF8900]">Book Now</button>
-                </div>
-              </div>
-              </div>
-            </div>
-            <div className="relative rounded-xl shadow-2xl overflow-hidden flex flex-col gap-4 mb-4">
-              <div>
-              <img src={gelLaser} alt="" />
-              </div>
-              <div className=" p-2 absolute bottom-0 w-full bg-white">
-              <div className="">
-                <h2 className="text-xl font-bold">Mahi Salon</h2>
-                <p className="text-md text-gray-400">Facial, Grooming, Massage</p>
-              </div>  
-              <div className="flex justify-between ">
-                <div className="flex items-center gap-2">
-                  <h2 className="text-[#FFDE7E] text-2xl font-bold">4.3</h2>
-                  <Star className="text-[#FFDE7E]"/>
-                </div>
-                <div>
-                  <button className="p-2 rounded-xl border-2 font-bold border-[#FFD700] hover:bg-[#FF8900]">Book Now</button>
-                </div>
-              </div>
-              </div>
-            </div>
-            <div className="relative rounded-xl shadow-2xl overflow-hidden flex flex-col gap-4 mb-4">
-              <div>
-              <img src={stoneMassage} alt="" />
-              </div>
-              <div className=" p-2 absolute bottom-0 w-full bg-white">
-              <div className="">
-                <h2 className="text-xl font-bold">OUD Luxury Salon</h2>
-                <p className="text-md text-gray-400">Facial, Grooming, Massage</p>
-              </div>  
-              <div className="flex justify-between ">
-                <div className="flex items-center gap-2">
-                  <h2 className="text-[#FFDE7E] text-2xl font-bold">4.3</h2>
-                  <Star className="text-[#FFDE7E]"/>
-                </div>
-                <div>
-                  <button className="p-2 rounded-xl border-2 font-bold border-[#FFD700] hover:bg-[#FF8900]">Book Now</button>
-                </div>
-              </div>
-              </div>
-            </div>
-            <div className="relative rounded-xl shadow-2xl overflow-hidden flex flex-col gap-4 mb-4">
-              <div>
-              <img src={pedicure} alt="" />
-              </div>
-              <div className=" p-2 absolute bottom-0 w-full bg-white">
-              <div className="">
-                <h2 className="text-xl font-bold">Dazzle by style Salon</h2>
-                <p className="text-md text-gray-400">Facial, Grooming, Massage</p>
-              </div>  
-              <div className="flex justify-between ">
-                <div className="flex items-center gap-2">
-                  <h2 className="text-[#FFDE7E] text-2xl font-bold">4.3</h2>
-                  <Star className="text-[#FFDE7E]"/>
-                </div>
-                <div>
-                  <button className="p-2 rounded-xl border-2 font-bold border-[#FFD700] hover:bg-[#FF8900]">Book Now</button>
-                </div>
-              </div>
-              </div>
-            </div>
-            
-          </Modal>
-        </div>
+        </div> */}
+      </div>
 
-        {/* Trending Services */}
-        <div className="px-4 w-full flex flex-col gap-4 space-y-6 mt-6">
-          <h1 className="text-lg sm:text-xl font-bold">Trending Services</h1>
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 w-full">
-            <img src={Highlight} alt="" className="w-full" />
-            <img src={Hightlight2} alt="" className="w-full" />
-            <img src={Hightlight3} alt="" className="w-full" />
+      {/* Hero Section */}
+      <div className="max-w-7xl mx-auto px-4 pb-8">
+        <div className="relative h-[450px] rounded-3xl overflow-hidden shadow-xl">
+          <img
+            src={image}
+            alt="Hero"
+            className="w-full h-full object-cover"
+          />
+          
+          <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-black/20 to-black/40 flex flex-col items-center justify-center">
+
+            <div className="w-1/2 px-6 py-8">
+        <div className="w-full">
+          <div className="relative">
+            <div className="absolute inset-y-0 left-4 flex items-center pointer-events-none">
+              <Search className="w-6 h-6 text-amber-500" />
+            </div>
+            <input
+              type="text"
+              placeholder="Search for Services"
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              className="w-full pl-14 pr-12 py-4 text-base border-2 border-amber-400 rounded-xl focus:outline-none focus:border-amber-500 transition-colors"
+            />
+            {/* <button className="absolute inset-y-0 right-4 flex items-center text-gray-400">
+              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+              </svg>
+            </button> */}
           </div>
         </div>
-
-        {/* Top Rated Professionals */}
-        <div className="px-4 w-full flex flex-col gap-4 space-y-6 mt-6">
-          <h1 className="text-lg sm:text-xl font-bold">
-            Top Rated Professionals
-          </h1>
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 w-full">
-            <img src={trp1} alt="" className="w-full" />
-            <img src={trp2} alt="" className="w-full" />
-            <img src={trp3} alt="" className="w-full" />
-          </div>
-        </div>
-
-        {/* Why Choose */}
-        <div className="w-full mt-10 p-6">
-          <h1 className="text-xl sm:text-2xl font-bold mb-4">
-            Why choose UnlockDiscounts?
-          </h1>
-        </div>
-
-        <div className="p-6 grid grid-cols-1 md:grid-cols-3 gap-8 items-start">
-          <div className="space-y-4 text-center md:text-left">
-            <img src={Vector} alt="" className="mx-auto md:mx-0" />
-            <h2 className="font-bold text-lg">
-              Verified and Background-Checked pros
-            </h2>
-            <p className="text-gray-500 text-sm sm:text-base">
-              We thoroughly vet all our pros to ensure they meet our high
-              standards.
-            </p>
-          </div>
-
-          <div className="space-y-4 text-center md:text-left">
-            <img src={star_shine} alt="" className="mx-auto md:mx-0" />
-            <h2 className="font-bold text-lg">Top rated professionals</h2>
-            <p className="text-gray-500 text-sm sm:text-base">
-              Our pros consistently receive excellent reviews from satisfied
-              customers.
-            </p>
-          </div>
-
-          <div className="space-y-4 text-center md:text-left">
-            <img src={calendar} alt="" className="mx-auto md:mx-0" />
-            <h2 className="font-bold text-lg">Flexible Scheduling</h2>
-            <p className="text-gray-500 text-sm sm:text-base">
-              Book appointments at your convenience, with flexible scheduling
-              options.
-            </p>
+      </div>
+            <h1 className="text-6xl font-bold text-white mb-3 tracking-tight">One Platform</h1>
+            <h2 className="text-5xl font-bold text-white tracking-tight">All Services</h2>
           </div>
         </div>
       </div>
 
-      {/* Footer */}
-      <footer className="p-6 mt-20 text-gray-500 flex flex-col sm:flex-row justify-between gap-4 sm:gap-0 bg-[#F2E7E7] w-full text-sm sm:text-base">
-        <a className="hover:cursor-pointer hover:text-blue-700">
-          Terms of service
-        </a>
-        <a className="hover:cursor-pointer hover:text-blue-700">
-          Privacy Policy
-        </a>
-        <a className="hover:cursor-pointer hover:text-blue-700">Contact us</a>
-      </footer>
-    </>
+      {/* Popular Services Section */}
+      <div className="max-w-7xl mx-auto px-4 py-12">
+        <h2 className="text-4xl font-bold mb-10 text-gray-900">Services Category</h2>
+
+        {loading ? (
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            {[...Array(4)].map((_, index) => (
+              <div key={index} className="bg-gray-100 rounded-2xl h-72 animate-pulse"></div>
+            ))}
+          </div>
+        ) : filteredCategories.length === 0 ? (
+          <div className="text-center py-16">
+            <p className="text-gray-500 text-lg">No services found matching "{searchQuery}"</p>
+          </div>
+        ) : (
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            {filteredCategories.map((category,id) => (
+              <button
+                key={id}
+                onClick={() => handleCategoryClick(category.category)}
+                className="group relative overflow-hidden rounded-2xl shadow-md hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-1"
+              >
+                <div className="aspect-[1]">
+                  <img
+                    src={ii}
+                    alt={category.category}
+                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
+                  <div className="absolute bottom-0 left-0 right-0 p-5">
+                    <h3 className="text-white text-2xl font-bold text-center">{category.category}</h3>
+                  </div>
+                </div>
+              </button>
+            ))}
+          </div>
+        )}
+      </div>
+
+      {/* Why Choose Section */}
+      <div className="max-w-7xl mx-auto px-4 py-16 mb-12">
+        <h2 className="text-4xl font-bold mb-12 text-gray-900">Why choose Mendora?</h2>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
+          {/* Feature 1 */}
+          <div className="flex flex-col items-start">
+            <div className="w-14 h-14 bg-green-100 rounded-2xl flex items-center justify-center mb-5">
+              <svg className="w-7 h-7 text-green-600" fill="currentColor" viewBox="0 0 20 20">
+                <path fillRule="evenodd" d="M6.267 3.455a3.066 3.066 0 001.745-.723 3.066 3.066 0 013.976 0 3.066 3.066 0 001.745.723 3.066 3.066 0 012.812 2.812c.051.643.304 1.254.723 1.745a3.066 3.066 0 010 3.976 3.066 3.066 0 00-.723 1.745 3.066 3.066 0 01-2.812 2.812 3.066 3.066 0 00-1.745.723 3.066 3.066 0 01-3.976 0 3.066 3.066 0 00-1.745-.723 3.066 3.066 0 01-2.812-2.812 3.066 3.066 0 00-.723-1.745 3.066 3.066 0 010-3.976 3.066 3.066 0 00.723-1.745 3.066 3.066 0 012.812-2.812zm7.44 5.252a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+              </svg>
+            </div>
+            <h3 className="text-xl font-bold mb-3 text-gray-900">Verified and Background-Checked Pros</h3>
+            <p className="text-gray-500 text-sm leading-relaxed">We thoroughly vet all our pros to ensure they meet our high standards.</p>
+          </div>
+
+          {/* Feature 2 */}
+          <div className="flex flex-col items-start">
+            <div className="w-14 h-14 bg-amber-100 rounded-2xl flex items-center justify-center mb-5">
+              <svg className="w-7 h-7 text-amber-600" fill="currentColor" viewBox="0 0 20 20">
+                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+              </svg>
+            </div>
+            <h3 className="text-xl font-bold mb-3 text-gray-900">Top-Rated Professionals</h3>
+            <p className="text-gray-500 text-sm leading-relaxed">Our pros consistently receive excellent reviews from satisfied customers.</p>
+          </div>
+
+          {/* Feature 3 */}
+          <div className="flex flex-col items-start">
+            <div className="w-14 h-14 bg-blue-100 rounded-2xl flex items-center justify-center mb-5">
+              <svg className="w-7 h-7 text-blue-600" fill="currentColor" viewBox="0 0 20 20">
+                <path fillRule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clipRule="evenodd" />
+              </svg>
+            </div>
+            <h3 className="text-xl font-bold mb-3 text-gray-900">Flexible Scheduling</h3>
+            <p className="text-gray-500 text-sm leading-relaxed">Book appointments at your convenience, with flexible scheduling options.</p>
+          </div>
+        </div>
+      </div>
+
+      {/* Modal */}
+      {isModalOpen && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-start justify-center overflow-y-auto">
+          <div className="bg-white w-full max-w-lg min-h-screen md:min-h-0 md:my-8 md:rounded-3xl shadow-2xl">
+            {/* Modal Header */}
+            <div className="sticky top-0 bg-white border-b border-gray-100 px-5 py-4 flex items-center gap-4 md:rounded-t-3xl z-10">
+              <button
+                onClick={closeModal}
+                className="p-2 hover:bg-gray-50 rounded-full transition-colors"
+              >
+                <ArrowLeft className="w-6 h-6 text-gray-700" />
+              </button>
+              <h2 className="text-2xl font-bold text-gray-900">Services</h2>
+            </div>
+
+            {/* Modal Content */}
+            <div className="p-5">
+              {servicesLoading ? (
+                <div className="space-y-4">
+                  {[...Array(3)].map((_, index) => (
+                    <div key={index} className="bg-gray-100 rounded-3xl h-80 animate-pulse"></div>
+                  ))}
+                </div>
+              ) : (
+                <div className="space-y-4">
+                  {services.map((service) => (
+                    <div
+                      key={service._id}
+                      className="cursor-pointer bg-white rounded-3xl shadow-md overflow-hidden hover:shadow-lg transition-shadow"
+                      onClick={()=>{
+                        handleCardClick(service._id);
+                      }}
+                    >
+                      <div className="relative h-56" >
+                        <img
+                          src={Thynk1}
+                          alt={service?.providerDetails?.business_name}
+                          className="w-full h-full object-cover"
+                        />
+                      </div>
+                      <div className="p-5">
+                        <h3 className="text-xl font-bold mb-1 text-gray-900 cursor-pointer" >{service?.providerDetails?.business_name}</h3>
+                        <div className="flex items-center justify-between">
+                          <div className="flex items-center gap-1">
+                            {/* <span className="text-lg font-bold text-amber-500">rating</span>
+                            <Star className="w-5 h-5 fill-amber-400 text-amber-400" /> */}
+                          </div>
+                          <button className="px-6 py-2.5 bg-white border-2 border-amber-400 text-gray-900 font-semibold rounded-full hover:bg-amber-400 hover:text-white transition-all duration-300"
+                            onClick={()=>handleBook(service._id)}>
+                            Book now
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              )}
+            </div>
+          </div>
+        </div>
+      )}
+    </div>
   );
-};
+}
 
 export default AllServices;

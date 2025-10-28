@@ -1,28 +1,125 @@
-import unlockdiscounts from '../assets/unlockdiscounts.logo.jpg';
-import '../index.css';
+import { useState, useEffect, useRef } from "react";
+import { useNavigate, Link } from "react-router-dom";
+import axios from 'axios';
+import unlockdiscounts from "../assets/unlockdiscounts.logo.jpg";
+import "../index.css";
 
 const Navbar = () => {
-    return (
-        <div className=' bg-white  w-full h-[100px] flex justify-between p-2 border-2 border-b-[#FF8900]' >
-            <div className=' flex items-center gap-2 '>
-                <img src={unlockdiscounts} alt="logo" className='h-10 w-10'></img>
-                <h1 className='text-2xl font-bold'>Unlock Discounts</h1>
+  const user = JSON.parse(localStorage.getItem("user"));
+  const token = localStorage.getItem("accessToken");
+  const [menuOpen, setMenuOpen] = useState(false);
+  const menuRef = useRef(null);
+  const navigate = useNavigate();
 
-            </div>
-            <div className='hidden md:flex justify-between items-center gap-10  mr-16'>
-                <nav className='w-full'>
-                    <ul className='flex justify-around gap-9 text-lg font-medium w-full p-4'>
-                        <a href="/">Home</a>
-                        <a href="/about">About Us</a>
-                        <a href="/contact">Contact</a>
-                        <span><a className="border-2 border-[#FF9800] px-6 py-1.5 rounded-full font-semibold" href="/login">Login</a></span>
+  const handleLogout = async () => {
+    try {
+      const res = await axios.post(
+        "https://service-app-backend-1.onrender.com/api/auth/logout",
+        {},
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
 
-                    </ul>
-                </nav>
+      console.log("Logout successful:", res.data);
+      setMenuOpen(false);
+      localStorage.removeItem("user");
+      // window.location.href = "/";
+    } catch (error) {
+      console.log("Logout error:", error.response?.status, error.response?.data || error.message);
+    }
+  };
 
-            </div>
-        </div>
-    );
-}
+  const handleProfile = () => {
+
+
+    if (user.role === "customer") {
+      navigate("/customerDashboard");
+    }
+    else if (user.role === "provider") {
+      navigate("/providerDashboard");
+    }
+
+  }
+  // close dropdown if clicked outside
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (menuRef.current && !menuRef.current.contains(event.target)) {
+        setMenuOpen(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
+
+  return (
+    <div className="fixed top-0 left-0 w-full h-[100px] flex justify-between items-center px-6 border-b-2 border-[#FF8900] bg-white z-50">
+      {/* Logo */}
+      <div className="flex items-center gap-2">
+        <img src={unlockdiscounts} alt="logo" className="h-10 w-10" />
+        <h1 className="text-2xl font-bold">
+          <span>Mend</span>
+          <span className="text-[#FF9800]">ora</span>
+        </h1>
+      </div>
+
+      {/* Navbar Links */}
+      <div className="hidden md:flex items-center gap-10 mr-10">
+        <nav>
+          <ul className="flex items-center gap-9 text-lg font-medium py-2">
+            <a href="/">Home</a>
+            <a href="/allservices">Services</a>
+            <a href="/about">About Us</a>
+            <a href="/contact">Contact</a>
+
+            {user ? (
+              <div className="relative" ref={menuRef}>
+                <div
+                  onClick={() => setMenuOpen(!menuOpen)}
+                  className="w-10 h-10 flex items-center justify-center bg-[#FF9800] rounded-full text-lg font-semibold text-white cursor-pointer select-none"
+                >
+                  {user.name.charAt(0).toUpperCase()}
+                </div>
+
+                {menuOpen && (
+                  <div className="absolute right-0 mt-2 w-40 bg-white border rounded-xl shadow-lg z-50">
+                    <a
+                      className="block px-4 py-2 hover:bg-gray-100 rounded-t-xl"
+                      onClick={() => {
+                        setMenuOpen(false)
+                        handleProfile();
+                      }}
+                    >
+                      Profile
+                    </a>
+                    <button
+                      onClick={handleLogout}
+                      className="w-full text-left px-4 py-2 hover:bg-gray-100 rounded-b-xl"
+                    >
+                      Logout
+                    </button>
+                  </div>
+                )}
+              </div>
+            ) : (
+              <span>
+                <a
+                  className="border-2 border-[#FF9800] px-6 py-1.5 rounded-full font-semibold"
+                  href="/login"
+                >
+                  Login
+                </a>
+              </span>
+            )}
+          </ul>
+        </nav>
+      </div>
+    </div>
+  );
+};
 
 export default Navbar;

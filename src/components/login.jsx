@@ -1,44 +1,120 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
+import loginImg from "../assets/login.jpg";
+import logo from "../assets/unlockdiscounts.logo.jpg";
+import axios from 'axios';
+import Rectangle from '../assets/Rectangle.png'
+
 
 const Login = () => {
-  const [selectedRole, setSetselectedRole] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
-  const handleRoleSelection = (role) => {
-    setSetselectedRole(role);
-    if (role === "customer") {
-      navigate("/allservices");
-    } else if (role === "serviceProvider") {
-      navigate("/serviceproviderlogin");
+  const handleLogin = async (e) => {
+
+    e.preventDefault();
+    setError("");
+    setLoading(true);
+
+    try {
+
+      const response = await axios.post(
+        "https://service-app-backend-1.onrender.com/api/auth/login",
+        { email, password }
+      );
+      console.log(response?.data);
+      const { accessToken, refreshToken, user } = response?.data;
+      localStorage.setItem("accessToken", accessToken);
+      localStorage.setItem("refreshToken", refreshToken);
+      localStorage.setItem("user", JSON.stringify(user));
+
+      alert(response?.data?.message);
+
+
+      if (user.role === "customer") {
+        navigate("/customerDashboard");
+      }
+      else if (user.role === "provider") {
+        navigate("/providerDashboard");
+      }
+
+
+    } catch (error) {
+      setError(error.response?.data.error);
+
     }
-  };
+
+    setLoading(false);
+  }
   return (
-    <div className=" flex w-full justify-center items-center mt-10">
-      <div className=" bg-[#FFFBEE] p-10 rounded-xl">
-        <div className="flex flex-col items-center gap-4">
-          <h1 className="text-5xl font-bold text-center">Choose Your Role</h1>
-          <p className="text-[#8C805E] text-xl">
-            Are you looking for services or offering them?
-          </p>
+    <div className="min-h-screen flex">
+      {/* Left Section (Image) */}
+      <div className="flex">
+        <img src={Rectangle} alt="Login" className="w-full h-4/5 object-cover" />
+      </div>
+
+      {/* Right Section (Form) */}
+      <div className="w-full md:w-[500px] bg-white flex flex-col py-12">
+        <div className="flex flex-col items-center mb-8">
+          <img src={logo} alt="Logo" className="w-16 h-16 rounded-xl mb-2" />
+          {/* <h1 className="text-2xl font-bold text-gray-800">Unlock Discounts</h1> */}
+          <h1 className="text-2xl font-bold">
+          <span>Mend</span>
+          <span className="text-[#FF9800]">ora</span>
+        </h1>
         </div>
 
-        <div className="flex flex-col items-center gap-5 mt-10">
+        <h2 className="text-3xl text-center font-semibold mb-2">Login</h2>
+        <p className="text-center text-gray-500 mb-6">Enter your details to sign in</p>
+
+        {error && <p className="text-red-500 text-center mb-4">{error}</p>}
+
+        <form onSubmit={handleLogin} className="space-y-5">
+          <div>
+            <label className="block mb-1 text-gray-700">Email</label>
+            <input
+              type="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              placeholder="example@gmail.com"
+              required
+              className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-orange-500 outline-none"
+            />
+          </div>
+
+          <div>
+            <label className="block mb-1 text-gray-700">Password</label>
+            <input
+              type="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              placeholder="●●●●●●"
+              required
+              className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-orange-500 outline-none"
+            />
+          </div>
+
           <button
-            onClick={() => handleRoleSelection("customer")}
-            className="border-2 border-[#ff8901] rounded-3xl px-6 py-2"
+            type="submit"
+            disabled={loading}
+            className="w-full bg-orange-500 text-white py-3 rounded-lg hover:bg-orange-600 transition"
           >
-            I'm a Customer
+            {loading ? "Signing In..." : "Sign In"}
           </button>
-          <button
-            onClick={() => handleRoleSelection("serviceProvider")}
-            className="bg-[#ff8901] rounded-3xl px-6 py-2"
-          >
-            I'm a Service Provider
-          </button>
-        </div>
+        </form>
+
+        <p className="text-center mt-6">
+          Don’t have an account?{" "}
+          <Link to="/usersignup" className="text-blue-600 hover:underline">
+            Sign up
+          </Link>
+        </p>
       </div>
     </div>
   );
 };
+
 export default Login;

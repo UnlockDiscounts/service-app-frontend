@@ -8,13 +8,15 @@ const Hero = () => {
   const navigate = useNavigate();
 
   const handleClick = () => {
-    navigate("/login");
+    navigate("/role");
   };
 
   
   const handleClick2=()=>{
     navigate("/allservices");
   }
+
+
 
   return (
     <div className="pt-10 heroclass w-full min-h-screen" style={{ backgroundImage: `url(${bglanding})`, backgroundSize: 'cover', backgroundPosition: 'center' }}
@@ -25,13 +27,13 @@ const Hero = () => {
         <div className="flex flex-col    text-center lg:text-left px-10  ">
           <div className="space-y-4  ">
             <h1
-              className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl text-gray-800  font-extrabold font-poppins tracking-wide opacity-90"
+              className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-6xl text-gray-800  font-extrabold font-poppins tracking-wide opacity-90"
               style={{ textShadow: "3px 4px 4px rgba(128,128,128,0.8)" }}
             >
               One Platform
             </h1>
             <h1
-              className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl text-gray-800 font-extrabold font-poppins tracking-wide opacity-90"
+              className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-6xl text-gray-800 font-extrabold font-poppins tracking-wide opacity-90"
               style={{ textShadow: "3px 4px 4px rgba(128,128,128,0.8)" }}
             >
               All Services
@@ -49,7 +51,10 @@ const Hero = () => {
             >
               Get Started
             </button>
-            <button className="border-2 border-[#FF9800] px-6 py-2 md:px-8 md:py-3 rounded-full text-lg md:text-2xl font-semibold hover:bg-[#FF9800] hover:text-white transition">
+            <button 
+             className="border-2 border-[#FF9800] px-6 py-2 md:px-8 md:py-3 rounded-full text-lg md:text-2xl font-semibold hover:bg-[#FF9800] hover:text-white transition"
+             onClick={handleClick2}
+            >
               Explore Services
             </button>
           </div>

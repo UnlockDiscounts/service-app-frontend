@@ -1,16 +1,22 @@
 import React, { useState } from "react";
 import { Check, ArrowRight } from "lucide-react";
+import { Link } from "react-router-dom";
+import bglanding from "../assets/bglanding.svg";
+import PaymentModal from "./PaymentModal";
+import ComingSoonOverlay from './comingSoonOverlay';
 
 const Payments = () => {
+
   const [couponCode, setCouponCode] = useState("");
+  const [show, setShow] = useState(false);
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-gray-50" style={{ backgroundImage: `url(${bglanding})` }}>
       {/* Main Content */}
       <main className="max-w-7xl mx-auto px-6 py-12">
         <div className="flex flex-col lg:flex-row gap-8 items-center justify-center">
           {/* Basic Plan Card */}
-          <div className="w-[444px] bg-white rounded-lg border-2 border-blue-400 overflow-hidden">
+          <div className="w-[444px] bg-white  border-2 shadow-2xl overflow-hidden rounded-2xl">
             <div className="h-32 bg-gradient-to-r from-yellow-300 via-orange-300 to-yellow-400"></div>
 
             <div className="p-8">
@@ -43,20 +49,29 @@ const Payments = () => {
               </div>
 
               {/* Subscribe Button */}
-              <button className="w-full py-3 px-6 border-2 border-orange-400 text-orange-500 font-semibold rounded-full hover:bg-orange-50 transition-colors">
+              <button className="w-full py-3 px-6 border-2 border-orange-400 text-orange-500 font-semibold rounded-full hover:bg-orange-50 transition-colors"
+                 onClick={()=>{
+                  setShow(true);
+                 }}
+              >
                 Subscribe
               </button>
+              {
+                show && (<>
+                <PaymentModal onClose={() => setShow(false)}/>
+                </>)
+              }
+        
             </div>
           </div>
 
           {/* Coupon Code Card */}
-          <div className="w-[343px] bg-white rounded-2xl shadow-lg overflow-hidden">
+          <ComingSoonOverlay>
+            (
+          <div className="w-[343px] bg-white rounded-2xl shadow-2xl overflow-hidden ">
+            
             <div className="p-6 pt-8">
               <div className="bg-gradient-to-r from-orange-600 to-orange-700 rounded-lg p-4 mb-6 relative overflow-hidden">
-                <div className="absolute top-2 left-4 w-4 h-4 bg-white bg-opacity-30 rounded-full"></div>
-                <div className="absolute top-2 left-12 w-4 h-4 bg-white bg-opacity-30 rounded-full"></div>
-                <div className="absolute top-2 left-20 w-4 h-4 bg-white bg-opacity-30 rounded-full"></div>
-                <div className="absolute top-2 left-28 w-4 h-4 bg-white bg-opacity-30 rounded-full"></div>
 
                 <div className="flex items-center gap-2 text-white">
                   <ArrowRight className="w-6 h-6" />
@@ -64,6 +79,7 @@ const Payments = () => {
                     Have a coupon code?
                   </span>
                 </div>
+                
               </div>
 
               {/* Coupon Input */}
@@ -79,9 +95,14 @@ const Payments = () => {
                 <button className="w-full py-3 px-6 bg-gray-100 text-gray-700 font-semibold rounded-lg hover:bg-gray-200 transition-colors">
                   Apply Code
                 </button>
+
+                
               </div>
+              
             </div>
-          </div>
+            
+          </div>)
+          </ComingSoonOverlay>
         </div>
       </main>
 
