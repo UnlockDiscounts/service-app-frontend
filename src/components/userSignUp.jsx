@@ -2,10 +2,13 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import login from '../assets/login.jpg'
 import unlockdiscounts from '../assets/unlockdiscounts.logo.jpg';
+import logoo from '../assets/logoo.jpg'
 import Rectangle from '../assets/Rectangle.png'
 import '../App.css';
 import axios from 'axios';
 import OtpVerify from './otpVerify'
+import { Link } from "react-router-dom";
+
 
 const SignUp = () => {
 
@@ -16,6 +19,7 @@ const SignUp = () => {
   const [phone, setPhone] = useState("");
   const [address, setAddress] = useState("");
   const [loading, setLoading] = useState(false);
+  const [verify,setVerify] = useState(false);
 
   const navigate = useNavigate();
   const formData = new FormData();
@@ -32,7 +36,7 @@ const SignUp = () => {
     setShowOtp(true);
     try {
     const res = await axios.post(
-      "https://service-app-backend-1.onrender.com/api/email/request-otp/email", 
+      "https://service-app-backend-omega.vercel.app/api/email/request-otp/email", 
     {email}
     );
     console.log("OTP response:", res.data);
@@ -45,6 +49,12 @@ const SignUp = () => {
 
   const handleSignUp = async () => {
 
+    // if(!verify)
+    // {
+    //    alert("Please Verify Email");
+    //    return;
+    // }
+    
     setLoading(true);
 
     try {
@@ -83,7 +93,7 @@ const SignUp = () => {
         {/* Logo */}
         <div className="flex items-center gap-3 mb-6 justify-center">
           {/* <div className="w-20 h-20 rounded-3xl flex items-center justify-center"> */}
-          <img className="size-16 rounded-2xl flex items-center justify-center" src={unlockdiscounts} alt="/" />
+          <img className="size-16 rounded-2xl flex items-center justify-center" src={logoo} alt="/" />
           {/* </div> */}
           <h1 className="text-2xl font-bold">
           <span>Mend</span>
@@ -122,12 +132,16 @@ const SignUp = () => {
               />
               <button
                 type="button"
-                // onClick={handleVerifyEmail} // your verification handler
+                onClick={handleVerifyEmail} // your verification handler
                 className="bg-gray-200 text-gray-700 px-4 py-2 m-1 rounded-lg hover:bg-gray-300 transition"
               >
                 Verify
               </button>
-              {/* {showOtp && <OtpVerify onClose={() => setShowOtp(false)} email={email}/>} */}
+              {showOtp && <OtpVerify onClose={() => setShowOtp(false)} email={email} verified={()=>{
+                setVerify(true);
+              }}  requestOtp={()=>{
+                handleVerifyEmail();
+              }}/>}
             </div>
           </div>
 
@@ -154,6 +168,13 @@ const SignUp = () => {
           >
           {loading ? "Signing Up..." : "Sign Up"}
           </button>
+
+          <p className="text-center mt-6">
+          Are you a Service Provider?{" "}
+          <Link to="/serviceproviderlogin" className="text-blue-600 hover:underline">
+          Register Here
+          </Link>
+        </p>
 
 
         </div>

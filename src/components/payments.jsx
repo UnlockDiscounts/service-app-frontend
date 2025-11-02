@@ -107,7 +107,7 @@ const Payments = () => {
       </main>
 
       {/* Footer */}
-      <footer className="mt-20 border-t border-gray-200 py-8">
+      {/* <footer className="mt-20 border-t border-gray-200 py-8">
         <div className="max-w-7xl mx-auto px-6">
           <div className="flex flex-col md:flex-row justify-between items-center gap-4">
             <a href="#" className="text-gray-700 hover:text-gray-900 font-medium">
@@ -121,7 +121,7 @@ const Payments = () => {
             </a>
           </div>
         </div>
-      </footer>
+      </footer> */}
     </div>
   );
 };

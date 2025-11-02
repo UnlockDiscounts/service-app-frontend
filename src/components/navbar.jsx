@@ -2,6 +2,7 @@ import { useState, useEffect, useRef } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import axios from 'axios';
 import unlockdiscounts from "../assets/unlockdiscounts.logo.jpg";
+import logoo from '../assets/logoo.jpg'
 import "../index.css";
 
 const Navbar = () => {
@@ -57,10 +58,10 @@ const Navbar = () => {
   }, []);
 
   return (
-    <div className="fixed top-0 left-0 w-full h-[100px] flex justify-between items-center px-6 border-b-2 border-[#FF8900] bg-white z-50">
+    <div className="fixed top-0 left-0 w-full h-[80px] flex justify-between items-center px-6 border-b-2 border-[#FF8900] bg-white z-50">
       {/* Logo */}
       <div className="flex items-center gap-2">
-        <img src={unlockdiscounts} alt="logo" className="h-10 w-10" />
+        <img src={logoo} alt="logo" className="h-10 w-10" />
         <h1 className="text-2xl font-bold">
           <span>Mend</span>
           <span className="text-[#FF9800]">ora</span>

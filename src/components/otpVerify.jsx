@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Illustration from '../assets/Illustration.png';
 import axios from 'axios';
 
-const OtpVerify = ({ onClose, email }) => {
+const OtpVerify = ({ onClose, email, verified, requestOtp }) => {
 
   const [otp,setOtp] = useState("");
 
@@ -16,6 +16,9 @@ const OtpVerify = ({ onClose, email }) => {
     );
 
     console.log("OTP verification response:", res?.data);
+    verified();
+    
+
   } catch (error) {
     console.error(
       "Error while verifying OTP:",
@@ -68,7 +71,8 @@ const OtpVerify = ({ onClose, email }) => {
 
         {/* Buttons */}
         <div className="flex justify-between">
-          <button className="border-2 border-orange-400 text-orange-500 px-4 py-2 rounded-full hover:bg-orange-100 transition">
+          <button className="border-2 border-orange-400 text-orange-500 px-4 py-2 rounded-full hover:bg-orange-100 transition"
+          onClick={requestOtp}>
             Re-send OTP
           </button>
           <button 

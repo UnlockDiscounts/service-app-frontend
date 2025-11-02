@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from "react-router-dom";
 import axios from 'axios';
+import qr from '../assets/qr.jpeg'
 
 const PaymentModal = ({ onClose }) => { // Component named PaymentModel
   // State 1: Ready to Scan/Upload -> 2: Upload Success -> 3: API Called
@@ -32,7 +33,7 @@ const PaymentModal = ({ onClose }) => { // Component named PaymentModel
         alert("Please select an image to upload first or use the QR scanner space.");
         return;
     }
-    // setLoading(true);
+    setLoading(true);
     
     const data = new FormData();
     data.append("receiptFile", imageFile);
@@ -49,8 +50,6 @@ const PaymentModal = ({ onClose }) => { // Component named PaymentModel
       );
 
       console.log(res?.data);
-    
-
       alert(res?.data?.message);
       navigate("/success");
 
@@ -72,8 +71,9 @@ const PaymentModal = ({ onClose }) => { // Component named PaymentModel
         
         {/* 1. QR Scanner Space */}
         <div className="p-5 bg-gray-100 border border-gray-300 rounded-lg text-center">
-          <p className="font-semibold text-gray-700">1. QR Scanner Space (Paste QR Here)</p>
-          <p className="text-sm text-gray-500">This space is left for QR code scanning integration.</p>
+          {/* <p className="font-semibold text-gray-700">1. QR Scanner Space (Paste QR Here)</p>
+          <p className="text-sm text-gray-500">This space is left for QR code scanning integration.</p> */}
+          <img src={qr}/>
         </div>
         
         {/* 2. Image Uploader */}
@@ -169,7 +169,7 @@ const PaymentModal = ({ onClose }) => { // Component named PaymentModel
         onClick={handleUpload} 
         className="w-full py-2 mt-6 text-white font-semibold rounded-md bg-green-600 hover:bg-green-700 transition duration-200"
       >
-        Done
+        {loading ? 'Processing...' : 'Done'}
       </button>
       </div>
     </div>

@@ -395,8 +395,11 @@ import axios from 'axios';
 import Thynk from '../assets/Thynk.jpg';
 import Thynk1 from "../assets/Thynk1.jpg";
 import { Star, MapPin, Phone, Share2, X, Mail, Globe, Navigation } from 'lucide-react';
+import BookNow from './bookNow';
 
 const IndividualListing = ({ listingData }) => {
+
+  const user = JSON.parse(localStorage.getItem("user"));
   const [activeTab, setActiveTab] = useState('Services');
   const reviewsScrollRef = useRef(null);
   const [activeReviewDot, setActiveReviewDot] = useState(0);
@@ -411,6 +414,10 @@ const IndividualListing = ({ listingData }) => {
   const [email, setEmail] = useState("");
   const [website, setWebsite] = useState("");
   const [avgPricing, setAvgPricing] = useState(0);
+  const [book, setBook] = useState(false);
+  const [drop, setDrop] = useState([]);
+
+
 
   const { id } = useParams();
 
@@ -434,7 +441,7 @@ const IndividualListing = ({ listingData }) => {
           },
         }
       );
-      const res3 = await axios.get(`https://service-app-backend-1.onrender.com/api/feedback/68fb5a23d9ed9b1672d331d0`);
+      const res3 = await axios.get(`https://service-app-backend-1.onrender.com/api/feedback/${id}`);
 
 
       console.log(res?.data);
@@ -472,7 +479,7 @@ const IndividualListing = ({ listingData }) => {
     const storedUser = JSON.parse(localStorage.getItem("user"));
     const token = localStorage.getItem("accessToken");
 
-    if (!storedUser){
+    if (!storedUser) {
       alert("Please Login / Sign Up first to Book a service");
       return;
     }
@@ -489,75 +496,75 @@ const IndividualListing = ({ listingData }) => {
   }
 
 
-  const data = listingData || {
-    businessName: 'Rakesh Plumbing Service',
-    rating: 4.5,
-    reviewCount: 25,
-    location: 'Janakpuri, Delhi, India',
-    phone: '+91 XXXXXXXXXX',
-    whatsapp: '+91 XXXXXXXXXX',
-    bannerImage: 'https://images.pexels.com/photos/8486888/pexels-photo-8486888.jpeg?auto=compress&cs=tinysrgb&w=1200',
-    services: [
-      {
-        id: 1,
-        title: 'Waste pipe replacement',
-        description: 'Remove damaged or leaking waste pipes and install new, durable piping to ensure smooth drainage.',
-        image: 'https://images.pexels.com/photos/6419127/pexels-photo-6419127.jpeg?auto=compress&cs=tinysrgb&w=600'
-      },
-      {
-        id: 2,
-        title: 'Tap installation',
-        description: 'Professional fitting of new taps with a secure, leak-free finish for kitchens, bathrooms, or outdoor areas.',
-        image: 'https://images.pexels.com/photos/4239031/pexels-photo-4239031.jpeg?auto=compress&cs=tinysrgb&w=600'
-      },
-      {
-        id: 3,
-        title: 'Connection hose installation',
-        description: 'Safe and precise setup of water inlet/outlet hoses for appliances or fixtures to prevent leaks and maintain steady flow.',
-        image: 'https://images.pexels.com/photos/8486206/pexels-photo-8486206.jpeg?auto=compress&cs=tinysrgb&w=600'
-      },
-      {
-        id: 4,
-        title: 'Flush tank replacement',
-        description: 'Replacement of old or faulty flush tanks with reliable, water-efficient units for better toilet performance.',
-        image: 'https://images.pexels.com/photos/4239153/pexels-photo-4239153.jpeg?auto=compress&cs=tinysrgb&w=600'
-      }
-    ],
-    contact: {
-      phone: '+91 92392xxxxx',
-      address: 'Office No 104, 1st Floor, Plot No 518, Vijay bhawan colony, Near Indian Bank Colony, Sector 24, Vijay Nagar-110071'
-    },
-    averageCharge: 250,
-    servicesCount: 50,
-    reviews: [
-      {
-        id: 1,
-        name: 'Nisha Maan',
-        date: 'Sept 19, 2025',
-        rating: 4.3,
-        comment: 'Quick and professional—he fixed my leaking sink pipe in no time and left everything spotless.'
-      },
-      {
-        id: 2,
-        name: 'Rajesh Kumar',
-        date: 'Sept 15, 2025',
-        rating: 4.5,
-        comment: 'Excellent service! Very professional and completed the work on time.'
-      },
-      {
-        id: 3,
-        name: 'Priya Sharma',
-        date: 'Sept 10, 2025',
-        rating: 4.8,
-        comment: 'Highly recommended! Great work and very reasonable pricing.'
-      }
-    ],
-    description: 'Rakesh Plumbing Service provides professional plumbing solutions, specializing in fixing leaks, installing fixtures, and handling all types of plumbing emergencies for residential and commercial clients.'
-  };
+  // const data = listingData || {
+  //   businessName: 'Rakesh Plumbing Service',
+  //   rating: 4.5,
+  //   reviewCount: 25,
+  //   location: 'Janakpuri, Delhi, India',
+  //   phone: '+91 XXXXXXXXXX',
+  //   whatsapp: '+91 XXXXXXXXXX',
+  //   bannerImage: 'https://images.pexels.com/photos/8486888/pexels-photo-8486888.jpeg?auto=compress&cs=tinysrgb&w=1200',
+  //   services: [
+  //     {
+  //       id: 1,
+  //       title: 'Waste pipe replacement',
+  //       description: 'Remove damaged or leaking waste pipes and install new, durable piping to ensure smooth drainage.',
+  //       image: 'https://images.pexels.com/photos/6419127/pexels-photo-6419127.jpeg?auto=compress&cs=tinysrgb&w=600'
+  //     },
+  //     {
+  //       id: 2,
+  //       title: 'Tap installation',
+  //       description: 'Professional fitting of new taps with a secure, leak-free finish for kitchens, bathrooms, or outdoor areas.',
+  //       image: 'https://images.pexels.com/photos/4239031/pexels-photo-4239031.jpeg?auto=compress&cs=tinysrgb&w=600'
+  //     },
+  //     {
+  //       id: 3,
+  //       title: 'Connection hose installation',
+  //       description: 'Safe and precise setup of water inlet/outlet hoses for appliances or fixtures to prevent leaks and maintain steady flow.',
+  //       image: 'https://images.pexels.com/photos/8486206/pexels-photo-8486206.jpeg?auto=compress&cs=tinysrgb&w=600'
+  //     },
+  //     {
+  //       id: 4,
+  //       title: 'Flush tank replacement',
+  //       description: 'Replacement of old or faulty flush tanks with reliable, water-efficient units for better toilet performance.',
+  //       image: 'https://images.pexels.com/photos/4239153/pexels-photo-4239153.jpeg?auto=compress&cs=tinysrgb&w=600'
+  //     }
+  //   ],
+  //   contact: {
+  //     phone: '+91 92392xxxxx',
+  //     address: 'Office No 104, 1st Floor, Plot No 518, Vijay bhawan colony, Near Indian Bank Colony, Sector 24, Vijay Nagar-110071'
+  //   },
+  //   averageCharge: 250,
+  //   servicesCount: 50,
+  //   reviews: [
+  //     {
+  //       id: 1,
+  //       name: 'Nisha Maan',
+  //       date: 'Sept 19, 2025',
+  //       rating: 4.3,
+  //       comment: 'Quick and professional—he fixed my leaking sink pipe in no time and left everything spotless.'
+  //     },
+  //     {
+  //       id: 2,
+  //       name: 'Rajesh Kumar',
+  //       date: 'Sept 15, 2025',
+  //       rating: 4.5,
+  //       comment: 'Excellent service! Very professional and completed the work on time.'
+  //     },
+  //     {
+  //       id: 3,
+  //       name: 'Priya Sharma',
+  //       date: 'Sept 10, 2025',
+  //       rating: 4.8,
+  //       comment: 'Highly recommended! Great work and very reasonable pricing.'
+  //     }
+  //   ],
+  //   description: 'Rakesh Plumbing Service provides professional plumbing solutions, specializing in fixing leaks, installing fixtures, and handling all types of plumbing emergencies for residential and commercial clients.'
+  // };
 
   const scrollToReview = (index) => {
     if (reviewsScrollRef.current) {
-      const reviewWidth = reviewsScrollRef.current.scrollWidth / data.reviews.length;
+      const reviewWidth = reviewsScrollRef.current.scrollWidth / feedbacks.length;
       reviewsScrollRef.current.scrollTo({
         left: reviewWidth * index,
         behavior: 'smooth'
@@ -569,7 +576,7 @@ const IndividualListing = ({ listingData }) => {
   const handleReviewScroll = () => {
     if (reviewsScrollRef.current) {
       const scrollLeft = reviewsScrollRef.current.scrollLeft;
-      const reviewWidth = reviewsScrollRef.current.scrollWidth / data.reviews.length;
+      const reviewWidth = reviewsScrollRef.current.scrollWidth /feedbacks.length;
       const currentIndex = Math.round(scrollLeft / reviewWidth);
       setActiveReviewDot(currentIndex);
     }
@@ -623,10 +630,24 @@ const IndividualListing = ({ listingData }) => {
           </div>
 
           <button className="px-6 py-2 bg-yellow-400 text-gray-900 font-semibold rounded-full hover:bg-yellow-500 transition text-sm whitespace-nowrap self-start"
-            onClick={handleBook}
+            onClick={
+              () => {
+
+                if (!user) {
+                  alert("Please Log In/Sign Up for Booking a Service");
+                  return;
+                }
+                setBook(true);
+                setDrop(services);
+
+
+              }}
           >
             Book now
           </button>
+          {book && <BookNow businessName={bname} onClose={() => {
+            setBook(false);
+          }} services={drop} id={id} />}
         </div>
 
         <div className="flex gap-6 sm:gap-8 border-b border-gray-200 mb-5">
@@ -710,7 +731,7 @@ const IndividualListing = ({ listingData }) => {
                   </div>
 
                   <div className="flex justify-center gap-1.5 mt-5">
-                    {data.reviews.map((_, index) => (
+                    {feedbacks.map((_, index) => (
                       <button
                         key={index}
                         onClick={() => scrollToReview(index)}
@@ -735,30 +756,48 @@ const IndividualListing = ({ listingData }) => {
           </div>
 
           <div className="space-y-4">
-            <div className="bg-white border border-gray-200 rounded-2xl p-5 shadow-sm">
-              <h3 className="font-bold text-base text-gray-900 mb-4">Contact</h3>
-              <div className="flex items-center gap-2 mb-5">
-                <span className="text-sm text-gray-900">{phone}</span>
+            <div className="bg-white border border-gray-200 rounded-2xl p-5 shadow-sm w-full max-w-md md:max-w-lg mx-auto">
+              <h3 className="font-bold text-base text-gray-900 mb-4 text-center md:text-left">
+                Contact
+              </h3>
+
+              <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 mb-5">
+                <span className="text-sm text-gray-900 break-all text-center sm:text-left">
+                  {phone}
+                </span>
               </div>
 
-              <h3 className="font-bold text-base text-gray-900 mb-2">Address</h3>
-              <p className="text-xs text-gray-700 leading-relaxed mb-3">
-                {address}
-              </p>
+              <h3 className="font-bold text-base text-gray-900 mb-2 text-center md:text-left">
+                Address
+              </h3>
 
+              <div className="flex flex-wrap items-center gap-2 mb-5 justify-center md:justify-start">
+                <p className="text-xs text-gray-700 leading-relaxed mb-3 text-center md:text-left break-words w-full">
+                  {address}
+                </p>
+              </div>
 
-              <button className="w-full flex items-center justify-center gap-2 py-2.5 border border-gray-300 rounded-lg hover:bg-gray-50 transition mb-3 text-sm"
-                onClick={() => window.location.href = `mailto:${email}`}>
-                <Mail className="w-4 h-4 text-gray-700" />
-                <span className="font-medium text-gray-900">Send Enquiry by Email</span>
+              <button
+                className="w-full flex flex-wrap sm:flex-nowrap items-center justify-center gap-2 py-2.5 border border-gray-300 rounded-lg hover:bg-gray-50 transition mb-3 text-sm"
+                onClick={() => (window.location.href = `mailto:${email}`)}
+              >
+                <Mail className="w-4 h-4 text-gray-700 flex-shrink-0" />
+                <span className="font-medium text-gray-900 text-center sm:text-left">
+                  Send Enquiry by Email
+                </span>
               </button>
 
-              <button className="w-full flex items-center justify-center gap-2 py-2.5 border border-gray-300 rounded-lg hover:bg-gray-50 transition text-sm"
-                onClick={() => window.open(website, "_blank")}>
-                <Globe className="w-4 h-4 text-gray-700" />
-                <span className="font-medium text-gray-900">Visit our Website</span>
+              <button
+                className="w-full flex flex-wrap sm:flex-nowrap items-center justify-center gap-2 py-2.5 border border-gray-300 rounded-lg hover:bg-gray-50 transition text-sm"
+                onClick={() => window.open(website, "_blank")}
+              >
+                <Globe className="w-4 h-4 text-gray-700 flex-shrink-0" />
+                <span className="font-medium text-gray-900 text-center sm:text-left">
+                  Visit our Website
+                </span>
               </button>
             </div>
+
 
             <div className="bg-white border border-gray-200 rounded-2xl p-5 shadow-sm">
               <h3 className="font-bold text-base text-gray-900 mb-2">
@@ -777,7 +816,7 @@ const IndividualListing = ({ listingData }) => {
             </div>
           </div>
         </div>
-{/* 
+        {/* 
         <div className="mt-6">
           <footer className="p-6 mt-20 text-gray-500 flex flex-col sm:flex-row justify-between gap-4 sm:gap-0 bg-[#F2E7E7] w-full text-sm sm:text-base">
             <a className="hover:cursor-pointer hover:text-blue-700">

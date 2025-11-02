@@ -40,10 +40,12 @@ const Profile = () => {
 
         const data = res.data;
         console.log(res?.data);
-        console.log(res1?.data);
-        setUser(res1.data);
-        setName(data?.name);
-        setEmail(data?.email);
+        // console.log(res1?.data);
+        setUser(res.data);
+        setName(data?.customer?.name);
+        setEmail(data?.customer?.email);
+        setAddress(data?.customer?.address);
+        setPhone(data?.customer?.phone_number);
 
 
 
@@ -63,23 +65,19 @@ const Profile = () => {
 
     if (!storedUser) return;
 
-    const formData = new FormData();
-    formData.append("name", name);
-    formData.append("email", email);
-    formData.append("phone", phone);
-    formData.append("address", address);
 
     try {
       const res = await axios.patch(
         `https://service-app-backend-1.onrender.com/api/customer/update/${storedUser.id}`,
-        formData
+        {name, email, phone_number:phone,address}
       );
 
       const data = res?.data?.updatedCustomer;
       console.log(res?.data);
-      setName(data?.name);
-      setEmail(data?.email);
-      setAddress(data?.address);
+      setName(data?.updatedCustomer?.name);
+      setEmail(data?.updatedCustomer?.email);
+      setAddress(data?.updatedCustomer?.address);
+      setPhone(data?.updatedCustomer?.phone_number);
       setIsEditing(false);
       alert("Profile updated successfully!");
     } catch (err) {
@@ -89,11 +87,12 @@ const Profile = () => {
   };
 
 
-  const handleFeedback = async () => {
+  const handleFeedback = async (id) => {
 
     const token = localStorage.getItem("accessToken");
 
-    const res = await axios.post(`https://service-app-backend-1.onrender.com/api/feedback/68fba39075690750dcc0ea6a`, { coment: feedback, rating },
+
+    const res = await axios.post(`https://service-app-backend-1.onrender.com/api/feedback/${id}`, { comment: feedback, rating },
 
       {
         headers: {
@@ -197,7 +196,7 @@ const Profile = () => {
       {/* Previous Service Logs */}
       <div className="bg-white shadow-md rounded-lg p-6 space-y-4">
         <h2 className="text-lg font-semibold">Previous Service Logs</h2>
-        <ComingSoonOverlay>
+        {/* <ComingSoonOverlay> */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             {user?.bookings?.length > 0 ? (
               user.bookings.map((b, idx) => (
@@ -253,7 +252,7 @@ const Profile = () => {
                         <button
                           onClick={() => {
                             closeModal();
-                            handleFeedback();
+                            handleFeedback(b.provider);
                           }}
                           className="px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700"
                         >
@@ -268,7 +267,7 @@ const Profile = () => {
               <p>Loading user data...</p>
             )}
           </div>
-        </ComingSoonOverlay>
+        {/* </ComingSoonOverlay> */}
       </div>
     </div>
   );

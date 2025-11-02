@@ -13,6 +13,7 @@ import Contact from './contact';
 import ProviderDashboard from './providerDashboard';
 import IndividualListing from './individualListing';
 import Profile from './customerDashboard';
+// import BookNow from './bookNow';
 
 
 export default function AppRoutes() {
@@ -36,6 +37,7 @@ export default function AppRoutes() {
             <Route path="/providerDashboard" element={<ProviderDashboard />} />
             <Route path="/individualListing/:id" element={<IndividualListing />} />
             <Route path="/customerDashboard" element={<Profile />} />
+            {/* <Route path="/bookNow" element={<BookNow />} /> */}
            
         
 

@@ -4,27 +4,32 @@ import { useNavigate, Link } from "react-router-dom";
 import axios from 'axios';
 import image from "../assets/image.png";
 import ii from '../assets/ii.jpg'
-import i1 from '../assets/i1.jpg'
 import Thynk1 from "../assets/Thynk1.jpg";
+import BookNow from './bookNow';
+import MendoraFooter from './footer';
 
 
 function AllServices() {
+
+  const user = JSON.parse(localStorage.getItem("user"));
   const [categories, setCategories] = useState([]);
   const [filteredCategories, setFilteredCategories] = useState([]);
   const [services, setServices] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [loading, setLoading] = useState(true);
+  const [book, setBook] = useState(false);
   const [servicesLoading, setServicesLoading] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
+  const [drop, setDrop] = useState([]);
   const navigate = useNavigate();
 
   useEffect(() => {
 
-     const info = async () => {
- 
+    const info = async () => {
+
       const res = await axios.get("https://service-app-backend-1.onrender.com/api/provider/services-by-category");
-      
+
       console.log(res?.data?.data);
 
 
@@ -53,20 +58,20 @@ function AllServices() {
 
   const handleCardClick = (id) => {
 
-    
+
     const storedUser = JSON.parse(localStorage.getItem("user"));
 
-    if (!storedUser){
+    if (!storedUser) {
       alert("Please Login / Sign Up first to Book a service");
       return;
     }
 
     navigate(`/individualListing/${id}`);
- 
-};
+
+  };
 
   const handleCategoryClick = async (category) => {
-    
+
     const res = await axios.get(`https://service-app-backend-1.onrender.com/api/provider/category/${category}`);
 
     console.log(res?.data?.data);
@@ -83,29 +88,29 @@ function AllServices() {
     setServices([]);
   };
 
-    const handleBook = async (id) => {
+  //   const handleBook = async (id) => {
 
-    
-    const token = localStorage.getItem("accessToken");
-    const storedUser = JSON.parse(localStorage.getItem("user"));
 
-    if (!storedUser){
-      alert("Please Login / Sign Up first to Book a service");
-      return;
-    }
-    
-    const res = await axios.get(`https://service-app-backend-1.onrender.com/api/booknow/provider/${id}`,  {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        });
+  //   const token = localStorage.getItem("accessToken");
+  //   const storedUser = JSON.parse(localStorage.getItem("user"));
 
-    console.log(res?.data);
-   
-    window.open(res?.data?.whatsAppURL, '_blank', 'noopener,noreferrer');
-    
+  //   if (!storedUser){
+  //     alert("Please Login / Sign Up first to Book a service");
+  //     return;
+  //   }
 
-  }
+  //   const res = await axios.get(`https://service-app-backend-1.onrender.com/api/booknow/provider/${id}`,  {
+  //         headers: {
+  //           Authorization: `Bearer ${token}`,
+  //         },
+  //       });
+
+  //   console.log(res?.data);
+
+  //   window.open(res?.data?.whatsAppURL, '_blank', 'noopener,noreferrer');
+
+
+  // }
 
   return (
     <div className="min-h-screen bg-white">
@@ -140,30 +145,30 @@ function AllServices() {
             alt="Hero"
             className="w-full h-full object-cover"
           />
-          
+
           <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-black/20 to-black/40 flex flex-col items-center justify-center">
 
             <div className="w-1/2 px-6 py-8">
-        <div className="w-full">
-          <div className="relative">
-            <div className="absolute inset-y-0 left-4 flex items-center pointer-events-none">
-              <Search className="w-6 h-6 text-amber-500" />
-            </div>
-            <input
-              type="text"
-              placeholder="Search for Services"
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full pl-14 pr-12 py-4 text-base border-2 border-amber-400 rounded-xl focus:outline-none focus:border-amber-500 transition-colors"
-            />
-            {/* <button className="absolute inset-y-0 right-4 flex items-center text-gray-400">
+              <div className="w-full">
+                <div className="relative">
+                  <div className="absolute inset-y-0 left-4 flex items-center pointer-events-none">
+                    <Search className="w-6 h-6 text-amber-500" />
+                  </div>
+                  <input
+                    type="text"
+                    placeholder="Search for Services"
+                    value={searchQuery}
+                    onChange={(e) => setSearchQuery(e.target.value)}
+                    className="w-full pl-14 pr-12 py-4 text-base border-2 border-amber-400 rounded-xl focus:outline-none focus:border-amber-500 transition-colors"
+                  />
+                  {/* <button className="absolute inset-y-0 right-4 flex items-center text-gray-400">
               <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
               </svg>
             </button> */}
-          </div>
-        </div>
-      </div>
+                </div>
+              </div>
+            </div>
             <h1 className="text-6xl font-bold text-white mb-3 tracking-tight">One Platform</h1>
             <h2 className="text-5xl font-bold text-white tracking-tight">All Services</h2>
           </div>
@@ -186,7 +191,7 @@ function AllServices() {
           </div>
         ) : (
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {filteredCategories.map((category,id) => (
+            {filteredCategories.map((category, id) => (
               <button
                 key={id}
                 onClick={() => handleCategoryClick(category.category)}
@@ -277,8 +282,8 @@ function AllServices() {
                     <div
                       key={service._id}
                       className="cursor-pointer bg-white rounded-3xl shadow-md overflow-hidden hover:shadow-lg transition-shadow"
-                      onClick={()=>{
-                        handleCardClick(service._id);
+                      onClick={() => {
+                        // handleCardClick(service._id);
                       }}
                     >
                       <div className="relative h-56" >
@@ -289,16 +294,32 @@ function AllServices() {
                         />
                       </div>
                       <div className="p-5">
-                        <h3 className="text-xl font-bold mb-1 text-gray-900 cursor-pointer" >{service?.providerDetails?.business_name}</h3>
+                        <h3 className="text-xl font-bold mb-1 text-gray-900 cursor-pointer"     onClick={() => {
+                        handleCardClick(service._id);
+                      }}>{service?.providerDetails?.business_name}</h3>
                         <div className="flex items-center justify-between">
                           <div className="flex items-center gap-1">
                             {/* <span className="text-lg font-bold text-amber-500">rating</span>
                             <Star className="w-5 h-5 fill-amber-400 text-amber-400" /> */}
                           </div>
                           <button className="px-6 py-2.5 bg-white border-2 border-amber-400 text-gray-900 font-semibold rounded-full hover:bg-amber-400 hover:text-white transition-all duration-300"
-                            onClick={()=>handleBook(service._id)}>
+                            onClick={
+                              () => {
+
+                                if (!user) {
+                                  alert("Please Log In/Sign Up for Booking a Service");
+                                  return;
+                                }
+
+                                setBook(true);
+                                setDrop(service?.providerDetails?.services);
+
+                              }}>
                             Book now
                           </button>
+                          {book && <BookNow businessName={service?.providerDetails?.business_name} onClose={() => {
+                            setBook(false);
+                          }} services={drop} id={service._id} />}
                         </div>
                       </div>
                     </div>
@@ -307,8 +328,11 @@ function AllServices() {
               )}
             </div>
           </div>
+
         </div>
+
       )}
+      <MendoraFooter />
     </div>
   );
 }

@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import loginImg from "../assets/login.jpg";
 import logo from "../assets/unlockdiscounts.logo.jpg";
+import logoo from '../assets/logoo.jpg'
 import axios from 'axios';
 import Rectangle from '../assets/Rectangle.png'
 
@@ -59,7 +60,7 @@ const Login = () => {
       {/* Right Section (Form) */}
       <div className="w-full md:w-[500px] bg-white flex flex-col py-12">
         <div className="flex flex-col items-center mb-8">
-          <img src={logo} alt="Logo" className="w-16 h-16 rounded-xl mb-2" />
+          <img src={logoo} alt="Logo" className="w-16 h-16 rounded-xl mb-2" />
           {/* <h1 className="text-2xl font-bold text-gray-800">Unlock Discounts</h1> */}
           <h1 className="text-2xl font-bold">
           <span>Mend</span>

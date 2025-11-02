@@ -21,6 +21,7 @@ import ComingSoonOverlay from './comingSoonOverlay';
 const Form = () => {
 
   const [isChecked, setIsChecked] = useState(false);
+  const [verify,setVerify] = useState(false);
   const navigate = useNavigate();
 
   // Form fields
@@ -83,6 +84,14 @@ const Form = () => {
 
   const handleSubmit = async (e) => {
 
+    e.preventDefault(); 
+
+    // if(!verify)
+    // {
+    //    alert("Please Verify Email");
+    //    return;
+    // }
+
     setLoading(true);
 
     e.preventDefault();
@@ -134,7 +143,7 @@ const Form = () => {
       localStorage.setItem("refreshToken", refreshToken);
       localStorage.setItem("user", JSON.stringify(user));
       alert("Provider registered successfully!");
-      navigate("/providerDashboard");
+      navigate("/payments");
     } catch (err) {
       console.error("Signup Error:", err.response?.data || err.message);
       alert(
@@ -223,13 +232,17 @@ const Form = () => {
 
             <button
               type="button"
-              // onClick={handleVerifyEmail} // your verification handler
+              onClick={handleVerifyEmail} // your verification handler
               className="bg-white-200 text-gray-700 px-4 py-4 m-1 rounded-lg hover:bg-gray-300 transition border-2 h-1/3"
             >
               Verify
             </button>
 
-            {/* {showOtp && <OtpVerify onClose={() => setShowOtp(false)} email={email} />} */}
+            {showOtp && <OtpVerify onClose={() => setShowOtp(false)} email={email} verified={()=>{
+              setVerify(true);
+            }} requestOtp={()=>{
+                handleVerifyEmail();
+              }}/>}
           </div>
         </div>
       </div>

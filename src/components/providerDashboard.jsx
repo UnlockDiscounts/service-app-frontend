@@ -36,7 +36,7 @@ export default function ProviderDashboard() {
     const info = async () => {
 
       const res = await axios.get(`https://service-app-backend-1.onrender.com/api/provider/${storedUser.id}`);
-      const res1 = await axios.get("https://service-app-backend-1.onrender.com/api/booking/68fb5a23d9ed9b1672d331d0");
+      const res1 = await axios.get(`https://service-app-backend-1.onrender.com/api/booking/${storedUser.id}`);
       console.log(res1?.data?.bookings);
       console.log(res?.data);
 
@@ -367,99 +367,99 @@ export default function ProviderDashboard() {
             </div>
 
             <button
-  className="absolute bottom-2 right-2 p-1 rounded-md shadow-sm"
-  onClick={() => {
-    setEdit(true);
-    setEditId(service._id);
-    setServiceName(service.serviceName);
-  }}
->
-  <Edit size={18} className="text-gray-500 cursor-pointer hover:text-[#ff9800]" />
+              className="absolute bottom-2 right-2 p-1 rounded-md shadow-sm"
+              onClick={() => {
+                setEdit(true);
+                setEditId(service._id);
+                setServiceName(service.serviceName);
+              }}
+            >
+              <Edit size={18} className="text-gray-500 cursor-pointer hover:text-[#ff9800]" />
 
-  {/* Edit Modal */}
-  {edit && editId === service._id && (
-    <div
-      className="fixed inset-0 bg-gray-800 bg-opacity-50 flex items-center justify-center z-50"
-      onClick={() => setEdit(false)} // close on outside click
-    >
-      <div
-        className="bg-white shadow-[0px_4px_8px_2px_rgba(0,0,0,0.25)] p-6 flex flex-col gap-6 rounded-3xl w-[380px]"
-        onClick={(e) => e.stopPropagation()} // prevent close on inside click
-      >
-        {/* Service Image Label */}
-        <div className="flex items-center justify-between">
-          <p className="font-semibold text-[16px] text-black">Service Image</p>
-          {/* Close button */}
-          <button
-            className="text-gray-500 hover:text-[#ff9800] text-lg font-bold"
-            onClick={() => setEdit(false)}
-          >
-            ×
-          </button>
-        </div>
+              {/* Edit Modal */}
+              {edit && editId === service._id && (
+                <div
+                  className="fixed inset-0 bg-gray-800 bg-opacity-50 flex items-center justify-center z-50"
+                  onClick={() => setEdit(false)} // close on outside click
+                >
+                  <div
+                    className="bg-white shadow-[0px_4px_8px_2px_rgba(0,0,0,0.25)] p-6 flex flex-col gap-6 rounded-3xl w-[380px]"
+                    onClick={(e) => e.stopPropagation()} // prevent close on inside click
+                  >
+                    {/* Service Image Label */}
+                    <div className="flex items-center justify-between">
+                      <p className="font-semibold text-[16px] text-black">Service Image</p>
+                      {/* Close button */}
+                      <button
+                        className="text-gray-500 hover:text-[#ff9800] text-lg font-bold"
+                        onClick={() => setEdit(false)}
+                      >
+                        ×
+                      </button>
+                    </div>
 
-        {/* Upload Area */}
-        <div
-          className="bg-[rgba(0,0,0,0.08)] flex items-center justify-center h-[88px] w-full rounded-[24px] cursor-pointer overflow-hidden"
-          onClick={() =>
-            fileInputRef.current && fileInputRef.current.click()
-          }
-        >
-          <input
-            type="file"
-            accept="image/*"
-            ref={fileInputRef}
-            style={{ display: "none" }}
-            onChange={(e) => {
-              const file = e.target.files[0];
-              setServiceImage(file);
-              if (file) setPreviewImage(URL.createObjectURL(file));
-            }}
-          />
-          {previewImage ? (
-            <img
-              src={previewImage}
-              alt="Preview"
-              className="w-16 h-16 object-cover rounded-[16px]"
-            />
-          ) : (
-            <div className="text-center text-[14px] text-[rgba(0,0,0,0.5)] leading-tight">
-              Click to upload or drag and drop
-              <br />
-              JPG, PNG up to 10MB
-            </div>
-          )}
-        </div>
+                    {/* Upload Area */}
+                    <div
+                      className="bg-[rgba(0,0,0,0.08)] flex items-center justify-center h-[88px] w-full rounded-[24px] cursor-pointer overflow-hidden"
+                      onClick={() =>
+                        fileInputRef.current && fileInputRef.current.click()
+                      }
+                    >
+                      <input
+                        type="file"
+                        accept="image/*"
+                        ref={fileInputRef}
+                        style={{ display: "none" }}
+                        onChange={(e) => {
+                          const file = e.target.files[0];
+                          setServiceImage(file);
+                          if (file) setPreviewImage(URL.createObjectURL(file));
+                        }}
+                      />
+                      {previewImage ? (
+                        <img
+                          src={previewImage}
+                          alt="Preview"
+                          className="w-16 h-16 object-cover rounded-[16px]"
+                        />
+                      ) : (
+                        <div className="text-center text-[14px] text-[rgba(0,0,0,0.5)] leading-tight">
+                          Click to upload or drag and drop
+                          <br />
+                          JPG, PNG up to 10MB
+                        </div>
+                      )}
+                    </div>
 
-        {/* Service Name Label */}
-        <div className="flex items-center justify-start">
-          <p className="font-semibold text-[16px] text-black">Service Name</p>
-        </div>
+                    {/* Service Name Label */}
+                    <div className="flex items-center justify-start">
+                      <p className="font-semibold text-[16px] text-black">Service Name</p>
+                    </div>
 
-        {/* Service Name Input */}
-        <div className="w-full">
-          <input
-            type="text"
-            value={serviceName}
-            onChange={(e) => setServiceName(e.target.value)}
-            placeholder="Enter service name"
-            className="w-full h-[48px] px-4 py-2 bg-transparent border border-[#ff9800] rounded-[16px] outline-none shadow-sm"
-          />
-        </div>
+                    {/* Service Name Input */}
+                    <div className="w-full">
+                      <input
+                        type="text"
+                        value={serviceName}
+                        onChange={(e) => setServiceName(e.target.value)}
+                        placeholder="Enter service name"
+                        className="w-full h-[48px] px-4 py-2 bg-transparent border border-[#ff9800] rounded-[16px] outline-none shadow-sm"
+                      />
+                    </div>
 
-        {/* Done Button */}
-        <div className="flex justify-center">
-          <button
-            onClick={() => handleUpdate(editId)}
-            className="bg-[#ff9800] hover:bg-[#e68a00] text-white font-semibold text-[16px] rounded-[36px] px-[48px] py-[12px] transition-all duration-200 shadow-sm"
-          >
-            Done
-          </button>
-        </div>
-      </div>
-    </div>
-  )}
-</button>
+                    {/* Done Button */}
+                    <div className="flex justify-center">
+                      <button
+                        onClick={() => handleUpdate(editId)}
+                        className="bg-[#ff9800] hover:bg-[#e68a00] text-white font-semibold text-[16px] rounded-[36px] px-[48px] py-[12px] transition-all duration-200 shadow-sm"
+                      >
+                        Done
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              )}
+            </button>
 
 
 
@@ -467,121 +467,121 @@ export default function ProviderDashboard() {
         ))}
 
         {/* Centered Add Button */}
-       <div className="flex justify-center w-[280px] h-[300px]">
-  {/* Plus button */}
-  <div
-    onClick={() => setIsAdd(true)} // opens modal
-    className="w-[60px] h-[60px] bg-gray-300 rounded-full flex items-center justify-center text-black hover:scale-110 transition-transform cursor-pointer self-center align-center"
-    title="Add new service"
-  >
-    <Plus size={28} />
-  </div>
+        <div className="flex justify-center w-[280px] h-[300px]">
+          {/* Plus button */}
+          <div
+            onClick={() => setIsAdd(true)} // opens modal
+            className="w-[60px] h-[60px] bg-gray-300 rounded-full flex items-center justify-center text-black hover:scale-110 transition-transform cursor-pointer self-center align-center"
+            title="Add new service"
+          >
+            <Plus size={28} />
+          </div>
 
-  {/* Modal */}
-  {add && (
-    <div
-      className="fixed inset-0 bg-gray-800 bg-opacity-50 flex items-center justify-center z-50"
-      onClick={() => setIsAdd(false)} 
-    >
-      <div
-        className="bg-white shadow-[0px_4px_8px_2px_rgba(0,0,0,0.25)] p-6 flex flex-col gap-6 rounded-3xl w-[380px]"
-        onClick={(e) => e.stopPropagation()} 
-      >
-        {/* Service Image Label */}
-        <div className="flex items-center justify-start">
-          <p className="font-semibold text-[16px] text-black">Service Image</p>
-        </div>
+          {/* Modal */}
+          {add && (
+            <div
+              className="fixed inset-0 bg-gray-800 bg-opacity-50 flex items-center justify-center z-50"
+              onClick={() => setIsAdd(false)}
+            >
+              <div
+                className="bg-white shadow-[0px_4px_8px_2px_rgba(0,0,0,0.25)] p-6 flex flex-col gap-6 rounded-3xl w-[380px]"
+                onClick={(e) => e.stopPropagation()}
+              >
+                {/* Service Image Label */}
+                <div className="flex items-center justify-start">
+                  <p className="font-semibold text-[16px] text-black">Service Image</p>
+                </div>
 
-        {/* Upload Area */}
-        <div
-          className="bg-[rgba(0,0,0,0.08)] flex items-center justify-center h-[88px] w-full rounded-[24px] cursor-pointer overflow-hidden"
-          onClick={() =>
-            fileInputRef.current && fileInputRef.current.click()
-          }
-        >
-          <input
-            type="file"
-            accept="image/*"
-            ref={fileInputRef}
-            style={{ display: "none" }}
-            onChange={(e) => {
-              const file = e.target.files[0];
-              setServiceImage(file);
-              if (file) setPreviewImage(URL.createObjectURL(file));
-            }}
-          />
-          {previewImage ? (
-            <img
-              src={previewImage}
-              alt="Preview"
-              className="w-16 h-16 object-cover rounded-[16px]"
-            />
-          ) : (
-            <div className="text-center text-[14px] text-[rgba(0,0,0,0.5)] leading-tight">
-              Click to upload or drag and drop
-              <br />
-              JPG, PNG up to 10MB
+                {/* Upload Area */}
+                <div
+                  className="bg-[rgba(0,0,0,0.08)] flex items-center justify-center h-[88px] w-full rounded-[24px] cursor-pointer overflow-hidden"
+                  onClick={() =>
+                    fileInputRef.current && fileInputRef.current.click()
+                  }
+                >
+                  <input
+                    type="file"
+                    accept="image/*"
+                    ref={fileInputRef}
+                    style={{ display: "none" }}
+                    onChange={(e) => {
+                      const file = e.target.files[0];
+                      setServiceImage(file);
+                      if (file) setPreviewImage(URL.createObjectURL(file));
+                    }}
+                  />
+                  {previewImage ? (
+                    <img
+                      src={previewImage}
+                      alt="Preview"
+                      className="w-16 h-16 object-cover rounded-[16px]"
+                    />
+                  ) : (
+                    <div className="text-center text-[14px] text-[rgba(0,0,0,0.5)] leading-tight">
+                      Click to upload or drag and drop
+                      <br />
+                      JPG, PNG up to 10MB
+                    </div>
+                  )}
+                </div>
+
+                {/* Service Name Label */}
+                <div className="flex items-center justify-start">
+                  <p className="font-semibold text-[16px] text-black">Service Name</p>
+                </div>
+
+                {/* Service Name Input */}
+                <div className="w-full">
+                  <input
+                    type="text"
+                    value={serviceName}
+                    onChange={(e) => setServiceName(e.target.value)}
+                    placeholder="Enter service name"
+                    className="w-full h-[48px] px-4 py-2 bg-transparent border border-[#ff9800] rounded-[16px] outline-none shadow-sm"
+                  />
+                </div>
+
+                {/* Done Button */}
+                <div className="flex justify-center">
+                  <button
+                    onClick={handleAdd}
+                    className="bg-[#ff9800] hover:bg-[#e68a00] text-white font-semibold text-[16px] rounded-[36px] px-[48px] py-[12px] transition-all duration-200 shadow-sm"
+                  >
+                    Done
+                  </button>
+                </div>
+              </div>
             </div>
           )}
         </div>
-
-        {/* Service Name Label */}
-        <div className="flex items-center justify-start">
-          <p className="font-semibold text-[16px] text-black">Service Name</p>
-        </div>
-
-        {/* Service Name Input */}
-        <div className="w-full">
-          <input
-            type="text"
-            value={serviceName}
-            onChange={(e) => setServiceName(e.target.value)}
-            placeholder="Enter service name"
-            className="w-full h-[48px] px-4 py-2 bg-transparent border border-[#ff9800] rounded-[16px] outline-none shadow-sm"
-          />
-        </div>
-
-        {/* Done Button */}
-        <div className="flex justify-center">
-          <button
-            onClick={handleAdd}
-            className="bg-[#ff9800] hover:bg-[#e68a00] text-white font-semibold text-[16px] rounded-[36px] px-[48px] py-[12px] transition-all duration-200 shadow-sm"
-          >
-            Done
-          </button>
-        </div>
-      </div>
-    </div>
-  )}
-</div>
 
       </div>
 
       {/* Task Logs */}
       <div className="mt-16">
         <h2 className="text-[32px] font-semibold mb-6">Task logs</h2>
-        <ComingSoonOverlay>
-          <div className="flex flex-col gap-4">
-            {task.map((task, i) => {
-              return (
-                <div
-                  key={i}
-                  className="bg-white rounded-lg shadow-md p-4 flex justify-between items-center hover:shadow-lg transition"
+        {/* <ComingSoonOverlay> */}
+        <div className="flex flex-col gap-4">
+          {task.map((task, i) => {
+            return (
+              <div
+                key={i}
+                className="bg-white rounded-lg shadow-md p-4 flex justify-between items-center hover:shadow-lg transition"
+              >
+                <p className="text-[16px]">
+                  {task.customerName} has requested for a {task.serviceName} service
+                </p>
+                <button
+                  onClick={() => handleStatusClick(task.Booking_id)}
+                  className="px-4 py-2 rounded-full border-2 border-[#ff9800] text-black font-semibold"
                 >
-                  <p className="text-[16px]">
-                    {task.customerName} has requested for a {task.serviceName} service
-                  </p>
-                  <button
-                    onClick={() => handleStatusClick(task.Booking_id)}
-                    className="px-4 py-2 rounded-full border-2 border-[#ff9800] text-black font-semibold"
-                  >
-                    Done
-                  </button>
-                </div>
-              );
-            })}
-          </div>
-        </ComingSoonOverlay>
+                  Done
+                </button>
+              </div>
+            );
+          })}
+        </div>
+        {/* </ComingSoonOverlay> */}
       </div>
     </div>
   );
