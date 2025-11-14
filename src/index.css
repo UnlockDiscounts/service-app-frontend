@@ -3,6 +3,9 @@
 @tailwind components;
 @tailwind utilities;
 
+@import "leaflet/dist/leaflet.css";
+
+
 @import "@fontsource/inter/index.css";
 /* import {bglanding} from "../assets/bglanding.svg"; */
 /* @import "@fontsource/poppins/index.css"; */

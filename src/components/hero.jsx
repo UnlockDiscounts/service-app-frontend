@@ -11,8 +11,8 @@ const Hero = () => {
     navigate("/role");
   };
 
-  
-  const handleClick2=()=>{
+
+  const handleClick2 = () => {
     navigate("/allservices");
   }
 
@@ -20,9 +20,9 @@ const Hero = () => {
 
   return (
     <div className="pt-10 heroclass w-full min-h-screen" style={{ backgroundImage: `url(${bglanding})`, backgroundSize: 'cover', backgroundPosition: 'center' }}
->
+    >
       <div className="flex flex-col-reverse lg:flex-row items-center justify-between gap-10 px-6 sm:px-10 lg:px-20 py-10">
-        
+
         {/* Left Side Text */}
         <div className="flex flex-col    text-center lg:text-left px-10  ">
           <div className="space-y-4  ">
@@ -45,19 +45,24 @@ const Hero = () => {
           </p>
 
           <div className="flex flex-col sm:flex-row gap-4 mt-8">
-             <button
-              className="bg-[#FF9800] px-6 py-2 md:px-8 md:py-3 rounded-full text-lg md:text-2xl font-semibold hover:bg-white hover:border-2 hover:border-[#FF8900] transition"
+            <button
+              className="bg-[#FF9800] px-6 py-2 md:px-8 md:py-3 rounded-full text-lg md:text-2xl font-semibold 
+               border-2 border-transparent hover:bg-white hover:border-[#FF8900] 
+               transition"
               onClick={handleClick}
             >
               Get Started
             </button>
-            <button 
-             className="border-2 border-[#FF9800] px-6 py-2 md:px-8 md:py-3 rounded-full text-lg md:text-2xl font-semibold hover:bg-[#FF9800] hover:text-white transition"
-             onClick={handleClick2}
+
+            <button
+              className="border-2 border-[#FF9800] px-6 py-2 md:px-8 md:py-3 rounded-full text-lg md:text-2xl 
+               font-semibold hover:bg-[#FF9800] hover:text-white transition"
+              onClick={handleClick2}
             >
               Explore Services
             </button>
           </div>
+
         </div>
 
         {/* Right Side Image */}

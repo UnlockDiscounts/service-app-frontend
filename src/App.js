@@ -7,7 +7,7 @@ function App() {
   return (
     <>
       <Navbar />
-      <div className="pt-8 m-9 mb-0">
+      <div className="pt-8 m-9 mb-0 mx-0">
         <AppRoutes />
       </div>
  

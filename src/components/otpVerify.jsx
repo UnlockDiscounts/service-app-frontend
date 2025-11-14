@@ -15,7 +15,7 @@ const OtpVerify = ({ onClose, email, verified, requestOtp }) => {
       { email, otp }
     );
 
-    console.log("OTP verification response:", res?.data);
+    alert("OTP verified");
     verified();
     
 

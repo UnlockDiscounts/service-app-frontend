@@ -16,12 +16,18 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import OtpVerify from './otpVerify'
 import ComingSoonOverlay from './comingSoonOverlay';
+import LocationSelector from "./locationSelector";
 
 
 const Form = () => {
 
+
+
   const [isChecked, setIsChecked] = useState(false);
   const [verify,setVerify] = useState(false);
+  const [latitude, setLatitude] = useState("");
+const [longitude, setLongitude] = useState("");
+
   const navigate = useNavigate();
 
   // Form fields
@@ -86,11 +92,11 @@ const Form = () => {
 
     e.preventDefault(); 
 
-    // if(!verify)
-    // {
-    //    alert("Please Verify Email");
-    //    return;
-    // }
+    if(!verify)
+    {
+       alert("Please Verify Email");
+       return;
+    }
 
     setLoading(true);
 
@@ -240,6 +246,7 @@ const Form = () => {
 
             {showOtp && <OtpVerify onClose={() => setShowOtp(false)} email={email} verified={()=>{
               setVerify(true);
+              setShowOtp(false);
             }} requestOtp={()=>{
                 handleVerifyEmail();
               }}/>}
@@ -266,22 +273,25 @@ const Form = () => {
       </div>
 
       {/* Address */}
-      <div>
-        <div className="flex items-center space-x-2 mb-3">
-          <MapPinHouse className="text-[#ff8901]" />
-          <h1 className="text-lg md:text-xl font-bold">
-            Registered Business Address*
-          </h1>
-        </div>
-        <textarea
-          onChange={(e) => setAddress(e.target.value)}
-          placeholder="Enter your business address"
-          className="w-full p-4 border border-gray-300 rounded-md bg-gray-200 focus:outline-none focus:ring-2 focus:ring-[#ff8901]"
-        />
-        {errors.address && (
-          <p className="text-red-500 text-sm">{errors.address}</p>
-        )}
-      </div>
+   {/* Address with Location Search */}
+<div>
+  <div className="flex items-center space-x-2 mb-3">
+    <MapPinHouse className="text-[#ff8901]" />
+    <h1 className="text-lg md:text-xl font-bold">Business Location*</h1>
+  </div>
+
+  <LocationSelector
+    address={address}
+    setAddress={setAddress}
+    setLatitude={setLatitude}
+    setLongitude={setLongitude}
+  />
+
+  {errors.address && (
+    <p className="text-red-500 text-sm">{errors.address}</p>
+  )}
+</div>
+
 
       {/* Upload address proof */}
       <div>
@@ -300,20 +310,36 @@ const Form = () => {
       {/* Service Category & Website Link */}
       <div className="flex flex-col md:flex-row md:justify-between md:space-x-4 space-y-4 md:space-y-0">
         <div className="w-full md:w-[59%]">
-          <div className="flex items-center space-x-2 mb-3">
-            <Tags className="text-[#ff8901]" />
-            <h1 className="text-lg md:text-xl font-bold">Service Category*</h1>
-          </div>
-          <input
-            onChange={(e) => setServiceCateogry(e.target.value)}
-            placeholder="Add a Category"
-            className="w-full p-4 border border-gray-300 rounded-md bg-gray-200 focus:outline-none focus:ring-2 focus:ring-[#ff8901]"
-            required
-          />
-          {errors.serviceCategory && (
-            <p className="text-red-500 text-sm">{errors.serviceCategory}</p>
-          )}
-        </div>
+  <div className="flex items-center space-x-2 mb-3">
+    <Tags className="text-[#ff8901]" />
+    <h1 className="text-lg md:text-xl font-bold">Service Category*</h1>
+  </div>
+
+  {/* Dropdown for Service Categories */}
+  <select
+    onChange={(e) => setServiceCateogry(e.target.value)}
+    className="w-full p-4 border border-gray-300 rounded-md bg-gray-200 focus:outline-none focus:ring-2 focus:ring-[#ff8901] appearance-none"
+    required
+  >
+    <option value="">Select a Category</option>
+    <option value="home-services">Home Services</option>
+    <option value="beauty-wellness">Beauty & Wellness</option>
+    <option value="events-entertainment">Events & Entertainment</option>
+    <option value="professional-services">Professional Services</option>
+    <option value="education-training">Education & Training</option>
+    <option value="automobile-services">Automobile Services</option>
+    <option value="technology-it">Technology & IT</option>
+    <option value="health-medical">Health & Medical</option>
+    <option value="home-improvement">Home Improvement</option>
+    <option value="hospitality-tourism">Hospitality & Tourism</option>
+    <option value="business-support">Business Support</option>
+  </select>
+
+  {errors.serviceCategory && (
+    <p className="text-red-500 text-sm">{errors.serviceCategory}</p>
+  )}
+</div>
+
 
         <div className="w-full md:w-[39%]">
           <div className="flex items-center space-x-2 mb-3">
@@ -354,7 +380,7 @@ const Form = () => {
           <input
             type="text"
             onChange={(e) => setpricing(e.target.value)}
-            placeholder="Enter pricing (comma-separated)"
+            placeholder="Enter average pricing"
             className="w-full p-4 border border-gray-300 rounded-md bg-gray-200 focus:outline-none focus:ring-2 focus:ring-[#ff8901]"
           />
           {errors.pricing && (

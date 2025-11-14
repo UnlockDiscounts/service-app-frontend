@@ -14,7 +14,7 @@ const Role = () => {
     }
   };
   return (
-    <div className=" flex w-full justify-center items-center mt-10">
+    <div className="flex w-full justify-center items-center mt-10">
       <div className=" bg-[#FFFBEE] p-10 rounded-xl">
         <div className="flex flex-col items-center gap-4">
           <h1 className="text-5xl font-bold text-center">Choose Your Role</h1>

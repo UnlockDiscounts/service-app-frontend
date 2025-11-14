@@ -36,7 +36,7 @@ const SignUp = () => {
     setShowOtp(true);
     try {
     const res = await axios.post(
-      "https://service-app-backend-omega.vercel.app/api/email/request-otp/email", 
+      "https://service-app-backend-1.onrender.com/api/email/request-otp/email", 
     {email}
     );
     console.log("OTP response:", res.data);
@@ -49,11 +49,11 @@ const SignUp = () => {
 
   const handleSignUp = async () => {
 
-    // if(!verify)
-    // {
-    //    alert("Please Verify Email");
-    //    return;
-    // }
+    if(!verify)
+    {
+       alert("Please Verify Email");
+       return;
+    }
     
     setLoading(true);
 
@@ -80,16 +80,16 @@ const SignUp = () => {
   return (
     <div className="min-h-screen flex">
       {/* Left side - Background */}
-      <div className="flex">
+      <div className="w-1/2 h-screen overflow-hidden">
   <img
-    className="w-full h-4/5 object-cover"
+    className="w-full h-full object-cover"
     src={Rectangle}
     alt=""
   />
 </div>
 
       {/* Right side - Login form */}
-      <div className="w-[512px] bg-white flex flex-col py-12">
+      <div className=" w-1/2 bg-white flex flex-col justify-center px-12">
         {/* Logo */}
         <div className="flex items-center gap-3 mb-6 justify-center">
           {/* <div className="w-20 h-20 rounded-3xl flex items-center justify-center"> */}
@@ -101,8 +101,8 @@ const SignUp = () => {
         </h1>
         </div>
 
-        {/* Login title */}
-        <h2 className="text-3xl text-center mb-3">Sign Up</h2>
+        {/* SignUp title */}
+        <h2 className="text-3xl font-bold text-center mb-3">Sign Up</h2>
         <p className="text-center text-gray-600 mb-8">Enter the details to sign in</p>
 
         {/* Form */}
@@ -139,6 +139,8 @@ const SignUp = () => {
               </button>
               {showOtp && <OtpVerify onClose={() => setShowOtp(false)} email={email} verified={()=>{
                 setVerify(true);
+                setShowOtp(false);
+
               }}  requestOtp={()=>{
                 handleVerifyEmail();
               }}/>}

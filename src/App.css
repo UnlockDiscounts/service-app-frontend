@@ -1,6 +1,13 @@
+
+html {
+  font-size: 12px; /* 75% of 16px */
+}
+
+
 *{
   margin: 0;
   padding: 0;
   box-sizing: border-box;
   font-family: 'Poppins', sans-serif;
+  
 }

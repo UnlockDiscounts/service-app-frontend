@@ -39,14 +39,14 @@ const Contact = () => {
         <img alt="" className="w-32 sm:w-48 md:w-64" />
       </div>
 
-      <div className="flex flex-col justify-center items-center gap-2 mt-8 mb-8">
+      <div className="flex flex-col justify-center items-center gap-2 mt-10 mb-8">
         <h1 className="font-semibold font-poppins text-3xl sm:text-4xl md:text-5xl text-center">
           Contact Us
         </h1>
 
         <div className="container mx-auto justify-center items-center p-4 
                         w-full sm:w-3/4 md:w-2/3 lg:w-2/5 
-                        shadow-xl shadow-gray-500 rounded-3xl bg-white mb-8">
+                        shadow-xl shadow-gray-500 rounded-3xl bg-white mb-8 mt-6">
           <div className="p-5">
             <h1 className="font-poppins text-xl sm:text-2xl md:text-3xl font-semibold text-left">
               Contact form

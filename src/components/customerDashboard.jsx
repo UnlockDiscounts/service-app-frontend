@@ -35,7 +35,7 @@ const Profile = () => {
       try {
 
         const res = await axios.get(`https://service-app-backend-1.onrender.com/api/customer/${storedUser.id}`);
-        const res1 = await axios.get(`https://service-app-backend-1.onrender.com/api/customer/68fb5ad1d9ed9b1672d331d9`);
+        // const res1 = await axios.get(`https://service-app-backend-1.onrender.com/api/customer/68fb5ad1d9ed9b1672d331d9`);
 
 
         const data = res.data;
@@ -205,9 +205,10 @@ const Profile = () => {
                   className="p-4 flex justify-center flex-col items-center bg-gray-50 rounded-lg shadow"
                 >
                   <p>
-                    <strong>{b.service.serviceName}</strong>
+                    <strong>{b.businessName}</strong>
                   </p>
-                  <p>2 months ago</p>
+                  <p>{new Date(b.bookingDate).toISOString().split("T")[0]}
+</p>
                   <div>
                     <button
                       className="p-2 rounded-3xl w-full bg-[#FF9800] text-white text-md mt-8"
@@ -252,7 +253,7 @@ const Profile = () => {
                         <button
                           onClick={() => {
                             closeModal();
-                            handleFeedback(b.provider);
+                            handleFeedback(b.providerId);
                           }}
                           className="px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700"
                         >
