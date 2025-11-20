@@ -66,13 +66,21 @@ const Hero = () => {
         </div>
 
         {/* Right Side Image */}
-        <div className="flex justify-center lg:justify-end w-full lg:w-1/2">
-          <img
-            src={imgcollage}
-            alt="img-collage"
-            className="w-full max-w-sm sm:max-w-md md:max-w-lg lg:max-w-xl object-contain"
-          />
-        </div>
+        <div className="flex justify-center lg:justify-end w-full lg:w-1/2 items-center">
+  <img
+    src={imgcollage}
+    alt="img-collage"
+    className="
+      w-full
+      max-w-lg 
+      sm:max-w-xl
+      md:max-w-2xl
+      lg:max-w-xl
+      object-contain
+    "
+  />
+</div>
+
       </div>
     </div>
   );

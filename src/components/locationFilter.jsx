@@ -15,7 +15,7 @@ const CHAR_DELAY = 100;
 // Multiplier to make erasing slightly faster than typing
 const ERASE_SPEED_MULTIPLIER = 2; 
 // Pause duration after a full cycle (3 seconds)
-const PAUSE_DURATION = 2000; 
+const PAUSE_DURATION = 1000; 
 
 // State machine phases
 const PHASES = {

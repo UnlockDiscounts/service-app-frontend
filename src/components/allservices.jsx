@@ -256,11 +256,11 @@ function AllServices() {
               </div>
             </div>
 
-            <h1 className="text-6xl font-semibold text-white mb-2 tracking-tight c opacity-90">
+            <h1 className="text-7xl font-semibold text-white mb-2 tracking-tight c opacity-90">
               One Platform
             </h1>
 
-            <h2 className="text-5xl font-semibold text-white tracking-tight mix-blend-color-dodge opacity-90">
+            <h2 className="text-6xl font-semibold text-white tracking-tight mix-blend-color-dodge opacity-90">
               All Services
             </h2>
 
