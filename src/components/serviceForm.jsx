@@ -17,6 +17,8 @@ import axios from "axios";
 import OtpVerify from './otpVerify'
 import ComingSoonOverlay from './comingSoonOverlay';
 import LocationSelector from "./locationSelector";
+import api from './api';
+
 
 
 const Form = () => {
@@ -76,8 +78,8 @@ const [longitude, setLongitude] = useState("");
 
     setShowOtp(true);
     try {
-      const res = await axios.post(
-        "https://service-app-backend-1.onrender.com/api/email/request-otp/email",
+      const res = await api.post(
+        "/email/request-otp/email",
         { email }
       );
       console.log("OTP response:", res.data);
@@ -92,11 +94,11 @@ const [longitude, setLongitude] = useState("");
 
     e.preventDefault(); 
 
-    if(!verify)
-    {
-       alert("Please Verify Email");
-       return;
-    }
+    // if(!verify)
+    // {
+    //    alert("Please Verify Email");
+    //    return;
+    // }
 
     setLoading(true);
 
@@ -121,6 +123,8 @@ const [longitude, setLongitude] = useState("");
     formData.append("providerDetails[emergency_contact]", emergencycontact);
     formData.append("providerDetails[average_pricing]", pricing);
     formData.append("providerDetails[websiteLink]", weblink);
+    formData.append("latitude", latitude);
+    formData.append("longitude", longitude);
 
 
 
@@ -138,8 +142,8 @@ const [longitude, setLongitude] = useState("");
     formData.append("experience", experienceFile);
 
     try {
-      const res = await axios.post(
-        "https://service-app-backend-1.onrender.com/api/auth/register",
+      const res = await api.post(
+        "/auth/register",
         formData
       );
 
@@ -296,7 +300,7 @@ const [longitude, setLongitude] = useState("");
       {/* Upload address proof */}
       <div>
         <div className="flex items-center space-x-2 mb-3">
-          <MapPinHouse className="text-[#ff8901]" />
+          <ShieldCheck className="text-[#ff8901]" />
           <h1 className="text-lg md:text-xl font-bold">Upload Any Government ID Proof*</h1>
         </div>
         <input

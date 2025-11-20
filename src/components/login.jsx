@@ -5,6 +5,7 @@ import logo from "../assets/unlockdiscounts.logo.jpg";
 import logoo from '../assets/logoo.jpg'
 import axios from 'axios';
 import Rectangle from '../assets/Rectangle.png'
+import api from './api';
 
 
 const Login = () => {
@@ -22,8 +23,8 @@ const Login = () => {
 
     try {
 
-      const response = await axios.post(
-        "https://service-app-backend-1.onrender.com/api/auth/login",
+      const response = await api.post(
+        "/auth/login",
         { email, password }
       );
       console.log(response?.data);

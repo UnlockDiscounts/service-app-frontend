@@ -1,6 +1,8 @@
 import { useState } from "react";
 import bglanding from "../assets/bglanding.svg";
 import axios from "axios";
+import api from './api';
+
 
 const BookNow = ({ businessName, onClose, services, id }) => {
 
@@ -33,16 +35,9 @@ const BookNow = ({ businessName, onClose, services, id }) => {
         setLoading(true);
         e.preventDefault(); // prevents page reload and route change
         try {
-            const res = await axios.post(
-                "https://service-app-backend-1.onrender.com/api/booking/book",
-                { customerId: user?.id, providerId: id, serviceNames: selectedServices }
-                //         ,
-                //         {
-                //   headers: {
-                //     Authorization: `Bearer ${token}`,
-                //   },
-                // }
-            );
+            const res = await api.post(
+                "/booking/book",
+                { customerId: user?.id, providerId: id, serviceNames: selectedServices });
             console.log(res?.data);
             alert("Booking Query Successfully Sent !!");
             onClose();
@@ -132,7 +127,7 @@ const BookNow = ({ businessName, onClose, services, id }) => {
                             </label>
                             <input
                                 type="text"
-                                id="business"
+                                id={id}
                                 value={businessName || ""}
                                 readOnly
                                 className="shadow-sm border border-gray-300 p-2 rounded-xl w-full bg-gray-100 text-gray-600 cursor-not-allowed"

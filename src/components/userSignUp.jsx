@@ -6,6 +6,7 @@ import logoo from '../assets/logoo.jpg'
 import Rectangle from '../assets/Rectangle.png'
 import '../App.css';
 import axios from 'axios';
+import api from './api';
 import OtpVerify from './otpVerify'
 import { Link } from "react-router-dom";
 
@@ -29,14 +30,16 @@ const SignUp = () => {
   formData.append("role", "customer");
   formData.append("phone_number", phone);
   formData.append("address", address);
+  // formData.append("latitude", 23.1010);
+  // formData.append("longitude", 74.1200);
 
 
   const handleVerifyEmail = async () => {
      
     setShowOtp(true);
     try {
-    const res = await axios.post(
-      "https://service-app-backend-1.onrender.com/api/email/request-otp/email", 
+    const res = await api.post(
+      "/email/request-otp/email", 
     {email}
     );
     console.log("OTP response:", res.data);
@@ -49,16 +52,16 @@ const SignUp = () => {
 
   const handleSignUp = async () => {
 
-    if(!verify)
-    {
-       alert("Please Verify Email");
-       return;
-    }
+    // if(!verify)
+    // {
+    //    alert("Please Verify Email");
+    //    return;
+    // }
     
     setLoading(true);
 
     try {
-      const res = await axios.post("https://service-app-backend-1.onrender.com/api/auth/register",
+      const res = await api.post("/auth/register",
         formData
       );
       const { accessToken, refreshToken, user } = res?.data;

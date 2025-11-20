@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import axios from 'axios';
+import api from './api';
 import unlockdiscounts from "../assets/unlockdiscounts.logo.jpg";
 import logoo from '../assets/logoo.jpg'
 import "../index.css";
@@ -14,20 +15,15 @@ const Navbar = () => {
 
   const handleLogout = async () => {
     try {
-      const res = await axios.post(
-        "https://service-app-backend-1.onrender.com/api/auth/logout",
-        {},
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
+      const res = await api.post(
+        "/auth/logout",
+        {}
       );
 
       console.log("Logout successful:", res.data);
       setMenuOpen(false);
       localStorage.removeItem("user");
-      // window.location.href = "/";
+      window.location.href = "/allservices";
     } catch (error) {
       console.log("Logout error:", error.response?.status, error.response?.data || error.message);
     }

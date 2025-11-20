@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from "react-router-dom";
 import axios from 'axios';
+import api from './api';
 import qr from '../assets/qr.jpeg'
 
 const PaymentModal = ({ onClose }) => { // Component named PaymentModel
@@ -40,13 +41,9 @@ const PaymentModal = ({ onClose }) => { // Component named PaymentModel
     const token = localStorage.getItem("accessToken");
 
     try {
-      const res = await axios.post(
-        "https://service-app-backend-1.onrender.com/api/receipt/upload",
-        data, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      }
+      const res = await api.post(
+        "/receipt/upload",
+        data
       );
 
       console.log(res?.data);

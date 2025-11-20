@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import Illustration from '../assets/Illustration.png';
 import axios from 'axios';
+import api from './api';
+
 
 const OtpVerify = ({ onClose, email, verified, requestOtp }) => {
 
@@ -10,8 +12,8 @@ const OtpVerify = ({ onClose, email, verified, requestOtp }) => {
   try {
     console.log({ email, otp });
 
-    const res = await axios.post(
-      "https://service-app-backend-1.onrender.com/api/email/verify-otp/email",
+    const res = await api.post(
+      "/email/verify-otp/email",
       { email, otp }
     );
 

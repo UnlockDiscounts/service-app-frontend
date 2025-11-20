@@ -2,6 +2,7 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import bglanding from "../assets/bglanding.svg";
 import { FaEdit, FaCheck } from "react-icons/fa";
+import api from './api';
 import ComingSoonOverlay from "./comingSoonOverlay";
 
 const Profile = () => {
@@ -34,7 +35,7 @@ const Profile = () => {
     const fetchUser = async () => {
       try {
 
-        const res = await axios.get(`https://service-app-backend-1.onrender.com/api/customer/${storedUser.id}`);
+        const res = await api.get(`/customer/${storedUser.id}`);
         // const res1 = await axios.get(`https://service-app-backend-1.onrender.com/api/customer/68fb5ad1d9ed9b1672d331d9`);
 
 
@@ -67,9 +68,9 @@ const Profile = () => {
 
 
     try {
-      const res = await axios.patch(
-        `https://service-app-backend-1.onrender.com/api/customer/update/${storedUser.id}`,
-        {name, email, phone_number:phone,address}
+      const res = await api.patch(
+        `/customer/update/${storedUser.id}`,
+        { name, email, phone_number: phone, address }
       );
 
       const data = res?.data?.updatedCustomer;
@@ -92,15 +93,7 @@ const Profile = () => {
     const token = localStorage.getItem("accessToken");
 
 
-    const res = await axios.post(`https://service-app-backend-1.onrender.com/api/feedback/${id}`, { comment: feedback, rating },
-
-      {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      }
-
-    );
+    const res = await api.post(`/feedback/${id}`, { comment: feedback, rating });
     console.log(res?.data);
 
 
@@ -197,77 +190,77 @@ const Profile = () => {
       <div className="bg-white shadow-md rounded-lg p-6 space-y-4">
         <h2 className="text-lg font-semibold">Previous Service Logs</h2>
         {/* <ComingSoonOverlay> */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-            {user?.bookings?.length > 0 ? (
-              user.bookings.map((b, idx) => (
-                <div
-                  key={idx}
-                  className="p-4 flex justify-center flex-col items-center bg-gray-50 rounded-lg shadow"
-                >
-                  <p>
-                    <strong>{b.businessName}</strong>
-                  </p>
-                  <p>{new Date(b.bookingDate).toISOString().split("T")[0]}
-</p>
-                  <div>
-                    <button
-                      className="p-2 rounded-3xl w-full bg-[#FF9800] text-white text-md mt-8"
-                      onClick={openModal}
-                    >
-                      Tap to rate
-                    </button>
-                  </div>
-                  {isOpen && (
-                    <div className="fixed inset-0 flex items-center justify-center bg-black/50 z-50">
-                      <div className="bg-white p-6 rounded-lg shadow-lg w-96">
-                        <h2 className="text-xl font-semibold mb-4">
-                          Your Feedback
-                        </h2>
-                        <div>
-                          <input type="text" className="mb-4 w-full border-gray-500 shadow-lg  h-30 p-5" placeholder="Enter Your Ratings "
-                            onChange={(e) => { setFeedback(e.target.value); }}
-                          />
-
-                        </div>
-                        {/* Star Rating */}
-                        <div className="flex gap-1 mb-4">
-                          {[1, 2, 3, 4, 5].map((star) => (
-                            <svg
-                              key={star}
-                              onClick={() => handleStarClick(star)}
-                              xmlns="http://www.w3.org/2000/svg"
-                              fill={star <= rating ? "gold" : "gray"}
-                              viewBox="0 0 24 24"
-                              strokeWidth="1.5"
-                              stroke="currentColor"
-                              className="w-8 h-8 cursor-pointer hover:scale-110 transition-transform"
-                            >
-                              <path
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                                d="M11.48 3.499a.75.75 0 011.04 0l2.733 3.38 3.747.545a.75.75 0 01.415 1.279l-2.71 2.64.64 3.73a.75.75 0 01-1.088.79L12 14.347l-3.34 1.753a.75.75 0 01-1.088-.79l.64-3.73-2.71-2.64a.75.75 0 01.415-1.28l3.746-.544 2.733-3.381z"
-                              />
-                            </svg>
-                          ))}
-                        </div>
-                        <button
-                          onClick={() => {
-                            closeModal();
-                            handleFeedback(b.providerId);
-                          }}
-                          className="px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700"
-                        >
-                          Close
-                        </button>
-                      </div>
-                    </div>
-                  )}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+          {user?.bookings?.length > 0 ? (
+            user.bookings.map((b, idx) => (
+              <div
+                key={idx}
+                className="p-4 flex justify-center flex-col items-center bg-gray-50 rounded-lg shadow"
+              >
+                <p>
+                  <strong>{b.businessName}</strong>
+                </p>
+                <p>{new Date(b.bookingDate).toISOString().split("T")[0]}
+                </p>
+                <div>
+                  <button
+                    className="p-2 rounded-3xl w-full bg-[#FF9800] text-white text-md mt-8"
+                    onClick={openModal}
+                  >
+                    Tap to rate
+                  </button>
                 </div>
-              ))
-            ) : (
-              <p>Loading user data...</p>
-            )}
-          </div>
+                {isOpen && (
+                  <div className="fixed inset-0 flex items-center justify-center bg-black/50 z-50">
+                    <div className="bg-white p-6 rounded-lg shadow-lg w-96">
+                      <h2 className="text-xl font-semibold mb-4">
+                        Your Feedback
+                      </h2>
+                      <div>
+                        <input type="text" className="mb-4 w-full border-gray-500 shadow-lg  h-30 p-5" placeholder="Enter Your Ratings "
+                          onChange={(e) => { setFeedback(e.target.value); }}
+                        />
+
+                      </div>
+                      {/* Star Rating */}
+                      <div className="flex gap-1 mb-4">
+                        {[1, 2, 3, 4, 5].map((star) => (
+                          <svg
+                            key={star}
+                            onClick={() => handleStarClick(star)}
+                            xmlns="http://www.w3.org/2000/svg"
+                            fill={star <= rating ? "gold" : "gray"}
+                            viewBox="0 0 24 24"
+                            strokeWidth="1.5"
+                            stroke="currentColor"
+                            className="w-8 h-8 cursor-pointer hover:scale-110 transition-transform"
+                          >
+                            <path
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              d="M11.48 3.499a.75.75 0 011.04 0l2.733 3.38 3.747.545a.75.75 0 01.415 1.279l-2.71 2.64.64 3.73a.75.75 0 01-1.088.79L12 14.347l-3.34 1.753a.75.75 0 01-1.088-.79l.64-3.73-2.71-2.64a.75.75 0 01.415-1.28l3.746-.544 2.733-3.381z"
+                            />
+                          </svg>
+                        ))}
+                      </div>
+                      <button
+                        onClick={() => {
+                          closeModal();
+                          handleFeedback(b.providerId);
+                        }}
+                        className="px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700"
+                      >
+                        Close
+                      </button>
+                    </div>
+                  </div>
+                )}
+              </div>
+            ))
+          ) : (
+            <p>Loading user data...</p>
+          )}
+        </div>
         {/* </ComingSoonOverlay> */}
       </div>
     </div>

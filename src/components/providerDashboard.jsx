@@ -3,6 +3,7 @@ import axios from 'axios';
 import i1 from '../assets/i1.jpg'
 import ComingSoonOverlay from './comingSoonOverlay';
 import { Trash2, Edit, Plus, User } from "lucide-react"; // icons from lucide-react
+import api from './api';
 
 export default function ProviderDashboard() {
 
@@ -35,8 +36,8 @@ export default function ProviderDashboard() {
 
     const info = async () => {
 
-      const res = await axios.get(`https://service-app-backend-1.onrender.com/api/provider/${storedUser.id}`);
-      const res1 = await axios.get(`https://service-app-backend-1.onrender.com/api/booking/${storedUser.id}`);
+      const res = await api.get(`/provider/${storedUser.id}`);
+      const res1 = await api.get(`/booking/${storedUser.id}`);
       console.log(res1?.data?.bookings);
       console.log(res?.data);
 
@@ -86,14 +87,10 @@ export default function ProviderDashboard() {
 
     try {
       const token = localStorage.getItem("accessToken");
-      const res = await axios.post(
-        "https://service-app-backend-1.onrender.com/api/auth/avatar",
+      const res = await api.post(
+        "/auth/avatar",
         formData // <-- Sending the file data package!
-        , {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
+        
       );
 
       console.log("API Response Data:", res?.data);
@@ -110,13 +107,9 @@ export default function ProviderDashboard() {
   const handlePrice = async () => {
     try {
       const token = localStorage.getItem("accessToken");
-      const res = await axios.patch(
-        "https://service-app-backend-1.onrender.com/api/provider/addpricing",
-        { average_pricing: price }, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      }
+      const res = await api.patch(
+        "/provider/addpricing",
+        { average_pricing: price }
       );
       console.log(res?.data);
     } catch (error) {
@@ -127,13 +120,9 @@ export default function ProviderDashboard() {
   const handleInfo = async () => {
     try {
       const token = localStorage.getItem("accessToken");
-      const res = await axios.patch(
-        "https://service-app-backend-1.onrender.com/api/provider/update-info",
-        { phone_number: phone, address: address, average_pricing: price }, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      }
+      const res = await api.patch(
+        "/provider/update-info",
+        { phone_number: phone, address: address, average_pricing: price }
       );
       console.log(res?.data);
     } catch (error) {
@@ -158,7 +147,7 @@ export default function ProviderDashboard() {
     formData.append("serviceName", serviceName);
     formData.append("serviceImage", serviceImage);
 
-    const res = await axios.post(`https://service-app-backend-1.onrender.com/api/provider/addService/${storedUser.id}`, formData);
+    const res = await api.post(`/provider/addService/${storedUser.id}`, formData);
 
     console.log(res?.data);
 
@@ -177,11 +166,7 @@ export default function ProviderDashboard() {
     const formData = new FormData();
     formData.append("serviceName", serviceName);
     formData.append("serviceImage", serviceImage);
-    const res = await axios.patch(`https://service-app-backend-1.onrender.com/api/provider/updateservice/${id}`, formData, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    });
+    const res = await api.patch(`/provider/updateservice/${id}`, formData);
 
     console.log(res?.data);
 
@@ -196,11 +181,7 @@ export default function ProviderDashboard() {
   const handleDeleteService = async (id) => {
 
     const token = localStorage.getItem("accessToken");
-    const res = await axios.delete(`https://service-app-backend-1.onrender.com/api/provider/deleteservice/${id}`, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    });
+    const res = await api.delete(`/provider/deleteservice/${id}`);
     console.log(res?.data);
     window.location.reload();
 
@@ -209,7 +190,7 @@ export default function ProviderDashboard() {
   };
   const handleStatusClick = async (id) => {
     try {
-      const res = await axios.patch(`https://service-app-backend-1.onrender.com/api/booking/servicedone/${id}`);
+      const res = await api.patch(`/booking/servicedone/${id}`);
       console.log(res?.data);
       alert(res?.data?.message);
       window.location.reload();

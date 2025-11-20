@@ -1,6 +1,8 @@
 import { use, useState } from "react";
 import bglanding from "../assets/bglanding.svg";
 import axios from 'axios';
+import api from './api';
+
 
 const Contact = () => {
 
@@ -14,8 +16,8 @@ const Contact = () => {
     setLoading(true);
     e.preventDefault(); // prevents page reload and route change
     try {
-      const res = await axios.post(
-        "https://service-app-backend-1.onrender.com/api/email/contact-us",
+      const res = await api.post(
+        "/email/contact-us",
         { fullName, email, phone, message }
       );
       alert("Query successfully sent !!");

@@ -16,3 +16,8 @@
   /* repeating-linear-gradient(0deg, #ccc 0 1px, transparent 1px 100px),
   repeating-linear-gradient(90deg, #ccc 0 1px, transparent 1px 100px); */
 }
+
+/*
+  This targets the placeholder text specifically across different browsers.
+  The color is set to a nice amber/orange to match your theme.
+*/

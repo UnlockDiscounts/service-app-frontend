@@ -11,3 +11,25 @@ html {
   font-family: 'Poppins', sans-serif;
   
 }
+
+/*
+  This targets the placeholder text specifically across different browsers.
+  The color is set to a nice amber/orange to match your theme.
+*/
+.amber-placeholder::placeholder {
+  color: #FF9800; /* Tailwind's amber-400 */
+  opacity: 1; /* Ensure full visibility in Firefox */
+  font-weight: 600; /* Optional: Make the text slightly bolder */
+}
+
+/* For older WebKit browsers (Safari/Chrome) */
+.amber-placeholder::-webkit-input-placeholder {
+  color: #FF9800; 
+  font-weight: 600;
+}
+
+/* For older Edge/IE */
+.amber-placeholder:-ms-input-placeholder {
+  color: #FF9800;
+  font-weight: 600;
+}

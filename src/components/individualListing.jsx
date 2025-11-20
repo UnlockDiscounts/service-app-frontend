@@ -396,6 +396,8 @@ import Thynk from '../assets/Thynk.jpg';
 import Thynk1 from "../assets/Thynk1.jpg";
 import { Star, MapPin, Phone, Share2, X, Mail, Globe, Navigation } from 'lucide-react';
 import BookNow from './bookNow';
+import api from './api';
+
 
 const IndividualListing = ({ listingData }) => {
 
@@ -432,16 +434,10 @@ const IndividualListing = ({ listingData }) => {
 
     const info = async () => {
 
-      const res = await axios.get(`https://service-app-backend-1.onrender.com/api/provider/${id}`);
-      const res1 = await axios.get(`https://service-app-backend-1.onrender.com/api/provider/service-count/${id}`);
-      const res2 = await axios.get(`https://service-app-backend-1.onrender.com/api/feedback/averagefeedback/${id}`,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
-      const res3 = await axios.get(`https://service-app-backend-1.onrender.com/api/feedback/${id}`);
+      const res = await api.get(`/provider/${id}`);
+      const res1 = await api.get(`/provider/service-count/${id}`);
+      const res2 = await api.get(`/feedback/averagefeedback/${id}`);
+      const res3 = await api.get(`/feedback/${id}`);
 
 
       console.log(res?.data);
@@ -484,11 +480,7 @@ const IndividualListing = ({ listingData }) => {
       return;
     }
 
-    const res = await axios.get(`https://service-app-backend-1.onrender.com/api/booknow/provider/${id}`, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    });
+    const res = await api.get(`/booknow/provider/${id}`);
 
     console.log(res?.data);
     window.open(res?.data?.whatsAppURL, '_blank', 'noopener,noreferrer');
@@ -816,18 +808,6 @@ const IndividualListing = ({ listingData }) => {
             </div>
           </div>
         </div>
-        {/* 
-        <div className="mt-6">
-          <footer className="p-6 mt-20 text-gray-500 flex flex-col sm:flex-row justify-between gap-4 sm:gap-0 bg-[#F2E7E7] w-full text-sm sm:text-base">
-            <a className="hover:cursor-pointer hover:text-blue-700">
-              Terms of service
-            </a>
-            <a className="hover:cursor-pointer hover:text-blue-700">
-              Privacy Policy
-            </a>
-            <a className="hover:cursor-pointer hover:text-blue-700">Contact us</a>
-          </footer>
-        </div> */}
 
       </div>
 

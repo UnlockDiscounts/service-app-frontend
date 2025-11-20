@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Search } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import axios from 'axios';
@@ -7,6 +7,86 @@ const SearchBar = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [filteredCategories, setFilteredCategories] = useState([]);
   const navigate = useNavigate();
+
+   // The full placeholder text you want to display
+  const PHRASE = "Search For Services...";
+  const PHRASE_LENGTH = PHRASE.length;
+  
+  // Standard delay between characters (e.g., 100ms)
+  const CHAR_DELAY = 100; 
+  // Multiplier to make erasing slightly faster than typing
+  const ERASE_SPEED_MULTIPLIER = 2; 
+  // Pause duration after a full cycle (3 seconds)
+  const PAUSE_DURATION = 2000; 
+  
+  // State machine phases
+  const PHASES = {
+      TYPING: 'TYPING',
+      PAUSING_TYPED: 'PAUSING_TYPED',
+      ERASING: 'ERASING',
+      PAUSING_ERASED: 'PAUSING_ERASED',
+  };
+  
+  const [placeholder, setPlaceholder] = useState('');
+      const [phase, setPhase] = useState(PHASES.TYPING);
+      const [index, setIndex] = useState(0);
+  
+      useEffect(() => {
+          let timeoutId;
+  
+          // 1. If the user starts typing, stop the animation immediately.
+          if (searchQuery) {
+              setPlaceholder(PHRASE);
+              return;
+          }
+  
+          switch (phase) {
+              case PHASES.TYPING:
+                  if (index < PHRASE_LENGTH) {
+                      // Add one character
+                      timeoutId = setTimeout(() => {
+                          setPlaceholder(PHRASE.substring(0, index + 1));
+                          setIndex(index + 1);
+                      }, CHAR_DELAY);
+                  } else {
+                      // Typing finished, move to pause
+                      setPhase(PHASES.PAUSING_TYPED);
+                  }
+                  break;
+  
+              case PHASES.PAUSING_TYPED:
+                  // Wait for the full pause duration
+                  timeoutId = setTimeout(() => {
+                      setPhase(PHASES.ERASING);
+                  }, PAUSE_DURATION);
+                  break;
+  
+              case PHASES.ERASING:
+                  if (index > 0) {
+                      // Remove one character
+                      timeoutId = setTimeout(() => {
+                          setPlaceholder(PHRASE.substring(0, index - 1));
+                          setIndex(index - 1);
+                      }, CHAR_DELAY * ERASE_SPEED_MULTIPLIER); // Use the multiplier for speed control
+                  } else {
+                      // Erasing finished, move to pause
+                      setPhase(PHASES.PAUSING_ERASED);
+                  }
+                  break;
+  
+              case PHASES.PAUSING_ERASED:
+                  // Wait for a brief moment before restarting the typing cycle
+                  timeoutId = setTimeout(() => {
+                      setPhase(PHASES.TYPING);
+                  }, CHAR_DELAY * 2); // Short pause before starting over
+                  break;
+                  
+              default:
+                  break;
+          }
+  
+          return () => clearTimeout(timeoutId); // Clean up the timer
+      }, [phase, index, searchQuery]); // Dependencies trigger the next step in the sequence
 
   const handleSearch = async (value) => {
   setSearchQuery(value);
@@ -56,10 +136,10 @@ const handleCardClick = (id) => {
 
       <input
         type="text"
-        placeholder="Search for Services"
+        placeholder={placeholder}
         value={searchQuery}
         onChange={(e) => handleSearch(e.target.value)}
-        className="w-full pl-14 pr-12 py-4 text-base border-2 border-amber-400 rounded-xl focus:outline-none focus:border-amber-500 transition-colors"
+        className="w-full pl-14 pr-20 py-4 text-base border-2 border-amber-500 rounded-xl focus:outline-none amber-placeholder"
       />
 
       {/* Dropdown */}
