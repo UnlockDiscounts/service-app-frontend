@@ -89,6 +89,15 @@ const SearchBar = () => {
       }, [phase, index, searchQuery]); // Dependencies trigger the next step in the sequence
 
   const handleSearch = async (value) => {
+
+   let formattedValue = value.toLowerCase().trim();
+
+  // Replace all spaces with dashes
+  formattedValue = formattedValue.replace(/\s+/g, "-");
+
+  // Now use formattedValue to hit the backend
+  console.log("Final backend value:", formattedValue);  
+  
   setSearchQuery(value);
 
   if (value.trim() === "") {
@@ -98,7 +107,7 @@ const SearchBar = () => {
 
   try {
     const res = await axios.get(
-      `https://service-app-backend-1.onrender.com/api/provider/search?query=${value}`
+      `https://service-app-backend-1.onrender.com/api/provider/search?query=${formattedValue}`
     );
 
     const data = res.data;

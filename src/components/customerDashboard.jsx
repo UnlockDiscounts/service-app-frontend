@@ -18,6 +18,7 @@ const Profile = () => {
   const [phone, setPhone] = useState("");
   const [address, setAddress] = useState("");
 
+
   const [rating, setRating] = useState(0); // 0 to 5
 
   const handleStarClick = (star) => {
@@ -248,9 +249,9 @@ const Profile = () => {
                           closeModal();
                           handleFeedback(b.providerId);
                         }}
-                        className="px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700"
+                        className="px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700 block mx-auto"
                       >
-                        Close
+                        Submit
                       </button>
                     </div>
                   </div>
