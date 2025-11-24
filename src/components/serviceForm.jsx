@@ -33,7 +33,7 @@ const [longitude, setLongitude] = useState("");
   const navigate = useNavigate();
 
   // Form fields
-  const [buisnessname, setBusinessname] = useState("");
+  const [businessname, setBusinessname] = useState("");
   const [ownername, setOwnername] = useState("");
   const [phone, setPhone] = useState("");
   const [email, setEmail] = useState("");
@@ -55,22 +55,32 @@ const [longitude, setLongitude] = useState("");
 
   const validate = () => {
     const newErrors = {};
-    if (!buisnessname.trim())
-      newErrors.buisnessname = "Business Name is required";
-    if (!ownername.trim()) newErrors.ownername = "Owner Name is required";
-    if (!/^\d{10}$/.test(phone)) newErrors.phone = "Enter valid phone number";
-    if (!/\S+@\S+\.\S+/.test(email)) newErrors.email = "Enter valid email";
-    if (!password) newErrors.password = "Enter valid password"
+    if (!businessname.trim() || /[^a-zA-Z0-9\s]/.test(businessname) ||
+  businessname.trim().length < 3 ||
+  businessname.trim().length > 50)
+      newErrors.businessname = "Business Name must be 3-50 characters long and contain only letters, numbers, and spaces";
+    if (!ownername.trim() || /[^a-zA-Z0-9\s]/.test(ownername) ||
+  ownername.trim().length < 3 ||
+  ownername.trim().length > 50) newErrors.ownername = "Owner Name must be 3-50 characters long and contain only letters, numbers, and spaces";
+    if (!/^\d{10}$/.test(phone.trim())) newErrors.phone = "Enter valid phone number";
+    if (!/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[A-Za-z]{2,}$/.test(email)) newErrors.email = "Enter valid email";
+    if (!password || password.length<5 ||
+password.includes(" ")) newErrors.password = "Password must be minimum 5 characters long"
     if (!address.trim()) newErrors.address = "Address is required";
     if (!serviceCategory)
       newErrors.serviceCategory = "Select category for service";
-    if (!serviceOffered.trim())
-      newErrors.serviceOffered = "Enter service names separated by a comma";
-    if (!pricing.trim())
-      newErrors.pricing = "Enter valid Pricing";
-    if (!/^\d{10}$/.test(emergencycontact))
+    if (!serviceOffered.trim() || /[^a-zA-Z0-9\s,]/.test(serviceOffered)
+ ||
+serviceOffered.length < 3)
+      newErrors.serviceOffered = "Enter valid service names separated by a comma";
+    if ( !pricing.trim() ||
+  /[^0-9]/.test(pricing) ||
+  pricing.length < 2 ||
+  pricing.length > 6)
+      newErrors.pricing = "Enter a valid price (only numbers, 2-6 digits)";
+    if (!/^\d{10}$/.test(emergencycontact.trim()))
       newErrors.emergencycontact = "Enter valid emergency contact number";
-
+ 
     return newErrors;
   };
 
@@ -106,6 +116,7 @@ const [longitude, setLongitude] = useState("");
 
     const validationErrors = validate();
     if (Object.keys(validationErrors).length > 0) {
+      setLoading(false);
       setErrors(validationErrors);
       return;
     }
@@ -119,7 +130,7 @@ const [longitude, setLongitude] = useState("");
     formData.append("phone_number", phone);
     formData.append("address", address);
     formData.append("providerDetails[service_category]", serviceCategory);
-    formData.append("providerDetails[business_name]", buisnessname);
+    formData.append("providerDetails[business_name]", businessname);
     formData.append("providerDetails[emergency_contact]", emergencycontact);
     formData.append("providerDetails[average_pricing]", pricing);
     formData.append("providerDetails[websiteLink]", weblink);
@@ -182,8 +193,8 @@ const [longitude, setLongitude] = useState("");
           placeholder="Enter your business name"
           className="w-full border border-gray-300 rounded-md p-4 bg-gray-200 focus:outline-none focus:ring-2 focus:ring-[#ff8901]"
         />
-        {errors.buisnessname && (
-          <p className="text-red-500 text-sm">{errors.buisnessname}</p>
+        {errors.businessname && (
+          <p className="text-red-500 text-sm">{errors.businessname}</p>
         )}
       </div>
 
