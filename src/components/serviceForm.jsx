@@ -59,9 +59,9 @@ const [longitude, setLongitude] = useState("");
   businessname.trim().length < 3 ||
   businessname.trim().length > 50)
       newErrors.businessname = "Business Name must be 3-50 characters long and contain only letters, numbers, and spaces";
-    if (!ownername.trim() || /[^a-zA-Z0-9\s]/.test(ownername) ||
+    if (!ownername.trim() || /[^a-zA-Z\s]/.test(ownername) ||
   ownername.trim().length < 3 ||
-  ownername.trim().length > 50) newErrors.ownername = "Owner Name must be 3-50 characters long and contain only letters, numbers, and spaces";
+  ownername.trim().length > 50) newErrors.ownername = "Owner Name must be 3-50 characters long and contain only letters and spaces";
     if (!/^\d{10}$/.test(phone.trim())) newErrors.phone = "Enter valid phone number";
     if (!/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[A-Za-z]{2,}$/.test(email)) newErrors.email = "Enter valid email";
     if (!password || password.length<5 ||
