@@ -87,7 +87,7 @@ const SignUp = () => {
   return (
     <div className="min-h-screen flex">
       {/* Left side - Background */}
-      <div className="w-1/2 h-screen overflow-hidden">
+
   <div className="w-1/2 h-screen overflow-hidden relative flex items-center justify-center">
   <img
     src={img1}
@@ -110,7 +110,7 @@ const SignUp = () => {
     className="slide-img delay-3 w-full h-full object-cover opacity-0 animate-slide-in-1 z-10"
   />
 </div>
-</div>
+
 
       {/* Right side - Login form */}
       <div className=" w-1/2 bg-white flex flex-col justify-center px-12">
