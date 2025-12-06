@@ -5,6 +5,10 @@ import logo from "../assets/unlockdiscounts.logo.jpg";
 import logoo from '../assets/logoo.jpg'
 import axios from 'axios';
 import Rectangle from '../assets/Rectangle.png'
+import animateimg4 from '../assets/animateimg4.png'
+import animateimg5 from '../assets/animateimg5.png'
+import animateimg6 from '../assets/animateimg6.png'
+import animateimg7 from '../assets/animateimg7.png'
 import api from './api';
 
 
@@ -124,12 +128,29 @@ const Login = () => {
     <div className="min-h-screen flex">
       {/* Left Section (Image) */}
       <div className="w-1/2 h-screen overflow-hidden">
-        <img
-          src={Rectangle}
-          alt="Login"
-          className="w-full h-full object-cover"
-        />
-      </div>
+  <img
+    src={animateimg4}
+    alt="Login"
+    className="w-full h-full object-cover animate-login-slide-0"
+    
+  />
+  <img
+    src={animateimg5}
+    alt="Login"
+    className="w-full h-full object-cover animate-login-slide-1"
+  />
+  <img
+    src={animateimg6}
+    alt="Login"
+    className="w-full h-full object-cover animate-login-slide-2"
+  />
+  <img
+    src={animateimg7}
+    alt="Login"
+    className="w-full h-full object-cover animate-login-slide-3"
+  />
+</div>
+
 
       {/* Right Section (Form) */}
       <div className="w-1/2 bg-white flex flex-col justify-center px-12">

@@ -1,11 +1,18 @@
+import {useState} from "react";
 import { useNavigate } from "react-router-dom";
 import imgcollage from "../assets/imgcollage.png";
+import imgcollage1 from "../assets/imgcollage1.png";
+import imgcollage2 from "../assets/imgcollage2.png";
+import animateimg1 from "../assets/animateimg1.png";
+import animateimg2 from "../assets/animateimg2.png";
+import animateimg3 from "../assets/animateimg3.png";
 import bglanding from "../assets/bglanding.svg";
-
+import Contact from "./contact.jsx"
 import "../index.css";
 
 const Hero = () => {
   const navigate = useNavigate();
+
 
   const handleClick = () => {
     navigate("/role");
@@ -15,8 +22,39 @@ const Hero = () => {
   const handleClick2 = () => {
     navigate("/allservices");
   }
+  const feedbackData = [
+  {
+    name: "Tanisha K.",
+    feedback:
+      "The app is super easy to use and professionals arrive on time. Got my house deep-cleaned and they did a thorough job. Very reasonable pricing too."
+  },
+  {
+    name: "Arvind S.",
+    feedback:
+      "I used Mendora for AC servicing and the technician was excellent. He explained the issue clearly and fixed it fast. Very reasonable pricing too."
+  },
+  {
+    name: "Kartik J.",
+    feedback:
+      "Reliable platform! The car wash service was quick and convenient. Would’ve loved more scheduling options, though."
+  },
+  {
+    name: "Sara K.",
+    feedback:
+      "Booked a home salon service and was genuinely impressed. The beautician was well-trained and the hygiene level was top-notch."
+  },
+  {
+    name: "Riya M.",
+    feedback:
+      "Booked a home salon service and was genuinely impressed. The beautician was well-trained and the hygiene level was top-notch."
+  }
+];
 
 
+const loopData = [...feedbackData, ...feedbackData];
+
+
+  
 
   return (
     <div className="pt-10 heroclass w-full min-h-screen" style={{ backgroundImage: `url(${bglanding})`, backgroundSize: 'cover', backgroundPosition: 'center' }}
@@ -27,13 +65,13 @@ const Hero = () => {
         <div className="flex flex-col    text-center lg:text-left px-10  ">
           <div className="space-y-4  ">
             <h1
-              className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-6xl text-gray-800  font-extrabold font-poppins tracking-wide opacity-90"
+              className="text-xl sm:text-4xl md:text-5xl lg:text-7xl xl:text-7xl text-gray-800  font-extrabold font-poppins tracking-wide opacity-90"
               style={{ textShadow: "3px 4px 4px rgba(128,128,128,0.8)" }}
             >
               One Platform
             </h1>
             <h1
-              className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-6xl text-gray-800 font-extrabold font-poppins tracking-wide opacity-90"
+              className="text-3xl sm:text-4xl md:text-5xl lg:text-7xl xl:text-7xl text-gray-800 font-extrabold font-poppins tracking-wide opacity-90"
               style={{ textShadow: "3px 4px 4px rgba(128,128,128,0.8)" }}
             >
               All Services
@@ -46,8 +84,8 @@ const Hero = () => {
 
           <div className="flex flex-col sm:flex-row gap-4 mt-8">
             <button
-              className="bg-[#FF9800] px-6 py-2 md:px-8 md:py-3 rounded-full text-lg md:text-2xl font-semibold 
-               border-2 border-transparent hover:bg-white hover:border-[#FF8900] 
+              className="bg-[#FF9800] px-12 py-2 md:px-15 md:py-3 rounded-2xl text-lg md:text-2xl font-semibold 
+               border-5 border-yellow-400 hover:bg-white hover:border-[#FF8900] 
                transition"
               onClick={handleClick}
             >
@@ -55,33 +93,79 @@ const Hero = () => {
             </button>
 
             <button
-              className="border-2 border-[#FF9800] px-6 py-2 md:px-8 md:py-3 rounded-full text-lg md:text-2xl 
+              className="border-4 border-yellow-300 px-8 py-2 md:px-8 md:py-3 rounded-2xl text-lg md:text-2xl 
                font-semibold hover:bg-[#FF9800] hover:text-white transition"
               onClick={handleClick2}
             >
               Explore Services
             </button>
+            
           </div>
 
         </div>
 
         {/* Right Side Image */}
-        <div className="flex justify-center lg:justify-end w-full lg:w-1/2 items-center">
-  <img
-    src={imgcollage}
-    alt="img-collage"
-    className="
-      w-full
-      max-w-lg 
-      sm:max-w-xl
-      md:max-w-2xl
-      lg:max-w-xl
-      object-contain
-    "
+       <div className="relative w-full lg:w-1/2 h-[400px] flex justify-center items-center">
+  <img 
+    src={imgcollage2} 
+    className="slide-img delay-0 absolute w-4/5 h-auto object-contain opacity-0 animate-collage-slide-0 z-30" 
+  />
+  <img 
+    src={imgcollage1} 
+    className="slide-img delay-1 absolute w-4/5 h-auto object-contain opacity-0 animate-collage-slide-1 z-20" 
+  />
+  <img 
+    src={imgcollage} 
+    className="slide-img delay-2 absolute w-4/5 h-auto object-contain opacity-0 animate-collage-slide-2 z-10" 
   />
 </div>
 
       </div>
+      <div className="mt-5 px-10 w-150">
+  <div className="overflow-hidden">
+    
+    <div className="flex animate-marquee px-20">  
+      {loopData.map((p, index) => (
+        <div
+          key={index}
+          className="bg-[#FFCB61] m-6 border rounded-2xl p-10 min-w-[300px]"
+        >
+          <h2 className="text-2xl">{p.name}</h2>
+          <h2>⭐⭐⭐⭐⭐</h2>
+          <p>{p.feedback}</p>
+        </div>
+      ))}
+    </div>
+
+  </div>
+</div>
+
+     <div className="flex flex-row mt-40 w-full">
+  
+  {/* LEFT SIDE */}
+  <div className="w-full">
+    <Contact setheading={"Get in touch"} />
+  </div>
+
+  {/* RIGHT SIDE */}
+  <div className="relative w-full h-[400px] flex justify-between items-center">
+  <img 
+    src={animateimg1} 
+    className="slide-img delay-0 absolute w-4/5 h-auto object-contain opacity-0 animate-slide-in-0 z-30" 
+  />
+  <img 
+    src={animateimg2} 
+    className="slide-img delay-1 absolute w-4/5 h-auto object-contain opacity-0 animate-slide-in-1 z-20" 
+  />
+  <img 
+    src={animateimg3} 
+    className="slide-img delay-2 absolute w-4/5 h-auto object-contain opacity-0 animate-slide-in-2 z-10" 
+  />
+</div>
+
+</div>
+
+
     </div>
   );
 };

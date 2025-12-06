@@ -1,23 +1,24 @@
 import bglanding from "../assets/bglanding.svg";
 import bw from '../assets/bw.png';
+import Frame1 from '../assets/Frame1.png';
 import { Link } from "react-router-dom";
 
 
 const About = () => {
   return (
     <div
-      className=" bg-cover h-screen w-full "
+      className=" bg-cover h-screen w-full py-10"
       style={{ backgroundImage: `url(${bglanding})` }}
     >
       <div className="px-6 md:px-16 py-12 font-poppins">
   <h1 className="text-4xl md:text-5xl font-extrabold text-center mb-8 text-gray-900 drop-shadow-sm">
-    About Us
+    About <span className="text-[#FF9800]">Us</span>
   </h1>
 
-  <div className="grid md:grid-cols-2 gap-10 items-center">
+  <div className=" gap-10 items-center">
     {/* Left Text Section */}
     <div>
-      <p className="text-gray-700 text-base md:text-lg leading-relaxed mb-4">
+      <p className="text-center text-gray-700 text-base md:text-[28px] leading-relaxed mb-4">
         Welcome to{" "}
         <span className="font-bold">
           Mend<span className="text-[#FF9800]">ora</span>
@@ -25,59 +26,59 @@ const About = () => {
         , the simplest way to book trusted services at unbeatable prices.
       </p>
 
-      <p className="text-gray-700 text-base md:text-lg leading-relaxed mb-4">
+      <div className="flex justify-center mb-20">
+  <Link to="/allservices">
+    <button
+      className=" text-[20px] mt-6 px-7 py-2 border-4 border-[#FFC727] rounded-md font-semibold hover:bg-[#FF9800] hover:text-white transition"
+    >
+      Explore Services
+    </button>
+  </Link>
+</div>
+
+    <div className="mx-[190px] mt-10 gap-10">
+<h2 className="font-bold text-gray-900 text-4xl mb-10">
+        Our <span className="text-[#FF9800] font-bold">Mission</span>
+      </h2>
+
+
+      <p className="text-gray-700 text-base md:text-[25px] leading-relaxed mb-20">
         Getting help for home, beauty, or wellness should be effortless. We make
         it easy by linking you with verified pros in your area.
       </p>
-
-      <h2 className="font-semibold text-gray-900 text-xl mb-2">
+      
+      <h2 className="font-semibold text-gray-900 text-4xl mb-10">
         Our <span className="text-[#FF9800] font-bold">Promise</span>
       </h2>
 
-      <p className="text-gray-700 text-base md:text-lg leading-relaxed mb-4">
+      <p className="text-center text-gray-700 text-base md:text-[25px] leading-relaxed mb-20">
         We focus on convenience and affordability so you can get back to your
         life.
       </p>
 
-      <ul className="list-disc pl-6 space-y-2 text-gray-700 text-base md:text-lg">
-        <li>
-          <span className="font-bold">Trusted Professionals:</span> Every
-          provider is rigorously vetted for quality and reliability.
-        </li>
-        <li>
-          <span className="font-bold">Exclusive Value:</span> Access special
-          offers and the best prices, guaranteeing maximum value.
-        </li>
-        <li>
-          <span className="font-bold">Simplicity & Transparency:</span> Enjoy
-          easy booking with upfront, transparent pricing—no hidden fees.
-        </li>
-        <li>
-          <span className="font-bold">Convenience:</span> Find, compare, and
-          book all your services in one user-friendly spot.
-        </li>
-      </ul>
+      <div className="flex gap-10">
+      <div className="flex-1 bg-[#D7FFF9] pl-5 py-5 border rounded-md">
+        <img className="mb-5" src={Frame1} alt=""/>
+        <h2 className="font-bold mb-5">Trusted Professionals</h2>
+        <h3>Every provider is rigorously vetted for quality and reliability</h3>
+      </div>
+      <div className="flex-1 bg-[#E2E8FE] pl-5 py-5  border rounded-md">
+        <img className="mb-5" src={Frame1} alt=""/>
+        <h2 className="font-bold mb-5">Exclusive Value</h2>
+        <h3>Access special offers and the best prices, guaranteeing maximum value</h3>
+      </div>
+      <div className="flex-1 bg-[#F4E0FF] pl-5 py-5  border rounded-md">
+        <img className="mb-5" src={Frame1} alt=""/>
+        <h2 className="font-bold mb-5">Dedicated Support</h2>
+        <h3>Our customer care team is always ready to help with any questions or concerns</h3>
+      </div>
 
-      <p className="text-gray-700 text-base md:text-lg leading-relaxed mt-4">
-        Let <span className="font-semibold">Mendora</span> help you unlock the
-        freedom of affordable, reliable service today!
-      </p>
-      <Link to="/allservices">
-      <button className="mt-6 px-5 py-2 border-2 border-[#FF9800] text-[#FF9800] rounded-full font-semibold hover:bg-[#FF9800] hover:text-white transition"
-      >
-        Explore Services
-      </button>
-      </Link>
+      </div>
+      
+    </div>
     </div>
 
-    {/* Right Image Section */}
-    <div className="flex justify-center">
-      <img
-        src={bw}
-        alt="About Mendora"
-        className="w-80 md:w-96 object-contain"
-      />
-    </div>
+ 
   </div>
 </div>
 

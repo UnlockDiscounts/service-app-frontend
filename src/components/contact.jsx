@@ -1,16 +1,17 @@
-import { use, useState } from "react";
+import {  useState } from "react";
 import bglanding from "../assets/bglanding.svg";
 import axios from 'axios';
 import api from './api';
 
 
-const Contact = () => {
+const Contact = ({setheading}) => {
 
   const [fullName, setFullName] = useState("");
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
   const [message, setMessage] = useState("");
   const [loading,setLoading] = useState(false);
+  
 
   const handleSubmit = async (e) => {
     setLoading(true);
@@ -43,7 +44,7 @@ const Contact = () => {
 
       <div className="flex flex-col justify-center items-center gap-2 mt-10 mb-8">
         <h1 className="font-semibold font-poppins text-3xl sm:text-4xl md:text-5xl text-center">
-          Contact Us
+          {setheading || ""}
         </h1>
 
         <div className="container mx-auto justify-center items-center p-4 
