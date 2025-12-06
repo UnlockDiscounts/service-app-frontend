@@ -9,6 +9,10 @@ import axios from 'axios';
 import api from './api';
 import OtpVerify from './otpVerify'
 import { Link } from "react-router-dom";
+import img1 from '../assets/img1.svg';
+import img2 from '../assets/img2.svg';
+import img3 from '../assets/img3.svg';
+import img4 from '../assets/img4.svg';
 
 
 const SignUp = () => {
@@ -84,11 +88,28 @@ const SignUp = () => {
     <div className="min-h-screen flex">
       {/* Left side - Background */}
       <div className="w-1/2 h-screen overflow-hidden">
+  <div className="w-1/2 h-screen overflow-hidden relative flex items-center justify-center">
   <img
-    className="w-full h-full object-cover"
-    src={Rectangle}
-    alt=""
+    src={img1}
+    alt="Login"
+    className="slide-img delay-0 w-full h-full object-cover opacity-0 animate-slide-in-1 z-40"
   />
+  <img
+    src={img2}
+    alt="Login"
+    className="slide-img delay-1 w-full h-full object-cover opacity-0 animate-slide-in-1 z-30"
+  />
+  <img
+    src={img3}
+    alt="Login"
+    className="slide-img delay-2 w-full h-full object-cover opacity-0 animate-slide-in-1 z-20"
+  />
+  <img
+    src={img4}
+    alt="Login"
+    className="slide-img delay-3 w-full h-full object-cover opacity-0 animate-slide-in-1 z-10"
+  />
+</div>
 </div>
 
       {/* Right side - Login form */}

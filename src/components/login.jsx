@@ -4,12 +4,13 @@ import loginImg from "../assets/login.jpg";
 import logo from "../assets/unlockdiscounts.logo.jpg";
 import logoo from '../assets/logoo.jpg'
 import axios from 'axios';
-import Rectangle from '../assets/Rectangle.png'
-import animateimg4 from '../assets/animateimg4.png'
-import animateimg5 from '../assets/animateimg5.png'
-import animateimg6 from '../assets/animateimg6.png'
-import animateimg7 from '../assets/animateimg7.png'
+import Rectangle from '../assets/Rectangle.png';
+import img1 from '../assets/img1.svg';
+import img2 from '../assets/img2.svg';
+import img3 from '../assets/img3.svg';
+import img4 from '../assets/img4.svg';
 import api from './api';
+import "../index.css";
 
 
 const Login = () => {
@@ -127,29 +128,29 @@ const Login = () => {
     //     </div>
     <div className="min-h-screen flex">
       {/* Left Section (Image) */}
-      <div className="w-1/2 h-screen overflow-hidden">
+      <div className="w-1/2 h-screen overflow-hidden relative flex items-center justify-center">
   <img
-    src={animateimg4}
+    src={img1}
     alt="Login"
-    className="w-full h-full object-cover animate-login-slide-0"
-    
+    className="slide-img delay-0 w-full h-full object-cover opacity-0 animate-slide-in-1 z-40"
   />
   <img
-    src={animateimg5}
+    src={img2}
     alt="Login"
-    className="w-full h-full object-cover animate-login-slide-1"
+    className="slide-img delay-1 w-full h-full object-cover opacity-0 animate-slide-in-1 z-30"
   />
   <img
-    src={animateimg6}
+    src={img3}
     alt="Login"
-    className="w-full h-full object-cover animate-login-slide-2"
+    className="slide-img delay-2 w-full h-full object-cover opacity-0 animate-slide-in-1 z-20"
   />
   <img
-    src={animateimg7}
+    src={img4}
     alt="Login"
-    className="w-full h-full object-cover animate-login-slide-3"
+    className="slide-img delay-3 w-full h-full object-cover opacity-0 animate-slide-in-1 z-10"
   />
 </div>
+
 
 
       {/* Right Section (Form) */}

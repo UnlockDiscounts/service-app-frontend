@@ -1,13 +1,14 @@
-import {useState} from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import imgcollage from "../assets/imgcollage.png";
-import imgcollage1 from "../assets/imgcollage1.png";
-import imgcollage2 from "../assets/imgcollage2.png";
-import animateimg1 from "../assets/animateimg1.png";
-import animateimg2 from "../assets/animateimg2.png";
-import animateimg3 from "../assets/animateimg3.png";
+import imgcollage from "../assets/imgcollage.svg";
+import imgcollage1 from "../assets/imgcollage1.svg";
+import imgcollage2 from "../assets/imgcollage2.svg";
+import animateimg1 from "../assets/animateimg1.svg";
+import animateimg2 from "../assets/animateimg2.svg";
+import animateimg3 from "../assets/animateimg3.svg";
 import bglanding from "../assets/bglanding.svg";
 import Contact from "./contact.jsx"
+import ContactForm from './contactForm';
 import "../index.css";
 
 const Hero = () => {
@@ -23,38 +24,38 @@ const Hero = () => {
     navigate("/allservices");
   }
   const feedbackData = [
-  {
-    name: "Tanisha K.",
-    feedback:
-      "The app is super easy to use and professionals arrive on time. Got my house deep-cleaned and they did a thorough job. Very reasonable pricing too."
-  },
-  {
-    name: "Arvind S.",
-    feedback:
-      "I used Mendora for AC servicing and the technician was excellent. He explained the issue clearly and fixed it fast. Very reasonable pricing too."
-  },
-  {
-    name: "Kartik J.",
-    feedback:
-      "Reliable platform! The car wash service was quick and convenient. Would’ve loved more scheduling options, though."
-  },
-  {
-    name: "Sara K.",
-    feedback:
-      "Booked a home salon service and was genuinely impressed. The beautician was well-trained and the hygiene level was top-notch."
-  },
-  {
-    name: "Riya M.",
-    feedback:
-      "Booked a home salon service and was genuinely impressed. The beautician was well-trained and the hygiene level was top-notch."
-  }
-];
+    {
+      name: "Tanisha K.",
+      feedback:
+        "The app is super easy to use and professionals arrive on time. Got my house deep-cleaned and they did a thorough job. Very reasonable pricing too."
+    },
+    {
+      name: "Arvind S.",
+      feedback:
+        "I used Mendora for AC servicing and the technician was excellent. He explained the issue clearly and fixed it fast. Very reasonable pricing too."
+    },
+    {
+      name: "Kartik J.",
+      feedback:
+        "Reliable platform! The car wash service was quick and convenient. Would’ve loved more scheduling options, though."
+    },
+    {
+      name: "Sara K.",
+      feedback:
+        "Booked a home salon service and was genuinely impressed. The beautician was well-trained and the hygiene level was top-notch."
+    },
+    {
+      name: "Riya M.",
+      feedback:
+        "Booked a home salon service and was genuinely impressed. The beautician was well-trained and the hygiene level was top-notch."
+    }
+  ];
 
 
-const loopData = [...feedbackData, ...feedbackData];
+  const loopData = [...feedbackData, ...feedbackData];
 
 
-  
+
 
   return (
     <div className="pt-10 heroclass w-full min-h-screen" style={{ backgroundImage: `url(${bglanding})`, backgroundSize: 'cover', backgroundPosition: 'center' }}
@@ -83,87 +84,95 @@ const loopData = [...feedbackData, ...feedbackData];
           </p>
 
           <div className="flex flex-col sm:flex-row gap-4 mt-8">
-            <button
-              className="bg-[#FF9800] px-12 py-2 md:px-15 md:py-3 rounded-2xl text-lg md:text-2xl font-semibold 
-               border-5 border-yellow-400 hover:bg-white hover:border-[#FF8900] 
+  <button
+    className="bg-[#FF9800] px-14 py-2 md:px-15 md:py-3 rounded-2xl text-lg md:text-2xl font-semibold 
+               border-4 border-[#FF9800] hover:bg-white hover:border-4 hover:border-yellow-300 
                transition"
-              onClick={handleClick}
-            >
-              Get Started
-            </button>
+    onClick={handleClick}
+  >
+    Get Started
+  </button>
 
-            <button
-              className="border-4 border-yellow-300 px-8 py-2 md:px-8 md:py-3 rounded-2xl text-lg md:text-2xl 
-               font-semibold hover:bg-[#FF9800] hover:text-white transition"
-              onClick={handleClick2}
-            >
-              Explore Services
-            </button>
-            
-          </div>
+  <button
+    className="border-4 border-yellow-300 px-8 py-2 md:px-8 md:py-3 rounded-2xl text-lg md:text-2xl 
+               font-semibold hover:bg-[#FF9800] hover:text-white transition hover:border-4 hover:border-[#FF9800]"
+    onClick={handleClick2}
+  >
+    Explore Services
+  </button>
+</div>
+
 
         </div>
 
         {/* Right Side Image */}
-       <div className="relative w-full lg:w-1/2 h-[400px] flex justify-center items-center">
-  <img 
-    src={imgcollage2} 
-    className="slide-img delay-0 absolute w-4/5 h-auto object-contain opacity-0 animate-collage-slide-0 z-30" 
-  />
-  <img 
-    src={imgcollage1} 
-    className="slide-img delay-1 absolute w-4/5 h-auto object-contain opacity-0 animate-collage-slide-1 z-20" 
-  />
-  <img 
-    src={imgcollage} 
-    className="slide-img delay-2 absolute w-4/5 h-auto object-contain opacity-0 animate-collage-slide-2 z-10" 
-  />
-</div>
+        <div className="relative w-full lg:w-1/2 h-[400px] flex justify-center items-center">
+          <img
+            src={imgcollage2}
+            className="slide-img delay-0 absolute w-4/5 h-auto object-contain opacity-0 animate-collage-slide-0 z-30"
+          />
+          <img
+            src={imgcollage1}
+            className="slide-img delay-1 absolute w-4/5 h-auto object-contain opacity-0 animate-collage-slide-1 z-20"
+          />
+          <img
+            src={imgcollage}
+            className="slide-img delay-2 absolute w-4/5 h-auto object-contain opacity-0 animate-collage-slide-2 z-10"
+          />
+        </div>
 
       </div>
       <div className="mt-5 px-10 w-150">
-  <div className="overflow-hidden">
-    
-    <div className="flex animate-marquee px-20">  
-      {loopData.map((p, index) => (
-        <div
-          key={index}
-          className="bg-[#FFCB61] m-6 border rounded-2xl p-10 min-w-[300px]"
-        >
-          <h2 className="text-2xl">{p.name}</h2>
-          <h2>⭐⭐⭐⭐⭐</h2>
-          <p>{p.feedback}</p>
+        <div className="overflow-hidden">
+
+          <div className="flex animate-marquee px-20">
+            {loopData.map((p, index) => (
+              <div
+                key={index}
+                className="bg-[#FFCB61] m-6 border rounded-2xl p-10 min-w-[300px]"
+              >
+                <h2 className="text-2xl">{p.name}</h2>
+                <h2>⭐⭐⭐⭐⭐</h2>
+                <p>{p.feedback}</p>
+              </div>
+            ))}
+          </div>
+
         </div>
-      ))}
-    </div>
+      </div>
 
-  </div>
-</div>
+      <div className="flex flex-row mt-12 w-full gap-4">
 
-     <div className="flex flex-row mt-40 w-full">
-  
-  {/* LEFT SIDE */}
-  <div className="w-full">
-    <Contact setheading={"Get in touch"} />
-  </div>
+        {/* LEFT SIDE */}
+        <div className="w-full">
+          <div className="w-4/5 sm:w-4/5 md:w-5/6 lg:w-5/6 
+                  mx-auto p-4 
+                  shadow-xl shadow-gray-500 rounded-[10px] bg-white 
+                  mb-8 mt-6 flex flex-col object-cover">
 
-  {/* RIGHT SIDE */}
-  <div className="relative w-full h-[400px] flex justify-between items-center">
-  <img 
-    src={animateimg1} 
-    className="slide-img delay-0 absolute w-4/5 h-auto object-contain opacity-0 animate-slide-in-0 z-30" 
-  />
-  <img 
-    src={animateimg2} 
-    className="slide-img delay-1 absolute w-4/5 h-auto object-contain opacity-0 animate-slide-in-1 z-20" 
-  />
-  <img 
-    src={animateimg3} 
-    className="slide-img delay-2 absolute w-4/5 h-auto object-contain opacity-0 animate-slide-in-2 z-10" 
-  />
-</div>
+            <div className="p-5 w-full">
+              <h1 className="font-poppins text-xl sm:text-2xl md:text-3xl font-semibold text-left">
+                Get In Touch
+              </h1>
+            </div>
 
-</div>
+            <div className="w-full">
+              <ContactForm />
+            </div>
+
+          </div>
+        </div>
+
+
+        {/* RIGHT SIDE */}
+        <div className="relative w-full h-[400px] flex justify-between items-center"> 
+          <img src={animateimg1} className="slide-img right-0 delay-0 absolute w-4/5 h-auto object-cover opacity-0 animate-slide-in-0 z-30" /> 
+          <img src={animateimg2} className="slide-img bottom-0 delay-1 absolute w-4/5 h-auto object-cover opacity-0 animate-slide-in-1 z-20" />
+          <img src={animateimg3} className="slide-img left-0 delay-2 absolute w-4/5 h-auto object-cover opacity-0 animate-slide-in-2 z-10" /> 
+        </div>
+
+
+      </div>
 
 
     </div>

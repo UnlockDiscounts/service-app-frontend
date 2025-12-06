@@ -62,3 +62,33 @@
   from { transform: translateX(0); }
   to   { transform: translateX(-50%); }
 }
+
+/* Smooth 4-image slideshow for Login component */
+
+@keyframes loginSlide {
+  0%    { opacity: 0; }
+  5%    { opacity: 1; }
+  25%   { opacity: 1; }
+  30%   { opacity: 0; }
+  100%  { opacity: 0; }
+}
+
+.animate-login-slide-0 {
+  animation: loginSlide 16s linear infinite;
+  animation-delay: 0s;
+}
+
+.animate-login-slide-1 {
+  animation: loginSlide 16s linear infinite;
+  animation-delay: 4s;
+}
+
+.animate-login-slide-2 {
+  animation: loginSlide 16s linear infinite;
+  animation-delay: 8s;
+}
+
+.animate-login-slide-3 {
+  animation: loginSlide 16s linear infinite;
+  animation-delay: 12s;
+}
