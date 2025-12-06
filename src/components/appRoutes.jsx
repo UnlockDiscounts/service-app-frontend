@@ -33,7 +33,7 @@ export default function AppRoutes() {
             <Route path="/role" element={<Role />} />
             <Route path="/usersignup" element={<SignUp />} />
             <Route path="/about" element={<About />} />
-            <Route path="/contact" element={<Contact />} />
+            <Route path="/contact" element={<Contact setheading={"Contact us"} />} />
             <Route path="/providerDashboard" element={<ProviderDashboard />} />
             <Route path="/individualListing/:id" element={<IndividualListing />} />
             <Route path="/customerDashboard" element={<Profile />} />
