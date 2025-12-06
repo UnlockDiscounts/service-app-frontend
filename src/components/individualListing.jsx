@@ -582,9 +582,17 @@ const IndividualListing = ({ listingData }) => {
           alt={bname}
           className="w-full h-full object-cover"
         />
-        {/* <button className="absolute top-3 right-3 bg-white rounded-full p-2 shadow-md hover:shadow-lg transition">
-          <X className="w-5 h-5 text-gray-700" />
-        </button> */}
+        <div className="absolute inset-0 bg-gradient-to-r from-yellow-300 via-yellow-400 to-orange-400 opacity-90"></div>
+
+  {/* Centered Quote Text */}
+  <div className="absolute inset-0 flex flex-col items-center justify-center px-4 text-center">
+    <h1 className="text-white text-xl sm:text-3xl md:text-4xl font-semibold italic">
+      “Mendora Services That Make Life Easy.”
+    </h1>
+    <p className="text-white font-semibold text-sm sm:text-lg mt-2">
+      Small Repairs to Big Care  Mendora Has You Covered
+    </p>
+  </div>
       </div>
 
       <div className="max-w-[1400px] mx-auto px-4 sm:px-6 py-5">
@@ -592,23 +600,23 @@ const IndividualListing = ({ listingData }) => {
           <div className="flex-1">
             <div className="flex items-center gap-2 mb-3">
 
-              <h1 className="text-xl sm:text-2xl font-bold text-gray-900">{bname}</h1>
+              <h1 className="text-xl sm:text-2xl font-bold text-gray-600">{bname}</h1>
             </div>
 
             <div className="flex flex-wrap items-center gap-2 mb-3">
-              <div className="inline-flex items-center gap-1.5 bg-yellow-50 border border-yellow-200 px-3 py-1.5 rounded-full">
+              <div className="inline-flex items-center gap-1.5 bg-yellow-50 border border-yellow-200 px-3 py-1.5 rounded-[5px]">
                 <Star className="w-3.5 h-3.5 fill-yellow-400 text-yellow-400" />
                 <span className="font-semibold text-sm text-gray-900">{avgRating}</span>
-                <span className="text-xs text-gray-600">({avgRatingCount} reviews)</span>
+                <span className="text-xs font-semibold text-gray-600">( {avgRatingCount} reviews )</span>
               </div>
               {/* <div className="inline-flex items-center gap-1.5 bg-pink-50 border border-pink-200 px-3 py-1 rounded-full">
                 <MapPin className="w-3.5 h-3.5 text-pink-500" />
                 <span className="text-xs font-medium text-gray-900">{data.location}</span>
               </div> */}
               <div className="flex flex-wrap items-center gap-2">
-                <button className="inline-flex items-center gap-2 px-3 py-1.5 border border-gray-300 rounded-full hover:bg-gray-50 transition text-sm">
-                  <Phone className="w-3.5 h-3.5 text-gray-700" />
-                  <span className="font-medium text-gray-900">{phone}</span>
+                <button className="inline-flex items-center gap-2 px-3 py-1.5 border border-green-300 rounded-[5px] bg-green-50 transition text-sm">
+                  <Phone className="w-3.5 h-3.5 text-green-700" />
+                  <span className="font-semibold text-green-900">{phone}</span>
                 </button>
               </div>
             </div>
@@ -621,7 +629,10 @@ const IndividualListing = ({ listingData }) => {
             </div> */}
           </div>
 
-          <button className="px-6 py-2 bg-yellow-400 text-gray-900 font-semibold rounded-full hover:bg-yellow-500 transition text-sm whitespace-nowrap self-start"
+          <button 
+          // className="px-6 py-2 bg-yellow-400 text-gray-900 font-semibold rounded-full hover:bg-yellow-500 transition text-sm whitespace-nowrap self-start"
+          className="bg-gradient-to-r from-[#FFC727] to-[#FF9800] 
+                            text-gray-600 text-[12px] px-8 py-3 rounded-[5px] font-semibold hover:text-white bg-gray-600 transition"
             onClick={
               () => {
 
@@ -683,7 +694,7 @@ const IndividualListing = ({ listingData }) => {
 
             {activeTab === 'Reviews' && (
               <div>
-                <h2 className="text-xl font-bold text-gray-900 mb-5">Reviews</h2>
+                {/* <h2 className="text-xl font-bold text-gray-900 mb-5">Reviews</h2> */}
 
                 <div className="relative">
                   <div
@@ -695,9 +706,9 @@ const IndividualListing = ({ listingData }) => {
                     {feedbacks.map((review, id) => (
                       <div
                         key={id}
-                        className="flex-shrink-0 w-full sm:w-[85%] snap-center"
+                        className="flex-shrink-0 w-full sm:w-[85%] snap-center h-[170px]"
                       >
-                        <div className="bg-gradient-to-br from-amber-50 via-orange-50 to-orange-100 rounded-3xl p-6 shadow-sm">
+                        <div className="bg-gradient-to-br from-amber-100 via-purple-100 to-purple-200 rounded-3xl p-6 h-[170px] shadow-sm">
                           <div className="flex items-start justify-between mb-4">
                             <div>
                               <h3 className="font-bold text-base text-gray-900">
@@ -714,7 +725,7 @@ const IndividualListing = ({ listingData }) => {
                               </span>
                             </div>
                           </div>
-                          <p className="text-sm text-gray-800 leading-relaxed">
+                          <p className="text-xl text-gray-800 leading-relaxed">
                             "{review.comment}"
                           </p>
                         </div>
@@ -739,9 +750,9 @@ const IndividualListing = ({ listingData }) => {
             )}
 
             {activeTab === 'Quick Info' && (
-              <div className="bg-white border border-gray-200 rounded-2xl p-5 shadow-sm">
-                <p className="text-sm text-gray-700 leading-relaxed">
-                  Mendora is your trusted platform for connecting with verified and background-checked professionals who meet the highest quality standards. Our top-rated service providers have earned consistent praise from satisfied customers for their expertise and reliability. With flexible scheduling options, Mendora makes it easy to book appointments at your convenience, ensuring a seamless and stress-free experience every time.
+              <div className="bg-gradient-to-br from-amber-50 via-amber-100 to-yellow-200 rounded-3xl p-12 shadow-sm">
+                <p className="text-xl text-gray-600 leading-relaxed font-semibold">
+                  Mendora is your trusted platform for connecting with verified and background-checked professionals who meet the highest quality standards. Our top-rated service providers have earned consistent praise from satisfied customers for their expertise and reliability. With flexible scheduling options, Mendora makes it easy to book appointments at your convenience, ensuring a seamless and stress-free experience every time !!
                 </p>
               </div>
             )}

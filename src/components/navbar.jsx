@@ -67,7 +67,7 @@ const Navbar = () => {
       {/* Navbar Links */}
       <div className="hidden md:flex items-center gap-10 mr-10">
         <nav>
-          <ul className="flex items-center gap-9 text-lg font-medium py-2">
+          <ul className="flex items-center gap-9 text-xl font-[30px] py-2">
             <a href="/">Home</a>
             <a href="/allservices">Services</a>
             <a href="/about">About Us</a>
@@ -105,7 +105,7 @@ const Navbar = () => {
             ) : (
               <span>
                 <a
-                  className="border-2 border-[#FF9800] px-6 py-1.5 rounded-full font-semibold"
+                  className="border-2 border-[#FF9800] px-6 py-2 rounded-[10px] font-semibold"
                   href="/login"
                 >
                   Login

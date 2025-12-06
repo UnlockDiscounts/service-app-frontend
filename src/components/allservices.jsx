@@ -10,6 +10,8 @@ import BookNow from './bookNow';
 import LocationFilter from './locationFilter';
 import MendoraFooter from './footer';
 import SearchBar from "./searchBar"; // adjust path if needed
+import bglanding from "../assets/bglanding.svg";
+
 
 function AllServices() {
 
@@ -198,7 +200,7 @@ function AllServices() {
 
   const getImage = (name) => {
     try {
-      return require(`../assets/${sanitizeServiceName(name)}.jpg`);
+      return require(`../assets/${sanitizeServiceName(name)}.svg`);
     } catch (error) {
       return require("../assets/ii.jpg"); // fallback image
     }
@@ -206,32 +208,33 @@ function AllServices() {
 
 
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen bg-white" style={{ backgroundImage: `url(${bglanding})`, height: "200px" }}>
 
       {/* Hero Section */}
-      <div className="max-w-7xl mx-auto px-4 pb-8">
-        <div className="w-full px-6 py-8 pt-12">
-          <div className="w-full">
+      <div className="max-w-7xl mx-auto px-4 py-16">
+        {/* <div className="w-full px-6 py-8 pt-12"> */}
+  <div className="w-full max-w-10xl mx-auto">
 
-            <div className="flex w-full gap-4">
+    <div className="w-full flex flex-col md:flex-row items-center md:items-start gap-6">
 
-              {/* Location Filter */}
-              <div className="flex-1">
-                <LocationFilter onLocationSelect={handleLocationSelect} />
-              </div>
+      {/* Location Filter */}
+      <div className="w-full md:flex-1">
+        <LocationFilter onLocationSelect={handleLocationSelect} />
+      </div>
 
-              {/* Search Bar */}
-              <div className="flex-1">
-                <SearchBar />
-              </div>
+      {/* Search Bar */}
+      <div className="w-full md:flex-1">
+        <SearchBar />
+      </div>
 
-            </div>
+    </div>
 
-          </div>
-        </div>
+  {/* </div> */}
+</div>
 
 
-        <div className="relative h-[400px] rounded-3xl overflow-hidden shadow-xl">
+
+        {/* <div className="relative h-[400px] rounded-3xl overflow-hidden shadow-xl">
           <img
             src={image}
             alt="Hero"
@@ -243,15 +246,10 @@ function AllServices() {
 
 
             <div className="w-1/2 px-6 py-8">
-              {/* Container for both fields side by side */}
               <div className="flex flex-wrap gap-4 items-center justify-between">
-                {/* Location Filter */}
                 <div className="flex-1 min-w-[400px]">
-                  {/* <LocationFilter onLocationSelect={handleLocationSelect}  /> */}
                 </div>
 
-                {/* Search Input */}
-                {/* <SearchBar/> */}
 
               </div>
             </div>
@@ -265,11 +263,11 @@ function AllServices() {
             </h2>
 
           </div>
-        </div>
+        </div> */}
       </div>
 
       {/* Popular Services Section */}
-      <div className="max-w-7xl mx-auto px-4 py-12 ">
+      {/* <div className="max-w-7xl mx-auto px-4 py-12 ">
         <h2 className="text-4xl md:text-5xl font-medium mb-16 text-gray-900 text-center tracking-tight">Services Category</h2>
 
         {loading ? (
@@ -310,7 +308,115 @@ function AllServices() {
             ))}
           </div>
         )}
-      </div>
+      </div> */}
+
+      <div className="max-w-7xl mx-auto px-4 py-5">
+    {/* Title is outside the main content card */}
+    <h2 className="text-4xl md:text-5xl font-medium mb-16 text-gray-900 text-center tracking-tight">One Platform Connecting You to Every Verified Service</h2>
+
+    {loading ? (
+        <div className="grid grid-cols-4 gap-6 bg-white p-8 rounded-3xl shadow-2xl border border-gray-100">
+            {[...Array(10)].map((_, index) => (
+                // Keeping the loading state simple but in a 4-column grid
+                <div key={index} className="bg-gray-50 rounded-lg h-40 flex flex-col items-center justify-center space-y-3 animate-pulse">
+                    <div className="w-16 h-16 bg-gray-200 rounded-full"></div>
+                    <div className="w-3/4 h-4 bg-gray-200 rounded"></div>
+                </div>
+            ))}
+        </div>
+    ) : filteredCategories?.length === 0 ? (
+        <div className="bg-white p-8 rounded-3xl shadow-2xl text-center py-16">
+            <p className="text-gray-500 text-lg">
+                {selectedLocation
+                    ? "No services found near the selected location."
+                    : `No services found matching "${searchQuery}"`
+                }
+            </p>
+        </div>
+    ) : (
+        // THIS IS THE MAIN CHANGE: A single container acting as the main "card" for all categories
+            <div className="flex flex-col items-start p-10 rounded-[10px] bg-white shadow-md hover:shadow-xl transition-shadow duration-300 border border-gray-100">
+
+
+            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-x-4 gap-y-8 md:gap-x-6 md:gap-y-10">
+                {filteredCategories.map((category, id) => (
+                    // <button
+                    //     key={id}
+                    //     onClick={() => handleCategoryClick(category.category)}
+                    //     // Card styling: no background needed since the parent container is white, centered content, no border/shadow on the individual card to maintain the clean look
+                    //     className="flex flex-col items-center justify-start text-center group transition-transform duration-200 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+                    // >
+                    //     {/* Container for the illustration to control size */}
+                    //     <div className="w-full max-w-[250px] h-[250px] p-2">
+                          
+                    //         <img
+                    //             src={getImage(category.category)}
+                    //             alt={category.category}
+                    //             // Illustration should be object-contain to prevent distortion
+                    //             className="w-full h-full object-cover "
+                    //         />
+                    //     </div>
+                    //     {/* Category Name styling - matches the design's font style */}
+                    //     <div className="mt-3">
+                    //         <h3 className="text-gray-800 text-[20px] font-medium whitespace-pre-line leading-snug">
+                    //             {/* Use whitespace-pre-line to allow the category names (like "Educational & Training") to wrap exactly as shown in the design */}
+                    //             {sanitizeServiceName1(category.category)}
+                    //         </h3>
+                    //     </div>
+                    // </button>
+                    <button
+    key={id}
+    onClick={() => handleCategoryClick(category.category)}
+    className="rounded-[500px] flex flex-col items-center justify-start text-center group 
+               transition-all duration-200"
+>
+    {/* Image container */}
+    <div className="
+        w-full max-w-[250px] h-[200px] p-2 
+        relative rounded-[500px] overflow-hidden 
+        flex items-center justify-center
+    ">
+        {/* Actual image */}
+        <img
+            src={getImage(category.category)}
+            alt={category.category}
+            className="
+                w-full h-full object-contain rounded-2xl
+                transition-all duration-300
+            "
+        />
+
+        {/* SIMPLE ORANGE CIRCULAR OVERLAY (opacity only, no shadow) */}
+        <div
+            className="
+                absolute inset-0 rounded-2xl 
+                bg-amber-500 
+                opacity-0 group-hover:opacity-20
+                transition-opacity duration-300
+            "
+        ></div>
+    </div>
+
+    {/* Text */}
+    <div className="mt-3 transition-colors duration-300">
+        <h3
+            className="
+                text-gray-800 text-[20px] font-medium whitespace-pre-line leading-snug
+                transition-colors duration-300
+                group-hover:text-amber-500
+            "
+        >
+            {sanitizeServiceName1(category.category)}
+        </h3>
+    </div>
+</button>
+
+                ))}
+            </div>
+        </div>
+    
+    )}
+</div>
 
       {/* Why Choose Section */}
       <div className="max-w-7xl mx-auto px-4 py-20 mb-16">

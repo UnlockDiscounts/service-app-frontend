@@ -45,7 +45,7 @@ const LocationSelector = ({ address, setAddress, setLatitude, setLongitude }) =>
         value={address}
         onChange={handleSearch}
         placeholder="Search your business location"
-        className="w-full p-4 border border-gray-300 rounded-md bg-gray-200 focus:outline-none focus:ring-2 focus:ring-[#ff8901]"
+        className="w-full p-4 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#ff8901]"
       />
 
       {suggestions.length > 0 && (

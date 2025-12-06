@@ -179,19 +179,19 @@ serviceOffered.length < 3)
   return (
     <form
       onSubmit={handleSubmit}
-      className="w-full max-w-5xl mx-auto p-6 space-y-6 rounded-lg shadow bg-white"
+      className="w-full max-w-5xl mx-auto p-12 py-9 space-y-8 bg-white"
     >
       {/* Business name */}
       <div>
         <div className="flex items-center space-x-2 mb-3">
           <Building className="text-[#ff8801]" />
-          <h1 className="text-lg md:text-xl font-bold">Business Name*</h1>
+          <h1 className="text-lg md:text-xl font-semibold">Business Name*</h1>
         </div>
         <input
           onChange={(e) => setBusinessname(e.target.value)}
           type="text"
           placeholder="Enter your business name"
-          className="w-full border border-gray-300 rounded-md p-4 bg-gray-200 focus:outline-none focus:ring-2 focus:ring-[#ff8901]"
+          className="w-full border border-gray-300 rounded-md p-4 focus:outline-none focus:ring-2 focus:ring-[#ff8901]"
         />
         {errors.businessname && (
           <p className="text-red-500 text-sm">{errors.businessname}</p>
@@ -208,7 +208,7 @@ serviceOffered.length < 3)
           type="text"
           onChange={(e) => setOwnername(e.target.value)}
           placeholder="Enter your full name"
-          className="w-full border border-gray-300 rounded-md p-4 bg-gray-200 focus:outline-none focus:ring-2 focus:ring-[#ff8901]"
+          className="w-full border border-gray-300 rounded-md p-4 focus:outline-none focus:ring-2 focus:ring-[#ff8901]"
         />
         {errors.ownername && (
           <p className="text-red-500 text-sm">{errors.ownername}</p>
@@ -226,7 +226,7 @@ serviceOffered.length < 3)
             type="tel"
             onChange={(e) => setPhone(e.target.value)}
             placeholder="Enter your phone number"
-            className="w-full p-4 border border-gray-300 rounded-md bg-gray-200 focus:outline-none focus:ring-2 focus:ring-[#ff8901]"
+            className="w-full p-4 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#ff8901]"
           />
           {errors.phone && (
             <p className="text-red-500 text-sm">{errors.phone}</p>
@@ -244,7 +244,7 @@ serviceOffered.length < 3)
               onChange={(e) => setEmail(e.target.value)}
               type="email"
               placeholder="your@gmail.com"
-              className="w-full p-4 border border-gray-300 rounded-md bg-gray-200 focus:outline-none focus:ring-2 focus:ring-[#ff8901]"
+              className="w-full p-4 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#ff8901]"
             />
 
             {errors.email && (
@@ -254,7 +254,7 @@ serviceOffered.length < 3)
             <button
               type="button"
               onClick={handleVerifyEmail} // your verification handler
-              className="bg-white-200 text-gray-700 px-4 py-4 m-1 rounded-lg hover:bg-gray-300 transition border-2 h-1/3"
+              className="bg-gray-200 rounded-md hover:bg-gray-300 border border-gray-300 font-medium px-4 py-4 m-1 rounded-lg"
             >
               Verify
             </button>
@@ -280,7 +280,7 @@ serviceOffered.length < 3)
           placeholder="● ● ● ● ● ●"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
-          className="w-full p-4 border border-gray-300 rounded-md bg-gray-200 focus:outline-none focus:ring-2 focus:ring-[#ff8901]"
+          className="w-full p-4 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#ff8901]"
         />
         {errors.password && (
           <p className="text-red-500 text-sm">{errors.password}</p>
@@ -317,7 +317,7 @@ serviceOffered.length < 3)
         <input
           type="file"
           onChange={(e) => setAddressProofFile(e.target.files[0])}
-          className="p-4 w-full border border-gray-300 rounded-md bg-gray-200 focus:outline-none focus:ring-2 focus:ring-[#ff8901]"
+          className="p-4 w-full border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#ff8901]"
           required
         />
       </div>
@@ -333,7 +333,7 @@ serviceOffered.length < 3)
   {/* Dropdown for Service Categories */}
   <select
     onChange={(e) => setServiceCateogry(e.target.value)}
-    className="w-full p-4 border border-gray-300 rounded-md bg-gray-200 focus:outline-none focus:ring-2 focus:ring-[#ff8901] appearance-none"
+    className="w-full p-4 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#ff8901] appearance-none"
     required
   >
     <option value="">Select a Category</option>
@@ -363,7 +363,7 @@ serviceOffered.length < 3)
           </div>
           <input
             onChange={(e) => setWeblink(e.target.value)}
-            className="w-full p-4 border border-gray-300 rounded-md bg-gray-200 focus:outline-none focus:ring-2 focus:ring-[#ff8901]"
+            className="w-full p-4 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#ff8901]"
             placeholder="Add a Link to your website"
           />
         </div>
@@ -380,7 +380,7 @@ serviceOffered.length < 3)
             onChange={(e) => setserviceOffered(e.target.value)}
             type="text"
             placeholder="Service offered (comma-separated)"
-            className="w-full p-4 border border-gray-300 rounded-md bg-gray-200 focus:outline-none focus:ring-2 focus:ring-[#ff8901]"
+            className="w-full p-4 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#ff8901]"
           />
           {errors.serviceOffered && (
             <p className="text-red-500 text-sm">{errors.serviceOffered}</p>
@@ -396,7 +396,7 @@ serviceOffered.length < 3)
             type="text"
             onChange={(e) => setpricing(e.target.value)}
             placeholder="Enter average pricing"
-            className="w-full p-4 border border-gray-300 rounded-md bg-gray-200 focus:outline-none focus:ring-2 focus:ring-[#ff8901]"
+            className="w-full p-4 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#ff8901]"
           />
           {errors.pricing && (
             <p className="text-red-500 text-sm">{errors.pricing}</p>
@@ -415,7 +415,7 @@ serviceOffered.length < 3)
         <input
           type="file"
           onChange={(e) => setExperienceFile(e.target.files[0])}
-          className="w-full p-4 border border-gray-400 rounded-md bg-gray-200 focus:outline-none focus:ring-2 focus:ring-[#ff8901]"
+          className="w-full p-4 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#ff8901]"
           required
         />
       </div>
@@ -430,7 +430,7 @@ serviceOffered.length < 3)
           placeholder="Enter emergency contact number"
           onChange={(e) => setemergencycontact(e.target.value)}
           type="text"
-          className="w-full p-4 border border-gray-400 rounded-md bg-gray-200 focus:outline-none focus:ring-2 focus:ring-[#ff8901]"
+          className="w-full p-4 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#ff8901]"
         />
         {errors.emergencycontact && (
           <p className="text-red-500 text-sm">{errors.emergencycontact}</p>
@@ -452,7 +452,7 @@ serviceOffered.length < 3)
         </div>
         <button
           type="submit"
-          className={`w-full md:w-[30%] py-3 rounded-md font-medium transition-all duration-200 ${isChecked
+          className={`w-full md:w-[100%] py-3 rounded-md font-medium transition-all duration-200 ${isChecked
             ? "bg-[#ff8901] hover:bg-[#ff8910] text-black"
             : "bg-gray-400 text-gray-200 cursor-not-allowed"
             }`}

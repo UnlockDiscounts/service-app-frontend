@@ -9,7 +9,7 @@ const SearchBar = () => {
   const navigate = useNavigate();
 
    // The full placeholder text you want to display
-  const PHRASE = "Search For Services...";
+  const PHRASE = "Search For SERVICES...";
   const PHRASE_LENGTH = PHRASE.length;
   
   // Standard delay between characters (e.g., 100ms)
@@ -138,9 +138,9 @@ const handleCardClick = (id) => {
   };
 
   return (
-    <div className="flex-1 min-w-[400px] relative">
+    <div className="flex-1 min-w-[400px] relative rounded-[10px] bg-white shadow-md hover:shadow-xl transition-shadow duration-300">
       <div className="absolute inset-y-0 left-4 flex items-center pointer-events-none">
-        <Search className="w-6 h-6 text-amber-500" />
+        <Search className="w-6 h-6 text-amber-400" />
       </div>
 
       <input
@@ -148,7 +148,7 @@ const handleCardClick = (id) => {
         placeholder={placeholder}
         value={searchQuery}
         onChange={(e) => handleSearch(e.target.value)}
-        className="w-full pl-14 pr-20 py-4 text-base border-2 border-amber-500 rounded-xl focus:outline-none amber-placeholder"
+        className="w-full pl-14 pr-20 py-4 text-base border-2 border-amber-400 rounded-xl focus:outline-none placeholder-amber-500"
       />
 
       {/* Dropdown */}
