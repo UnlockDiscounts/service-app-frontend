@@ -6,6 +6,7 @@ import { Trash2, Edit, Plus, Logs } from "lucide-react"; // icons from lucide-re
 import api from './api';
 import welcomeBack from '../assets/welcomeBack.svg';
 import bglanding from "../assets/bglanding.svg";
+import Illustration from '../assets/Illustration.svg';
 
 export default function ProviderDashboard() {
 
@@ -358,7 +359,7 @@ export default function ProviderDashboard() {
             className="bg-white rounded-xl shadow-md w-[220px] h-[220px] relative hover:shadow-lg transition cursor-pointer"
           >
             {/* Top Action Icons Area */}
-<div className="absolute top-0 left-0 right-0 flex justify-between z-10 w-full p-2">
+<div className="absolute top-0 left-0 right-0 flex rounded-[10px] justify-between z-10 w-full p-2 bg-amber-100 ">
   
   {/* Edit Button */}
   <button
@@ -383,11 +384,11 @@ export default function ProviderDashboard() {
 </div>
 
             {/* Image Area */}
-            <div className="h-[140px] flex items-center justify-center p-4">
+            <div className="bg-amber-100 h-[140px] flex items-center justify-center p-4">
               <img 
-                src={service.serviceImage || i1} 
+                src={service.serviceImage || Illustration} 
                 alt={service.serviceName}
-                className="w-full h-full object-contain"
+                className="w-full h-5/6 object-contain"
               />
             </div>
 
