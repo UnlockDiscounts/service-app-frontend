@@ -26,9 +26,9 @@ const Form = () => {
 
 
   const [isChecked, setIsChecked] = useState(false);
-  const [verify,setVerify] = useState(false);
+  const [verify, setVerify] = useState(false);
   const [latitude, setLatitude] = useState("");
-const [longitude, setLongitude] = useState("");
+  const [longitude, setLongitude] = useState("");
 
   const navigate = useNavigate();
 
@@ -56,31 +56,31 @@ const [longitude, setLongitude] = useState("");
   const validate = () => {
     const newErrors = {};
     if (!businessname.trim() || /[^a-zA-Z0-9\s]/.test(businessname) ||
-  businessname.trim().length < 3 ||
-  businessname.trim().length > 50)
+      businessname.trim().length < 3 ||
+      businessname.trim().length > 50)
       newErrors.businessname = "Business Name must be 3-50 characters long and contain only letters, numbers, and spaces";
     if (!ownername.trim() || /[^a-zA-Z\s]/.test(ownername) ||
-  ownername.trim().length < 3 ||
-  ownername.trim().length > 50) newErrors.ownername = "Owner Name must be 3-50 characters long and contain only letters and spaces";
+      ownername.trim().length < 3 ||
+      ownername.trim().length > 50) newErrors.ownername = "Owner Name must be 3-50 characters long and contain only letters and spaces";
     if (!/^\d{10}$/.test(phone.trim())) newErrors.phone = "Enter valid phone number";
     if (!/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[A-Za-z]{2,}$/.test(email)) newErrors.email = "Enter valid email";
-    if (!password || password.length<5 ||
-password.includes(" ")) newErrors.password = "Password must be minimum 5 characters long"
+    if (!password || password.length < 5 ||
+      password.includes(" ")) newErrors.password = "Password must be minimum 5 characters long"
     if (!address.trim()) newErrors.address = "Address is required";
     if (!serviceCategory)
       newErrors.serviceCategory = "Select category for service";
     if (!serviceOffered.trim() || /[^a-zA-Z0-9\s,]/.test(serviceOffered)
- ||
-serviceOffered.length < 3)
+      ||
+      serviceOffered.length < 3)
       newErrors.serviceOffered = "Enter valid service names separated by a comma";
-    if ( !pricing.trim() ||
-  /[^0-9]/.test(pricing) ||
-  pricing.length < 2 ||
-  pricing.length > 6)
+    if (!pricing.trim() ||
+      /[^0-9]/.test(pricing) ||
+      pricing.length < 2 ||
+      pricing.length > 6)
       newErrors.pricing = "Enter a valid price (only numbers, 2-6 digits)";
     if (!/^\d{10}$/.test(emergencycontact.trim()))
       newErrors.emergencycontact = "Enter valid emergency contact number";
- 
+
     return newErrors;
   };
 
@@ -102,7 +102,7 @@ serviceOffered.length < 3)
 
   const handleSubmit = async (e) => {
 
-    e.preventDefault(); 
+    e.preventDefault();
 
     // if(!verify)
     // {
@@ -259,12 +259,12 @@ serviceOffered.length < 3)
               Verify
             </button>
 
-            {showOtp && <OtpVerify onClose={() => setShowOtp(false)} email={email} verified={()=>{
+            {showOtp && <OtpVerify onClose={() => setShowOtp(false)} email={email} verified={() => {
               setVerify(true);
               setShowOtp(false);
-            }} requestOtp={()=>{
-                handleVerifyEmail();
-              }}/>}
+            }} requestOtp={() => {
+              handleVerifyEmail();
+            }} />}
           </div>
         </div>
       </div>
@@ -288,24 +288,24 @@ serviceOffered.length < 3)
       </div>
 
       {/* Address */}
-   {/* Address with Location Search */}
-<div>
-  <div className="flex items-center space-x-2 mb-3">
-    <MapPinHouse className="text-[#ff8901]" />
-    <h1 className="text-lg md:text-xl font-bold">Business Location*</h1>
-  </div>
+      {/* Address with Location Search */}
+      <div>
+        <div className="flex items-center space-x-2 mb-3">
+          <MapPinHouse className="text-[#ff8901]" />
+          <h1 className="text-lg md:text-xl font-bold">Business Location*</h1>
+        </div>
 
-  <LocationSelector
-    address={address}
-    setAddress={setAddress}
-    setLatitude={setLatitude}
-    setLongitude={setLongitude}
-  />
+        <LocationSelector
+          address={address}
+          setAddress={setAddress}
+          setLatitude={setLatitude}
+          setLongitude={setLongitude}
+        />
 
-  {errors.address && (
-    <p className="text-red-500 text-sm">{errors.address}</p>
-  )}
-</div>
+        {errors.address && (
+          <p className="text-red-500 text-sm">{errors.address}</p>
+        )}
+      </div>
 
 
       {/* Upload address proof */}
@@ -325,35 +325,35 @@ serviceOffered.length < 3)
       {/* Service Category & Website Link */}
       <div className="flex flex-col md:flex-row md:justify-between md:space-x-4 space-y-4 md:space-y-0">
         <div className="w-full md:w-[59%]">
-  <div className="flex items-center space-x-2 mb-3">
-    <Tags className="text-[#ff8901]" />
-    <h1 className="text-lg md:text-xl font-bold">Service Category*</h1>
-  </div>
+          <div className="flex items-center space-x-2 mb-3">
+            <Tags className="text-[#ff8901]" />
+            <h1 className="text-lg md:text-xl font-bold">Service Category*</h1>
+          </div>
 
-  {/* Dropdown for Service Categories */}
-  <select
-    onChange={(e) => setServiceCateogry(e.target.value)}
-    className="w-full p-4 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#ff8901] appearance-none"
-    required
-  >
-    <option value="">Select a Category</option>
-    <option value="home-services">Home Services</option>
-    <option value="beauty-wellness">Beauty & Wellness</option>
-    <option value="events-entertainment">Events & Entertainment</option>
-    <option value="professional-services">Professional Services</option>
-    <option value="education-training">Education & Training</option>
-    <option value="automobile-services">Automobile Services</option>
-    <option value="technology-it">Technology & IT</option>
-    <option value="health-medical">Health & Medical</option>
-    <option value="home-improvement">Home Improvement</option>
-    <option value="hospitality-tourism">Hospitality & Tourism</option>
-    <option value="business-support">Business Support</option>
-  </select>
+          {/* Dropdown for Service Categories */}
+          <select
+            onChange={(e) => setServiceCateogry(e.target.value)}
+            className="w-full p-4 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#ff8901] appearance-none"
+            required
+          >
+            <option value="">Select a Category</option>
+            <option value="home-services">Home Services</option>
+            <option value="beauty-wellness">Beauty & Wellness</option>
+            <option value="events-entertainment">Events & Entertainment</option>
+            <option value="professional-services">Professional Services</option>
+            <option value="education-training">Education & Training</option>
+            <option value="automobile-services">Automobile Services</option>
+            <option value="technology-it">Technology & IT</option>
+            <option value="health-medical">Health & Medical</option>
+            <option value="home-improvement">Home Improvement</option>
+            <option value="hospitality-tourism">Hospitality & Tourism</option>
+            <option value="business-support">Business Support</option>
+          </select>
 
-  {errors.serviceCategory && (
-    <p className="text-red-500 text-sm">{errors.serviceCategory}</p>
-  )}
-</div>
+          {errors.serviceCategory && (
+            <p className="text-red-500 text-sm">{errors.serviceCategory}</p>
+          )}
+        </div>
 
 
         <div className="w-full md:w-[39%]">
@@ -447,8 +447,16 @@ serviceOffered.length < 3)
             onChange={(e) => setIsChecked(e.target.checked)}
           />
           <label className="text-gray-700 text-sm md:text-base">
-            I agree to the terms and conditions and privacy policy.
+            <span>I agree to the </span>
+            <a className="text-blue-700 font-medium" href="/tc.pdf">
+              terms and conditions
+            </a>
+            <span> and </span>
+            <a className="text-blue-700 font-medium" href="/pp.pdf">
+              privacy policy
+            </a>
           </label>
+
         </div>
         <button
           type="submit"

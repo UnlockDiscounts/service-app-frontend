@@ -708,7 +708,7 @@ const IndividualListing = ({ listingData }) => {
                         key={id}
                         className="flex-shrink-0 w-full sm:w-[85%] snap-center h-[170px]"
                       >
-                        <div className="bg-gradient-to-br from-amber-100 via-purple-100 to-purple-200 rounded-3xl p-6 h-[170px] shadow-sm">
+                        <div className="bg-gradient-to-br from-amber-200 via-purple-200 to-purple-200 rounded-3xl p-6 h-[170px] shadow-sm">
                           <div className="flex items-start justify-between mb-4">
                             <div>
                               <h3 className="font-bold text-base text-gray-900">
@@ -750,7 +750,7 @@ const IndividualListing = ({ listingData }) => {
             )}
 
             {activeTab === 'Quick Info' && (
-              <div className="bg-gradient-to-br from-amber-50 via-amber-100 to-yellow-200 rounded-3xl p-12 shadow-sm">
+              <div className="bg-gradient-to-br from-amber-100 via-amber-200 to-yellow-200 rounded-3xl p-12 shadow-sm">
                 <p className="text-xl text-gray-600 leading-relaxed font-semibold">
                   Mendora is your trusted platform for connecting with verified and background-checked professionals who meet the highest quality standards. Our top-rated service providers have earned consistent praise from satisfied customers for their expertise and reliability. With flexible scheduling options, Mendora makes it easy to book appointments at your convenience, ensuring a seamless and stress-free experience every time !!
                 </p>

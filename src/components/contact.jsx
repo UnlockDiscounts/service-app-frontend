@@ -39,7 +39,7 @@ const Contact = ({setheading}) => {
 
   return (
     <div
-      className="relative bg-cover h-screen w-full max-w-[1200px] px-4"
+      className="relative bg-cover min-h-screen w-full"
       style={{ backgroundImage: `url(${Background})` }}
     >
 
@@ -68,9 +68,9 @@ const Contact = ({setheading}) => {
 
         {/* RIGHT SIDE */}
         <div className="relative w-full h-[500px] flex justify-between items-center"> 
-          <img src={animateimg1} className="slide-img delay-0 right-0 absolute w-4/5 h-auto object-cover opacity-0 animate-slide-in-0 z-30" /> 
-          <img src={animateimg2} className="slide-img delay-1 top-0 absolute w-4/5 h-auto object-cover opacity-0 animate-slide-in-1 z-20" />
-          <img src={animateimg3} className="slide-img delay-2 left-0 absolute w-4/5 h-auto object-cover opacity-0 animate-slide-in-2 z-10" /> 
+          <img src={animateimg1} className="rounded-full slide-img delay-0 right-0 absolute w-4/5 h-auto object-cover opacity-0 animate-slide-in-0 z-30" /> 
+          <img src={animateimg2} className="rounded-full slide-img delay-1 top-0 absolute w-4/5 h-auto object-cover opacity-0 animate-slide-in-1 z-20" />
+          <img src={animateimg3} className="rounded-full slide-img delay-2 left-0 absolute w-4/5 h-auto object-cover opacity-0 animate-slide-in-2 z-10" /> 
         </div>
 
 

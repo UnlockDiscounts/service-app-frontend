@@ -60,19 +60,19 @@ const Hero = () => {
   return (
     <div className="pt-10 heroclass w-full min-h-screen" style={{ backgroundImage: `url(${bglanding})`, backgroundSize: 'cover', backgroundPosition: 'center' }}
     >
-      <div className="flex flex-col-reverse lg:flex-row items-center justify-between gap-10 px-6 sm:px-10 lg:px-20 py-10">
+      <div className="flex flex-col-reverse lg:flex-row items-center justify-between gap-14 px-6 sm:px-10 lg:px-20 py-10">
 
         {/* Left Side Text */}
-        <div className="flex flex-col    text-center lg:text-left px-10  ">
-          <div className="space-y-4  ">
+        <div className="flex flex-col text-center lg:text-left px-10 pr-0 gap-2 justify-center items-center">
+          <div className="space-y-4 flex flex-col gap-2 justify-center items-center">
             <h1
-              className="text-xl sm:text-4xl md:text-5xl lg:text-7xl xl:text-7xl text-gray-800  font-extrabold font-poppins tracking-wide opacity-90"
+              className="text-4xl sm:text-4xl md:text-5xl lg:text-7xl xl:text-7xl text-gray-800  font-extrabold font-poppins tracking-wide opacity-90"
               style={{ textShadow: "3px 4px 4px rgba(128,128,128,0.8)" }}
             >
               One Platform
             </h1>
             <h1
-              className="text-3xl sm:text-4xl md:text-5xl lg:text-7xl xl:text-7xl text-gray-800 font-extrabold font-poppins tracking-wide opacity-90"
+              className="text-4xl sm:text-4xl md:text-5xl lg:text-7xl xl:text-7xl text-gray-800 font-extrabold font-poppins tracking-wide opacity-90"
               style={{ textShadow: "3px 4px 4px rgba(128,128,128,0.8)" }}
             >
               All Services
@@ -80,22 +80,20 @@ const Hero = () => {
           </div>
 
           <p className="text-gray-600 font-semibold mt-6 text-sm sm:text-base md:text-lg lg:text-xl">
-            Unlock trusted services with speed, savings, and simplicity.
+            Unlock trusted services with speed, savings, and simplicity
           </p>
 
           <div className="flex flex-col sm:flex-row gap-4 mt-8">
   <button
-    className="bg-[#FF9800] px-14 py-2 md:px-15 md:py-3 rounded-2xl text-lg md:text-2xl font-semibold 
-               border-4 border-[#FF9800] hover:bg-white hover:border-4 hover:border-yellow-300 
-               transition"
+    className="bg-gradient-to-r from-[#FFC727] to-[#FF9800] px-14 py-4 rounded-2xl text-lg md:text-2xl font-semibold hover:text-white transition"
     onClick={handleClick}
   >
     Get Started
   </button>
 
   <button
-    className="border-4 border-yellow-300 px-8 py-2 md:px-8 md:py-3 rounded-2xl text-lg md:text-2xl 
-               font-semibold hover:bg-[#FF9800] hover:text-white transition hover:border-4 hover:border-[#FF9800]"
+    className="border-2 border-[#FF9800] px-8 py-2 md:px-8 md:py-3 rounded-2xl text-lg md:text-2xl 
+               font-semibold hover:bg-gradient-to-r from-[#FFC727] to-[#FF9800] hover:text-white hover:border-[#FFC727] transition"
     onClick={handleClick2}
   >
     Explore Services
@@ -109,15 +107,15 @@ const Hero = () => {
         <div className="relative w-full lg:w-1/2 h-[400px] flex justify-center items-center">
           <img
             src={imgcollage2}
-            className="slide-img delay-0 absolute w-4/5 h-auto object-contain opacity-0 animate-collage-slide-0 z-30"
+            className="rounded-4xl slide-img delay-0 absolute w-4/5 h-auto object-contain opacity-0 animate-collage-slide-0 z-30"
           />
           <img
             src={imgcollage1}
-            className="slide-img delay-1 absolute w-4/5 h-auto object-contain opacity-0 animate-collage-slide-1 z-20"
+            className="rounded-4xl slide-img delay-1 absolute w-4/5 h-auto object-contain opacity-0 animate-collage-slide-1 z-20"
           />
           <img
             src={imgcollage}
-            className="slide-img delay-2 absolute w-4/5 h-auto object-contain opacity-0 animate-collage-slide-2 z-10"
+            className="rounded-4xl slide-img delay-2 absolute w-4/5 h-auto object-contain opacity-0 animate-collage-slide-2 z-10"
           />
         </div>
 
@@ -129,11 +127,11 @@ const Hero = () => {
             {loopData.map((p, index) => (
               <div
                 key={index}
-                className="bg-[#FFCB61] m-6 border rounded-2xl p-10 min-w-[300px]"
+                className="bg-gradient-to-br from-amber-200 via-purple-200 to-purple-200 m-6 rounded-2xl p-10 min-w-[300px]"
               >
                 <h2 className="text-2xl">{p.name}</h2>
                 <h2>⭐⭐⭐⭐⭐</h2>
-                <p>{p.feedback}</p>
+                <p className="pt-4">{p.feedback}</p>
               </div>
             ))}
           </div>
@@ -166,9 +164,9 @@ const Hero = () => {
 
         {/* RIGHT SIDE */}
         <div className="relative w-full h-[400px] flex justify-between items-center"> 
-          <img src={animateimg1} className="slide-img right-0 delay-0 absolute w-4/5 h-auto object-cover opacity-0 animate-slide-in-0 z-30" /> 
-          <img src={animateimg2} className="slide-img bottom-0 delay-1 absolute w-4/5 h-auto object-cover opacity-0 animate-slide-in-1 z-20" />
-          <img src={animateimg3} className="slide-img left-0 delay-2 absolute w-4/5 h-auto object-cover opacity-0 animate-slide-in-2 z-10" /> 
+          <img src={animateimg1} className="rounded-full slide-img right-0 delay-0 absolute w-4/5 h-auto object-cover opacity-0 animate-slide-in-0 z-30" /> 
+          <img src={animateimg2} className="rounded-full slide-img bottom-0 delay-1 absolute w-4/5 h-auto object-cover opacity-0 animate-slide-in-1 z-20" />
+          <img src={animateimg3} className="rounded-full slide-img left-0 delay-2 absolute w-4/5 h-auto object-cover opacity-0 animate-slide-in-2 z-10" /> 
         </div>
 
 
