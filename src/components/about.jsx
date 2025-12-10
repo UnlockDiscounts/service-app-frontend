@@ -2,23 +2,25 @@ import bglanding from "../assets/bglanding.svg";
 import bw from '../assets/bw.png';
 import Frame1 from '../assets/Frame1.png';
 import { Link } from "react-router-dom";
+import MendoraFooter from "./footer";
 
 
 const About = () => {
   return (
+    <>
     <div
-      className=" bg-cover h-screen w-full py-10"
+      className=" bg-cover min-h-screen w-full py-10"
       style={{ backgroundImage: `url(${bglanding})` }}
     >
-      <div className="px-6 md:px-16 py-12 font-poppins">
+      <div className="md:px-16 py-12 font-poppins">
   <h1 className="text-4xl md:text-5xl font-extrabold text-center mb-8 text-gray-900 drop-shadow-sm">
     About <span className="text-[#FF9800]">Us</span>
   </h1>
 
-  <div className=" gap-10 items-center">
+  <div className="gap-10 items-center">
     {/* Left Text Section */}
     <div>
-      <p className="text-center text-gray-700 text-base md:text-[28px] leading-relaxed mb-4">
+      <p className="text-center mx-[190px] text-gray-700 text-base md:text-[28px] leading-relaxed mb-4">
         Welcome to{" "}
         <span className="font-bold">
           Mend<span className="text-[#FF9800]">ora</span>
@@ -83,6 +85,8 @@ const About = () => {
 </div>
 
     </div>
+    <MendoraFooter/>
+</>
   );
 };
 export default About;

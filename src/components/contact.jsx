@@ -4,6 +4,7 @@ import animateimg1 from "../assets/animateimg1.svg";
 import animateimg2 from "../assets/animateimg2.svg";
 import animateimg3 from "../assets/animateimg3.svg";
 import Background from '../assets/Background.svg';
+import MendoraFooter from "./footer";
 
 
 
@@ -75,6 +76,8 @@ const Contact = ({setheading}) => {
 
 
       </div>
+      <div className="pt-8"><MendoraFooter/></div>
+      
     </div>
   );
 };

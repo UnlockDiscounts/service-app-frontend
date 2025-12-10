@@ -9,6 +9,7 @@ import animateimg3 from "../assets/animateimg3.svg";
 import bglanding from "../assets/bglanding.svg";
 import Contact from "./contact.jsx"
 import ContactForm from './contactForm';
+import MendoraFooter from "./footer.jsx";
 import "../index.css";
 
 const Hero = () => {
@@ -58,7 +59,8 @@ const Hero = () => {
 
 
   return (
-    <div className="pt-10 heroclass w-full min-h-screen" style={{ backgroundImage: `url(${bglanding})`, backgroundSize: 'cover', backgroundPosition: 'center' }}
+    <>
+    <div className="pt-10 heroclass w-full min-h-screen mb-14" style={{ backgroundImage: `url(${bglanding})`, backgroundSize: 'cover', backgroundPosition: 'center' }}
     >
       <div className="flex flex-col-reverse lg:flex-row items-center justify-between gap-14 px-6 sm:px-10 lg:px-20 py-10">
 
@@ -172,8 +174,10 @@ const Hero = () => {
 
       </div>
 
-
+    
     </div>
+    <MendoraFooter/>
+    </>
   );
 };
 
