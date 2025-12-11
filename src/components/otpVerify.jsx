@@ -32,7 +32,7 @@ const OtpVerify = ({ onClose, email, verified, requestOtp }) => {
 
   return (
     <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-40 backdrop-blur-sm z-50">
-      <div className="bg-[#FFF8ED] p-8 rounded-2xl shadow-xl w-[400px] text-center relative">
+      <div className="bg-[#FFF8ED] p-8 py-12 rounded-md shadow-xl w-[400px] text-center relative ">
         {/* Close Button */}
         <button
           onClick={onClose}

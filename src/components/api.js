@@ -50,6 +50,7 @@ api.interceptors.response.use(
   async (error) => {
     const originalRequest = error.config;
 
+
     // Check if the error is 401 (Unauthorized) and we haven't already retried
     if (error.response?.status === 401 && !originalRequest._retry) {
       
@@ -79,7 +80,10 @@ api.interceptors.response.use(
         // No Refresh Token available, user must log in
         isRefreshing = false;
         console.error("No Refresh Token found. Forcing user to log in.");
-        // **TO DO: Add logic to clear ALL tokens and redirect user to login page here**
+        alert('Session expired. Please log in again.');
+        localStorage.removeItem('accessToken');
+        localStorage.removeItem('refreshToken');
+        window.location.href = '/login';
         return Promise.reject(error);
       }
       
@@ -116,7 +120,11 @@ api.interceptors.response.use(
         isRefreshing = false;
         processQueue(refreshError, null);
         console.error("Refresh Token failed. Forcing logout.");
-        // **TO DO: Add logic to clear ALL tokens and redirect user to login page here**
+        alert('Session expired. Please log in again.');
+        localStorage.removeItem('accessToken');
+        localStorage.removeItem('refreshToken');
+        window.location.href = '/login';
+
         return Promise.reject(refreshError);
       }
     }

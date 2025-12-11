@@ -4,39 +4,13 @@ import animateimg1 from "../assets/animateimg1.svg";
 import animateimg2 from "../assets/animateimg2.svg";
 import animateimg3 from "../assets/animateimg3.svg";
 import Background from '../assets/Background.svg';
-import MendoraFooter from "./footer";
 
 
 
 
 const Contact = ({setheading}) => {
 
-  // const [fullName, setFullName] = useState("");
-  // const [email, setEmail] = useState("");
-  // const [phone, setPhone] = useState("");
-  // const [message, setMessage] = useState("");
-  // const [loading,setLoading] = useState(false);
-  
-
-  // const handleSubmit = async (e) => {
-  //   setLoading(true);
-  //   e.preventDefault(); // prevents page reload and route change
-  //   try {
-  //     const res = await api.post(
-  //       "/email/contact-us",
-  //       { fullName, email, phone, message }
-  //     );
-  //     alert("Query successfully sent !!");
-  //     setFullName("");
-  //     setEmail("");
-  //     setPhone("");
-  //     setMessage("");
-
-  //   } catch (error) {
-  //     console.error("Error sending contact message:", error);
-  //   }
-  //   setLoading(false);
-  // };
+ 
 
   return (
     <div
@@ -76,8 +50,6 @@ const Contact = ({setheading}) => {
 
 
       </div>
-      <div className="pt-8"><MendoraFooter/></div>
-      
     </div>
   );
 };

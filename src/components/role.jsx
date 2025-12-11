@@ -67,7 +67,7 @@ const Role = () => {
                 className="
                 text-gray-800 text-[20px] font-medium whitespace-pre-line leading-snug
                 transition-colors duration-300
-                group-hover:text-amber-500 px-12
+                group-hover:text-amber-500 px-[28px]
             "
               >
                 I'm a Customer 

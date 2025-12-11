@@ -185,15 +185,15 @@ function AllServices() {
 
   const sanitizeServiceName = (name) => {
     return name
-      .split('-')                                   // split at hyphens
+      .split('-') // split at hyphens
       .map(word => word.charAt(0).toUpperCase() + word.slice(1)) // capitalize each part
-      .join('');                                    // join together
+      .join(''); // join together
   };
 
   const sanitizeServiceName1 = (name) => {
 
     return name
-      .split('-')                                   // split at hyphens
+      .split('-') // split at hyphens
       .map(word => word.charAt(0).toUpperCase() + word.slice(1)) // capitalize each part
       .join(' ');
   };
@@ -234,81 +234,9 @@ function AllServices() {
 
 
 
-        {/* <div className="relative h-[400px] rounded-3xl overflow-hidden shadow-xl">
-          <img
-            src={image}
-            alt="Hero"
-            className="w-full h-full object-cover"
-          />
-
-          <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-black/20 to-black/40 flex flex-col items-center justify-center">
-
-
-
-            <div className="w-1/2 px-6 py-8">
-              <div className="flex flex-wrap gap-4 items-center justify-between">
-                <div className="flex-1 min-w-[400px]">
-                </div>
-
-
-              </div>
-            </div>
-
-            <h1 className="text-7xl font-semibold text-white mb-2 tracking-tight c opacity-90">
-              One Platform
-            </h1>
-
-            <h2 className="text-6xl font-semibold text-white tracking-tight mix-blend-color-dodge opacity-90">
-              All Services
-            </h2>
-
-          </div>
-        </div> */}
+       
       </div>
 
-      {/* Popular Services Section */}
-      {/* <div className="max-w-7xl mx-auto px-4 py-12 ">
-        <h2 className="text-4xl md:text-5xl font-medium mb-16 text-gray-900 text-center tracking-tight">Services Category</h2>
-
-        {loading ? (
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {[...Array(4)].map((_, index) => (
-              <div key={index} className="bg-gray-100 rounded-2xl h-72 animate-pulse"></div>
-            ))}
-          </div>
-        ) : filteredCategories?.length === 0 ? (
-          <div className="text-center py-16">
-            <p className="text-gray-500 text-lg">
-              {selectedLocation
-                ? "No services found near the selected location."
-                : `No services found matching "${searchQuery}"`
-              }
-            </p>
-          </div>
-        ) : (
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {filteredCategories.map((category, id) => (
-              <button
-                key={id}
-                onClick={() => handleCategoryClick(category.category)}
-                className="group relative overflow-hidden rounded-2xl shadow-md hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-1"
-              >
-                <div className="aspect-[1]">
-                  <img
-                    src={getImage(category.category)}
-                    alt={category.category}
-                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
-                  <div className="absolute bottom-0 left-0 right-0 p-5">
-                    <h3 className="text-white text-2xl font-bold text-center">{sanitizeServiceName1(category.category)}</h3>
-                  </div>
-                </div>
-              </button>
-            ))}
-          </div>
-        )}
-      </div> */}
 
       <div className="max-w-7xl mx-auto px-4 py-5">
     {/* Title is outside the main content card */}
@@ -340,30 +268,7 @@ function AllServices() {
 
             <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-x-4 gap-y-8 md:gap-x-6 md:gap-y-10">
                 {filteredCategories.map((category, id) => (
-                    // <button
-                    //     key={id}
-                    //     onClick={() => handleCategoryClick(category.category)}
-                    //     // Card styling: no background needed since the parent container is white, centered content, no border/shadow on the individual card to maintain the clean look
-                    //     className="flex flex-col items-center justify-start text-center group transition-transform duration-200 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
-                    // >
-                    //     {/* Container for the illustration to control size */}
-                    //     <div className="w-full max-w-[250px] h-[250px] p-2">
-                          
-                    //         <img
-                    //             src={getImage(category.category)}
-                    //             alt={category.category}
-                    //             // Illustration should be object-contain to prevent distortion
-                    //             className="w-full h-full object-cover "
-                    //         />
-                    //     </div>
-                    //     {/* Category Name styling - matches the design's font style */}
-                    //     <div className="mt-3">
-                    //         <h3 className="text-gray-800 text-[20px] font-medium whitespace-pre-line leading-snug">
-                    //             {/* Use whitespace-pre-line to allow the category names (like "Educational & Training") to wrap exactly as shown in the design */}
-                    //             {sanitizeServiceName1(category.category)}
-                    //         </h3>
-                    //     </div>
-                    // </button>
+                   
                     <button
     key={id}
     onClick={() => handleCategoryClick(category.category)}
@@ -484,16 +389,16 @@ function AllServices() {
       {/* Modal */}
       {isModalOpen && (
         <div className="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-start justify-center overflow-y-auto">
-          <div className="bg-white w-full max-w-lg min-h-screen md:min-h-0 md:my-8 md:rounded-3xl shadow-2xl">
+          <div className="bg-white px-12 pb-12 border-b w-full max-w-lg min-h-screen md:min-h-0 md:my-8 md:rounded-[10px] shadow-xl">
             {/* Modal Header */}
-            <div className="sticky top-0 bg-white border-b border-gray-100 px-5 py-4 flex items-center gap-4 md:rounded-t-3xl z-10">
+            <div className="sticky top-0 bg-white border-b border-gray-300 px-5 py-4 flex items-center gap-24 md:rounded-t-3xl z-10">
               <button
                 onClick={closeModal}
                 className="p-2 hover:bg-gray-50 rounded-full transition-colors"
               >
                 <ArrowLeft className="w-6 h-6 text-gray-700" />
               </button>
-              <h2 className="text-2xl font-bold text-gray-900">Services</h2>
+              <h2 className="text-2xl font-semibold text-gray-700">Services</h2>
             </div>
 
             {/* Modal Content */}
@@ -518,9 +423,9 @@ function AllServices() {
                   {services.map((service) => (
                     <div
                       key={service._id}
-                      className="cursor-pointer bg-white rounded-3xl shadow-md overflow-hidden hover:shadow-lg transition-shadow"
+                      className="cursor-pointer bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition-shadow"
                       onClick={() => {
-                        // handleCardClick(service._id);
+                        handleCardClick(service._id);
                       }}
                     >
                       <div className="relative h-56" >
@@ -531,17 +436,19 @@ function AllServices() {
                         />
                       </div>
                       <div className="p-5">
-                        <h3 className="text-xl font-bold mb-1 text-gray-900 cursor-pointer" onClick={() => {
-                          handleCardClick(service._id);
+                        <h3 className="text-xl font-semibold mb-1 text-gray-900 cursor-pointer" onClick={() => {
+                          // handleCardClick(service._id);
                         }}>{service?.providerDetails?.business_name}</h3>
                         <div className="flex items-center justify-between">
                           <div className="flex items-center gap-1">
                             {/* <span className="text-lg font-bold text-amber-500">rating</span>
                             <Star className="w-5 h-5 fill-amber-400 text-amber-400" /> */}
                           </div>
-                          <button className="px-6 py-2.5 bg-white border-2 border-amber-400 text-gray-900 font-semibold rounded-full hover:bg-amber-400 hover:text-white transition-all duration-300"
+                          <button className="px-6 py-2.5 bg-gradient-to-r from-[#FFC727] to-[#FF9800] rounded-xl text-gray-900 font-semibold hover:text-white transition-all duration-300"
                             onClick={
-                              () => {
+                              
+                              (e) => {
+                                e.stopPropagation();
 
                                 if (!user) {
                                   alert("Please Log In/Sign Up for Booking a Service");
