@@ -3,7 +3,7 @@ import axios from 'axios';
 // 1. Create a custom Axios instance
 const api = axios.create({
   // Setting a relative base URL for cleaner endpoint calls in components
-  baseURL: 'https://service-app-backend-1.onrender.com/api', 
+  baseURL: 'http://3.7.66.48:5000/api', 
   headers: {
     'Content-Type': 'application/json',
   },
