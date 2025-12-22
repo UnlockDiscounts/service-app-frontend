@@ -25,17 +25,17 @@ export default function AppRoutes() {
             {/* Explicit routes */}
             <Route path="/home" element={<Hero />} />
             <Route path="/login" element={<Login />} />
-            <Route path="/customerlogin" element={<CustomerLogin />} />
+            {/* <Route path="/customerlogin" element={<CustomerLogin />} /> */}
             <Route path="/serviceproviderlogin" element={<ServiceLogin />} />
-            <Route path="/success" element={<Success />} />
+             <Route path="/success" element={<Success />} />
             <Route path="/allservices" element={<AllServices />} />
-            <Route path="/payments" element={<Payments />} />
+             <Route path="/payments" element={<Payments />} />
             <Route path="/role" element={<Role />} />
             <Route path="/usersignup" element={<SignUp />} />
             <Route path="/about" element={<About />} />
             <Route path="/contact" element={<Contact setheading={"Contact us"} />} />
-            <Route path="/providerDashboard" element={<ProviderDashboard />} />
-            <Route path="/individualListing/:id" element={<IndividualListing />} />
+             <Route path="/providerDashboard" element={<ProviderDashboard />} />
+             <Route path="/individualListing/:id" element={<IndividualListing />} />
             <Route path="/customerDashboard" element={<Profile />} />
             {/* <Route path="/bookNow" element={<BookNow />} /> */}
            
