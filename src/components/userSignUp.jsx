@@ -56,11 +56,11 @@ const SignUp = () => {
 
   const handleSignUp = async () => {
 
-    // if(!verify)
-    // {
-    //    alert("Please Verify Email");
-    //    return;
-    // }
+    if(!verify)
+    {
+       alert("Please Verify Email");
+       return;
+    }
     
     setLoading(true);
 
