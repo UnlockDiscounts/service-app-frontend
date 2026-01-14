@@ -104,11 +104,11 @@ const Form = () => {
 
     e.preventDefault();
 
-    // if(!verify)
-    // {
-    //    alert("Please Verify Email");
-    //    return;
-    // }
+    if(!verify)
+    {
+       alert("Please Verify Email");
+       return;
+    }
 
     setLoading(true);
 
